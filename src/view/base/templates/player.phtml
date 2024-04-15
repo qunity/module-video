@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var Qunity\Video\Block\VideoPlayer $block
+ * @var Magento\Framework\Escaper $escaper
+ */
+?>
+<?php if (!empty($videoId = $block->getVideoId())): // @phpstan-ignore-line ?>
+    <div class="video-wrapper" data-role="video" data-bind="scope: '<?= $escaper->escapeHtmlAttr($videoId) ?>'">
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "[data-role='video']": {
+                "Magento_Ui/js/core/app": <?= /* @noEscape */ $block->getJsLayout() ?>
+            }
+        }
+    </script>
+<?php endif; ?>
