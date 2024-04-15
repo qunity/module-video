@@ -62,7 +62,7 @@ class VideoPlayer extends Template
     {
         static $counter = 0;
 
-        $videoId = hash('md2', (string)($counter++));
+        $videoId = hash('md2', (string) ($counter++));
         $this->setVideoId($videoId)->updateJsLayout();
 
         return $this;
