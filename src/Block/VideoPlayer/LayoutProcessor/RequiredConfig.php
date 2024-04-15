@@ -1,7 +1,6 @@
 <?php
 
 /**
- * @noinspection PhpUnused
  * @noinspection PhpPossiblePolymorphicInvocationInspection
  */
 
@@ -32,7 +31,8 @@ class RequiredConfig implements LayoutProcessorInterface
         $videoId = $config->getVideoId(); // @phpstan-ignore-line
         $videoSrc = $config->getVideoSrc(); // @phpstan-ignore-line
 
-        $path = implode('/', ['components', $videoId, 'config']);
+        $delimiter = ArrayManager::DEFAULT_PATH_DELIMITER;
+        $path = implode($delimiter, ['components', $videoId, 'config']);
 
         return $this->arrayManager->merge($path, $jsLayout, [
             'videoId' => $videoId,
