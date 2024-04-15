@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Qunity_Video::css/video.css"/>
+    </head>
+    <body>
+        <referenceContainer name="root">
+            <block name="video.player" as="player" class="Qunity\Video\Block\VideoPlayer"
+                   template="Qunity_Video::video-player.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="{{video_id}}" xsi:type="array">
+                                <item name="component" xsi:type="string">uiVideo</item>
+                                <item name="displayArea" xsi:type="string">{{video_id}}</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">Qunity_Video/video</item>
+                                    <item name="class" xsi:type="array">
+                                        <item name="videoJs" xsi:type="string">video-js</item>
+                                        <item name="vjsM2lumaSkin" xsi:type="string">vjs-m2luma-skin</item>
+                                    </item>
+                                </item>
+                                <item name="children" xsi:type="array">
+                                    <item name="preview" xsi:type="array">
+                                        <item name="component" xsi:type="string">video/uiComponent</item>
+                                        <item name="displayArea" xsi:type="string">preview</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="template" xsi:type="string">
+                                                Qunity_Video/video/preview
+                                            </item>
+                                            <item name="class" xsi:type="array">
+                                                <item name="vjsVideoPreview" xsi:type="string">
+                                                    vjs-video-preview
+                                                </item>
+                                            </item>
+                                        </item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="titleBar" xsi:type="array">
+                                                <item name="component" xsi:type="string">video/uiTitleBar</item>
+                                                <item name="displayArea" xsi:type="string">preview-child</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="template" xsi:type="string">
+                                                        Qunity_Video/video/component/title-bar
+                                                    </item>
+                                                    <item name="class" xsi:type="array">
+                                                        <item name="vjsTitleBar" xsi:type="string">
+                                                            vjs-title-bar
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                            <item name="bigPlayButton" xsi:type="array">
+                                                <item name="component" xsi:type="string">video/uiBigPlayButton</item>
+                                                <item name="displayArea" xsi:type="string">preview-child</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="template" xsi:type="string">
+                                                        Qunity_Video/video/component/big-play-button
+                                                    </item>
+                                                    <item name="class" xsi:type="array">
+                                                        <item name="vjsBigButton" xsi:type="string">
+                                                            vjs-big-button
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                            <item name="posterImage" xsi:type="array">
+                                                <item name="component" xsi:type="string">video/uiPosterImage</item>
+                                                <item name="displayArea" xsi:type="string">preview-child</item>
+                                                <item name="config" xsi:type="array">
+                                                    <item name="template" xsi:type="string">
+                                                        Qunity_Video/video/component/poster-image
+                                                    </item>
+                                                    <item name="class" xsi:type="array">
+                                                        <item name="vjsPosterImage" xsi:type="string">
+                                                            vjs-poster-image
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>
