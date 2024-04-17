@@ -15,7 +15,7 @@ class VideoPlayerConfig extends DataObject implements ConfigInterface
     public function getVideoId(): ?string
     {
         return $this->hasData(self::VIDEO_ID)
-            ? (string)$this->getData(self::VIDEO_ID) : null;
+            ? (string) $this->getData(self::VIDEO_ID) : null;
     }
 
     /**
@@ -32,7 +32,7 @@ class VideoPlayerConfig extends DataObject implements ConfigInterface
     public function getVideoSrc(): ?string
     {
         return $this->hasData(self::VIDEO_SRC)
-            ? (string)$this->getData(self::VIDEO_SRC) : null;
+            ? (string) $this->getData(self::VIDEO_SRC) : null;
     }
 
     /**
