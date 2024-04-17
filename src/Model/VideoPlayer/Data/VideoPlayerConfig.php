@@ -21,7 +21,7 @@ class VideoPlayerConfig extends DataObject implements ConfigInterface
     /**
      * @inheritDoc
      */
-    public function setVideoId(string $videoId): static
+    public function setVideoId(string $videoId): ConfigInterface
     {
         return $this->setData(self::VIDEO_ID, $videoId);
     }
@@ -38,7 +38,7 @@ class VideoPlayerConfig extends DataObject implements ConfigInterface
     /**
      * @inheritDoc
      */
-    public function setVideoSrc(string $videoSrc): static
+    public function setVideoSrc(string $videoSrc): ConfigInterface
     {
         return $this->setData(self::VIDEO_SRC, $videoSrc);
     }
