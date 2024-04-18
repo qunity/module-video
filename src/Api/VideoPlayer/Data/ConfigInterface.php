@@ -1,10 +1,16 @@
 <?php
 
+/**
+ * @noinspection PhpUnnecessaryFullyQualifiedNameInspection
+ */
+
 declare(strict_types=1);
 
 namespace Qunity\Video\Api\VideoPlayer\Data;
 
-interface ConfigInterface
+use Magento\Framework\Api\ExtensibleDataInterface;
+
+interface ConfigInterface extends ExtensibleDataInterface
 {
     public const VIDEO_ID = 'video_id';
     public const VIDEO_SRC = 'video_src';
@@ -38,4 +44,19 @@ interface ConfigInterface
      * @return $this
      */
     public function setVideoSrc(string $videoSrc): self;
+
+    /**
+     * Retrieve existing extension attributes object or create a new one
+     *
+     * @return \Qunity\Video\Api\VideoPlayer\Data\ConfigExtensionInterface
+     */
+    public function getExtensionAttributes(): ConfigExtensionInterface;
+
+    /**
+     * Set an extension attributes object
+     *
+     * @param \Qunity\Video\Api\VideoPlayer\Data\ConfigExtensionInterface $extensionAttributes
+     * @return $this
+     */
+    public function setExtensionAttributes(ConfigExtensionInterface $extensionAttributes): self;
 }
