@@ -58,7 +58,6 @@ class VideoPlayer extends Template
             $this->videoPlayer->updateConfig($config);
             $this->updateJsLayout($this->getVideoId());
         } catch (LocalizedException $e) {
-            $this->_logger->critical($e->getMessage(), $config);
             $this->messageManager->addErrorMessage($e->getMessage());
         }
 
