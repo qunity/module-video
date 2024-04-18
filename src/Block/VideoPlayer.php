@@ -14,9 +14,6 @@ use Qunity\Video\Api\VideoPlayerInterface;
 
 class VideoPlayer extends Template
 {
-    public const PRODUCT_ID = 'product_id';
-    public const LINK_ID = 'link_id';
-
     /**
      * @param Template\Context $context
      * @param SerializerInterface $serializer
@@ -61,11 +58,8 @@ class VideoPlayer extends Template
             $this->videoPlayer->updateConfig($config);
             $this->updateJsLayout($this->getVideoId());
         } catch (LocalizedException $e) {
+            $this->_logger->critical($e->getMessage(), $config);
             $this->messageManager->addErrorMessage($e->getMessage());
-            $this->_logger->critical($e->getMessage(), [
-                self::PRODUCT_ID => $this->getData(self::PRODUCT_ID),
-                self::LINK_ID => $this->getData(self::LINK_ID),
-            ]);
         }
 
         return $this;
