@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Qunity\Video\Api\VideoPlayer;
 
-use Magento\Framework\DataObject;
+use Qunity\Video\Api\VideoPlayer\Data\ConfigInterface;
 
 interface LayoutProcessorInterface
 {
@@ -12,9 +12,9 @@ interface LayoutProcessorInterface
      * Process js Layout of block
      *
      * @param array $jsLayout
-     * @param DataObject $config
+     * @param ConfigInterface $config
      *
-     * @return array
+     * @return void
      */
-    public function process(array $jsLayout, DataObject $config): array;
+    public function process(array &$jsLayout, ConfigInterface $config): void;
 }
