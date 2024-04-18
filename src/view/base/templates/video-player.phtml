@@ -4,7 +4,7 @@
  * @var Magento\Framework\Escaper $escaper
  */
 ?>
-<?php if (!empty($videoId = $block->getVideoId())): // @phpstan-ignore-line ?>
+<?php if (!empty($videoId = $block->getVideoId())): ?>
     <div class="video-wrapper" data-role="video" data-bind="scope: '<?= $escaper->escapeHtmlAttr($videoId) ?>'">
         <!-- ko template: getTemplate() --><!-- /ko -->
     </div>
