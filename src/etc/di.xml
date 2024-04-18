@@ -1,6 +1,17 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Qunity\Video\Api\VideoPlayerInterface" type="Qunity\Video\Model\VideoPlayer"/>
+    <preference for="Qunity\Video\Api\VideoPlayer\Data\ConfigInterface"
+                type="Qunity\Video\Model\VideoPlayer\Data\Config"/>
+    <type name="Qunity\Video\Model\VideoPlayer">
+        <arguments>
+            <argument name="configProcessors" xsi:type="array">
+                <item name="Qunity_Video::required_config"
+                      xsi:type="object">Qunity\Video\Model\VideoPlayer\ConfigProcessor\RequiredConfig\Proxy</item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Qunity\Video\Block\VideoPlayer">
         <arguments>
             <argument name="layoutProcessors" xsi:type="array">
