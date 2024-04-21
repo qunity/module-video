@@ -13,7 +13,6 @@ define([
      * @inheritDoc
      */
     _initialize() {
-      this.subElements = {};
       this.on('click', this._onPlayPauseToggle.bind(this));
 
       this.paused = ko.observable(null);
@@ -44,7 +43,8 @@ define([
       const isPaused = tech.paused();
       isPaused ? tech.play() : tech.pause();
 
-      this.paused(isPaused);
+      (this.paused() === isPaused)
+        ? this.paused.valueHasMutated() : this.paused(isPaused);
     }
 
     /**
@@ -54,7 +54,10 @@ define([
      * @param {Boolean} paused
      */
     _animateSubElements(paused) {
-      this.wrapper.active(paused ? 'play' : 'pause');
+      const type = paused ? 'play' : 'pause';
+
+      (this.wrapper.active() === type) ?
+        this.wrapper.active.valueHasMutated() : this.wrapper.active(type);
     }
   }
 });
