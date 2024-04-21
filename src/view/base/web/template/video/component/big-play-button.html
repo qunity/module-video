@@ -1,0 +1,8 @@
+<div class="vjs-big-button" data-bind="afterRender: setElement">
+    <button type="button" data-bind="event: { animationend: animationComplete }">
+        <span class="vjs-icon-placeholder vjs-svg-icon" data-bind="html: svg"></span>
+    </button>
+    <script type="text/x-magento-template" data-bind="attr: { id: svgId }, afterRender: initialSvgButton">
+        <svg viewBox="0 0 48 48"><path d="<%= path %>"/></svg>
+    </script>
+</div>
