@@ -1,4 +1,5 @@
 <!-- ko with: getChild('preview') -->
     <!-- ko template: getTemplate() --><!-- /ko -->
 <!--/ko-->
-<video data-bind="attr: { id: videoId, class: classStr }, afterRender: initVideo"></video>
+<video class="video-js vjs-m2luma-skin" data-bind="attr: { id: videoId },
+       style: { width: options.width, height: options.height }, afterRender: initVideo"></video>
