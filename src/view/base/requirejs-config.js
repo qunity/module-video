@@ -1,7 +1,7 @@
 let config = {
   map: {
     "*": {
-      "uiYoutube": "Qunity_Video/js/youtube",
+      "uiYouTube": "Qunity_Video/js/youtube",
       "uiVideo": "Qunity_Video/js/video",
       "video/player": "Qunity_Video/js/video/player",
       "video/uiComponent": "Qunity_Video/js/video/component/ui-component",
