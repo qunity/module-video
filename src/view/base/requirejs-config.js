@@ -17,6 +17,7 @@ let config = {
     "videojs/lang/ru": "Qunity_Video/js/lib/videojs/lang/ru.min.json",
     "videojs/component": "Qunity_Video/js/video/component/vjs-component",
     "videojs/component/title-bar": "Qunity_Video/js/video/component/videojs/title-bar",
+    "videojs/component/big-play-button": "Qunity_Video/js/video/component/videojs/big-play-button",
     "videojs/component/poster-image": "Qunity_Video/js/video/component/videojs/poster-image"
   }
 }
