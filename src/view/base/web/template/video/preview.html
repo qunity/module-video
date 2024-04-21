@@ -1,4 +1,5 @@
-<div data-bind="attr: { class: classStr }">
+<div class="video-js vjs-m2luma-skin vjs-video-preview"
+     data-bind="style: { width: width, height: height }, afterRender: setElement">
     <!-- ko foreach: getRegion('preview-child') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->
