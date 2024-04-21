@@ -1,5 +1,5 @@
 <div class="video-js vjs-m2luma-skin vjs-video-preview" data-bind="style: { width: width, height: height },
-    event: { animationend: removeElement }, afterRender: setElement">
+    event: { animationend: remove }, afterRender: element">
     <!-- ko foreach: getRegion('preview-child') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->

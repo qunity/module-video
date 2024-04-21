@@ -160,7 +160,7 @@ define([
         vjsComponentsKeys = Object.keys(this.config.components),
         difference = vjsComponentsKeys.filter(name => !uiComponentsKeys.includes(name));
 
-      this.initialized(Boolean(difference.length));
+      this.initialized(!difference.length);
     }
   }.initialize();
 });

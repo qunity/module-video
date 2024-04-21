@@ -52,20 +52,10 @@ define([
     },
 
     /**
-     * Set base HTML element
-     * @public
-     *
-     * @param {HTMLElement} element
-     */
-    setElement: function (element) {
-      this.element(element);
-    },
-
-    /**
-     * Remove base HTML element
+     * Remove component element from DOM
      * @public
      */
-    removeElement: function () {
+    remove: function () {
       this.element().remove();
     }
   });
