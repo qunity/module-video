@@ -18,6 +18,7 @@ define([
      */
     initialize: function () {
       this._super();
+      this.initSubscriber();
 
       if (this.videojsComponent) {
         this.videojsComponent.wrapper = this;
@@ -37,6 +38,16 @@ define([
       this._super();
       this.observe(['element']);
 
+      return this;
+    },
+
+    /**
+     * Initializes subscription properties
+     * @public
+     *
+     * @returns {Object}
+     */
+    initSubscriber: function () {
       return this;
     },
 
