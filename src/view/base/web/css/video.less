@@ -1,0 +1,48 @@
+@import (css,inline) "lib/videojs/videojs.min.css";
+@import "lib/videojs/skins/m2luma";
+
+@preview-background-color: rgb(40, 40, 40);
+
+.video-wrapper {
+  width: max-content;
+  height: max-content;
+
+  .vjs-video-preview {
+    position: absolute;
+    background-color: @preview-background-color;
+    z-index: 1;
+
+    &._animate {
+      animation: previewFadeOut .5s linear 1 normal forwards;
+      animation-delay: .6s;
+    }
+
+    .vjs-big-button button {
+      &:not(._animate) {
+        visibility: visible;
+      }
+
+      .vjs-icon-placeholder {
+        transition: .1s;
+
+        &:hover {
+          filter: drop-shadow(0 0 .25em #fff);
+          transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        &:active {
+          transform: translate(-50%, -50%) scale(.95);
+        }
+      }
+    }
+
+    @keyframes previewFadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+  }
+}
