@@ -1,0 +1,177 @@
+@player-elements-color: #eee;
+@player-background-gradient-color: rgba(0, 0, 0, .7);
+@player-background-filter: blur(3em);
+@player-big-buttons-size: 1em;
+@player-video-title-size: 2em;
+@player-video-title-text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+@player-control-bar-height: 5em;
+@player-control-bar-background-color: rgba(0, 0, 0, .3);
+
+.video-js.vjs-m2luma-skin {
+  .vjs-title-bar {
+    padding: 0;
+    font-size: 1em;
+    background: transparent;
+    z-index: 1;
+
+    &:before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      mask: linear-gradient(to bottom, @player-background-gradient-color, transparent);
+      backdrop-filter: @player-background-filter;
+      background-color: @player-background-gradient-color;
+      z-index: -1;
+    }
+
+    span {
+      display: inline-block;
+      padding: .8em 1em 1em;
+      width: 100%;
+      font-size: @player-video-title-size;
+      text-shadow: @player-video-title-text-shadow;
+    }
+  }
+
+  .vjs-poster-image {
+    height: 100%;
+    width: 100%;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: left top;
+    }
+  }
+
+  .vjs-big-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+
+    button {
+      position: absolute;
+      width: @player-big-buttons-size;
+      height: @player-big-buttons-size;
+      margin: 0;
+      padding: .6em;
+      font-size: calc(@player-big-buttons-size * 7);
+      line-height: 1;
+      border-radius: @player-big-buttons-size;
+      color: @player-elements-color;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: @player-big-buttons-size;
+        mask: radial-gradient(@player-background-gradient-color, transparent);
+        backdrop-filter: @player-background-filter;
+        background-color: @player-background-gradient-color;
+      }
+
+      &:not(._animate) {
+        visibility: hidden;
+      }
+
+      &._animate {
+        visibility: visible;
+        animation: fadeOut .5s linear 1 normal forwards, scale;
+      }
+
+      .vjs-icon-placeholder:hover {
+        filter: none;
+      }
+
+      .vjs-svg-icon {
+        width: 1em;
+        height: 1em;
+        transform: translate(-50%, -50%);
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+
+  .vjs-control-bar {
+    height: @player-control-bar-height;
+    color: @player-elements-color;
+    background-color: @player-control-bar-background-color;
+    backdrop-filter: @player-background-filter;
+    z-index: 2;
+
+    .vjs-time-control,
+    .vjs-volume-control {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100% !important;
+    }
+
+    .vjs-play-control,
+    .vjs-fullscreen-control {
+      width: 4.5em;
+    }
+
+    .vjs-play-control > .vjs-icon-placeholder {
+      margin-left: .5em;
+    }
+
+    .vjs-fullscreen-control > .vjs-icon-placeholder {
+      margin-right: .5em;
+    }
+
+    .vjs-volume-level {
+      background-color: @player-elements-color;
+    }
+
+    .vjs-progress-holder .vjs-play-progress > .vjs-icon-placeholder {
+      line-height: unset;
+    }
+
+    .vjs-play-progress,
+    .vjs-mouse-display {
+      background-color: @player-elements-color;
+
+      & > .vjs-time-tooltip,
+      & > .vjs-volume-tooltip {
+        top: calc(@player-control-bar-height / -2.3);
+        color: @player-elements-color;
+        background: transparent;
+      }
+    }
+
+    .vjs-progress-control {
+      .vjs-play-progress > .vjs-time-tooltip {
+        display: none;
+      }
+
+      &:hover {
+        .vjs-progress-holder,
+        .vjs-time-tooltip {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
