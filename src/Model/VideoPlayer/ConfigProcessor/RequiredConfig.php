@@ -33,7 +33,7 @@ class RequiredConfig implements ConfigProcessorInterface
             throw new LocalizedException(__($exceptionMessage));
         }
 
-        $config->setVideoId(hash('md2', $videoSrc))
+        $config->setVideoId('video-' . hash('md2', $videoSrc))
             ->setVideoSrc($videoSrc);
     }
 }
