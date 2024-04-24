@@ -1,6 +1,5 @@
-<div class="video-js vjs-m2luma-skin vjs-video-preview" data-bind="style: { width: width, height: height },
-    event: { animationend: remove }, afterRender: element">
-    <!-- ko foreach: getRegion('preview-child') -->
+<div class="vjs-video-preview" data-bind="event: { click: initVideo }, afterRender: element">
+    <!-- ko foreach: $parent.player().getRegion('component') -->
         <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->
 </div>
