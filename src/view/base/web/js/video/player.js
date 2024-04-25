@@ -6,7 +6,7 @@ define([
   'use strict';
 
   /**
-   * Component for general configuration of VideoJs player
+   * Component for configuration of VideoJs player library
    * @see https://videojs.com
    */
   return uiComponent.extend({
@@ -15,20 +15,18 @@ define([
         ru: 'videojs/lang/ru'
       },
       components: {
-        titleBar: 'titleBar',
-        bigPlayButton: 'bigPlayButton',
-        posterImage: 'posterImage',
-        errorInfo: 'errorInfo'
-      },
-      modules: {
         titleBar: '${ $.name }.titleBar',
         bigPlayButton: '${ $.name }.bigPlayButton',
         posterImage: '${ $.name }.posterImage',
         errorInfo: '${ $.name }.errorInfo'
+      },
+      modules: {
+        titleBar: '${ $.components.titleBar }',
+        bigPlayButton: '${ $.components.bigPlayButton }',
+        posterImage: '${ $.components.posterImage }',
+        errorInfo: '${ $.components.errorInfo }'
       }
     },
-    uiComponents: {},
-    initialized: true, // TODO: избавиться от флага инициализации
 
     /**
      * Component initialization
@@ -39,42 +37,10 @@ define([
     initialize: function () {
       this._super();
 
-      this.initSubscriber();
-      this.initPlayer();
-
-      return this;
-    },
-
-    /**
-     * Initializes observable properties
-     * @public
-     *
-     * @returns {Object}
-     */
-    initObservable: function () {
-      this._super();
-      this.observe(['uiComponents', 'initialized']);
-
-      return this;
-    },
-
-    /**
-     * Initializes subscription properties
-     * @public
-     *
-     * @returns {Object}
-     */
-    initSubscriber: function () {
-      return this;
-    },
-
-    /**
-     * Video player configuration process
-     * @private
-     */
-    initPlayer: function () {
       this._addLanguages();
       this._registerComponents();
+
+      return this;
     },
 
     /**
@@ -88,10 +54,6 @@ define([
      * @returns {Object}
      */
     create: function (id, options, ready) {
-      if (!this.initialized()) {
-        throw new Error('Video Player library is not initialized');
-      }
-
       this.bigPlayButton().active.valueHasMutated();
       this.posterImage().animation(
         component => component.element().style.visibility = 'hidden'
@@ -101,14 +63,14 @@ define([
     },
 
     /**
-     * ...
+     * Display error information
      * @public
      *
      * @param {String|null} message
      * @param {String|null} description
      */
     error: function (message = null, description = null) {
-      this.errorInfo().error(message, description);
+      this.errorInfo().show(message, description);
     },
 
     /**
@@ -129,13 +91,10 @@ define([
      * @private
      */
     _registerComponents: function () {
-      const names = Object.keys(this.components),
-        query = names.map(name => `${this.components[name]}`);
-
-      query.forEach(name => {
-        const query = `name = ${this.name}.${this.components[name]}`;
-        uiRegistry.get(query, uiComponent => videojs.registerComponent(name, uiComponent.videojsComponent));
-      });
+      Object.entries(this.components).forEach(([name, query]) =>
+          uiRegistry.get(query, uiComponent =>
+            videojs.registerComponent(name, uiComponent.videojsComponent))
+      );
     }
   });
 });
