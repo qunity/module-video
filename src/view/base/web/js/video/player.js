@@ -1,31 +1,34 @@
 define([
-  'videojs',
-  'json!videojs/lang/ru',
-  'videojs/component/title-bar',
-  'videojs/component/big-play-button',
-  'videojs/component/poster-image',
+  'uiComponent',
   'uiRegistry',
-  'ko'
-], function (videojs, ru, titleBar, bigPlayButton, posterImage, uiRegistry, ko) {
+  'videojs'
+], function (uiComponent, uiRegistry, videojs) {
   'use strict';
 
   /**
    * Component for general configuration of VideoJs player
    * @see https://videojs.com
    */
-  return {
-    config: {
+  return uiComponent.extend({
+    defaults: {
       languages: {
-        'ru': ru
+        ru: 'videojs/lang/ru'
       },
       components: {
-        'titleBar': titleBar,
-        'bigPlayButton': bigPlayButton,
-        'posterImage': posterImage
+        titleBar: 'titleBar',
+        bigPlayButton: 'bigPlayButton',
+        posterImage: 'posterImage',
+        errorInfo: 'errorInfo'
+      },
+      modules: {
+        titleBar: '${ $.name }.titleBar',
+        bigPlayButton: '${ $.name }.bigPlayButton',
+        posterImage: '${ $.name }.posterImage',
+        errorInfo: '${ $.name }.errorInfo'
       }
     },
-    uiComponents: ko.observable({}),
-    initialized: ko.observable(false),
+    uiComponents: {},
+    initialized: true, // TODO: избавиться от флага инициализации
 
     /**
      * Component initialization
@@ -34,11 +37,44 @@ define([
      * @return {Object}
      */
     initialize: function () {
-      if (!this.initialized()) {
-        this._configure();
-      }
+      this._super();
+
+      this.initSubscriber();
+      this.initPlayer();
 
       return this;
+    },
+
+    /**
+     * Initializes observable properties
+     * @public
+     *
+     * @returns {Object}
+     */
+    initObservable: function () {
+      this._super();
+      this.observe(['uiComponents', 'initialized']);
+
+      return this;
+    },
+
+    /**
+     * Initializes subscription properties
+     * @public
+     *
+     * @returns {Object}
+     */
+    initSubscriber: function () {
+      return this;
+    },
+
+    /**
+     * Video player configuration process
+     * @private
+     */
+    initPlayer: function () {
+      this._addLanguages();
+      this._registerComponents();
     },
 
     /**
@@ -56,47 +92,23 @@ define([
         throw new Error('Video Player library is not initialized');
       }
 
+      this.bigPlayButton().active.valueHasMutated();
+      this.posterImage().animation(
+        component => component.element().style.visibility = 'hidden'
+      );
+
       return videojs(id, options, ready);
     },
 
     /**
-     * Get language dictionary
+     * ...
      * @public
      *
-     * @param {String} name
-     * @returns {{String:String}}
+     * @param {String|null} message
+     * @param {String|null} description
      */
-    getLanguage: function (name) {
-      if (!this.config.languages.hasOwnProperty(name)) {
-        throw new Error(`Video player language dictionary not found: ${name}`);
-      }
-
-      return this.config.languages[name];
-    },
-
-    /**
-     * Get player static component
-     * @public
-     *
-     * @param {String} name
-     * @returns {Class}
-     */
-    getComponent: function (name) {
-      if (!this.config.components.hasOwnProperty(name)) {
-        throw new Error(`Video player component not found: ${name}`);
-      }
-
-      return this.config.components[name];
-    },
-
-    /**
-     * Video player configuration process
-     * @private
-     */
-    _configure: function () {
-      this._addLanguages();
-      this._registerComponents();
-      this._loadUiComponents();
+    error: function (message = null, description = null) {
+      this.errorInfo().error(message, description);
     },
 
     /**
@@ -104,8 +116,12 @@ define([
      * @private
      */
     _addLanguages: function () {
-      Object.keys(this.config.languages)
-        .forEach(name => videojs.addLanguage(name, this.getLanguage(name)));
+      const names = Object.keys(this.languages),
+        query = names.map(name => `json!${this.languages[name]}`);
+
+      require(query, function (...languages) {
+        names.forEach((name, index) => videojs.addLanguage(name, languages[index]));
+      });
     },
 
     /**
@@ -113,54 +129,13 @@ define([
      * @private
      */
     _registerComponents: function () {
-      Object.keys(this.config.components)
-        .forEach(name => videojs.registerComponent(name, this.getComponent(name)));
-    },
+      const names = Object.keys(this.components),
+        query = names.map(name => `${this.components[name]}`);
 
-    /**
-     * Subscribe UI components load process
-     * @private
-     */
-    _loadUiComponents: function () {
-      Object.keys(this.config.components).forEach(name => {
-        const query = `videojsComponentName = ${this.getComponent(name).name}`;
-        uiRegistry.get(query, this._loadUiComponent.bind(this, name));
+      query.forEach(name => {
+        const query = `name = ${this.name}.${this.components[name]}`;
+        uiRegistry.get(query, uiComponent => videojs.registerComponent(name, uiComponent.videojsComponent));
       });
-
-      this.uiComponents.subscribe(this._changeUiComponents.bind(this));
-    },
-
-    /**
-     * Subscribe of rendering loaded UI component
-     * @private
-     *
-     * @param {String} name
-     * @param {Object} uiComponent
-     */
-    _loadUiComponent: function (name, uiComponent) {
-      uiComponent.element.subscribe(value => {
-        if (typeof value !== 'object') {
-          throw new Error(`Element of component '${name}' is not an HTML element`);
-        }
-
-        let item = {};
-        item[name] = uiComponent;
-        this.uiComponents({ ...this.uiComponents(), ...item });
-      });
-    },
-
-    /**
-     * Processing change of UI components list
-     * @private
-     *
-     * @param {Object} uiComponents
-     */
-    _changeUiComponents: function (uiComponents) {
-      const uiComponentsKeys = Object.keys(uiComponents),
-        vjsComponentsKeys = Object.keys(this.config.components),
-        difference = vjsComponentsKeys.filter(name => !uiComponentsKeys.includes(name));
-
-      this.initialized(!difference.length);
     }
-  }.initialize();
+  });
 });
