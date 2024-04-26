@@ -69,7 +69,7 @@ define([
      *
      * @param {VoidFunction} callback
      */
-    animate: function (callback = () => { }) {
+    animate: function (callback = () => {}) {
       const element = this.element(), fnRemoveClass = () => {
         element.classList.remove(this.animationClass);
         callback(this);
