@@ -30,8 +30,8 @@ define([
       this._super();
 
       this.initSubscriber();
-      this.initComponents();
       this.initLanguages();
+      this.initComponents();
 
       return this;
     },
