@@ -5,7 +5,7 @@ define([
   'use strict';
 
   /**
-   * Abstracted video component with general methods for base video components
+   * Abstracted video component with general methods
    */
   return uiComponent.extend({
     defaults: {
