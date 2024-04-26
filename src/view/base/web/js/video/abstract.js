@@ -68,8 +68,9 @@ define([
     initLanguages: function () {
       const names = Object.keys(this.languages);
 
-      require(names.map(name => `json!${this.languages[name]}`), ...languages =>
-        names.forEach((name, index) => this.languages[name] = languages[index]));
+      require(names.map(name => `json!${this.languages[name]}`), function (...languages) {
+        names.forEach((name, index) => this.languages[name] = languages[index]);
+      }.bind(this));
 
       return this;
     },
