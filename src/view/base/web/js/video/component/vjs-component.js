@@ -56,17 +56,6 @@ define([
       }
 
       /**
-       * Create HTML element
-       * @public
-       *
-       * @returns {HTMLElement}
-       */
-      createEl() {
-        // noinspection JSUnresolvedReference
-        return this.wrapper.element();
-      }
-
-      /**
        * Component initialization
        * @public
        *
@@ -75,6 +64,17 @@ define([
        */
       initialize(player, options) {
         // ...
+      }
+
+      /**
+       * Create HTML element
+       * @public
+       *
+       * @returns {HTMLElement}
+       */
+      createEl() {
+        // noinspection JSUnresolvedReference
+        return this.wrapper.element();
       }
     };
 
