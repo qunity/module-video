@@ -18,7 +18,7 @@ define([
        */
       constructor(player, options = {}) {
         super(player, options);
-        this._initialize(player, options);
+        this.initialize(player, options);
       }
 
       /**
@@ -68,12 +68,12 @@ define([
 
       /**
        * Component initialization
-       * @private
+       * @public
        *
        * @param {Object} player
        * @param {Object} options
        */
-      _initialize(player, options) {
+      initialize(player, options) {
         // ...
       }
     };
