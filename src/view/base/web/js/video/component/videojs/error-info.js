@@ -15,6 +15,9 @@ define([
        */
       initialize(player) {
         player.on('error', this._onErrorProcessing.bind(this));
+
+        player.error = ko.observable(null);
+        player.error.subscribe(this._showErrorInfo.bind(this));
       }
 
       /**
@@ -22,8 +25,18 @@ define([
        * @private
        */
       _onErrorProcessing() {
-        this.wrapper.show();
+        this._showErrorInfo();
         this.player.off();
+      }
+
+      /**
+       * Show error information into HTML element
+       *
+       * @param {String|null} message
+       * @private
+       */
+      _showErrorInfo(message = null) {
+        this.wrapper.show(message);
       }
     };
   };

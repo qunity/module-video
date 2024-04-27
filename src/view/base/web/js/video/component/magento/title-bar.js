@@ -1,15 +1,19 @@
 define([
-  'video/uiComponent',
-  'videojs/component/title-bar'
-], function (uiComponent, titleBar) {
+  'video/m2Component',
+  'video/vjsTitleBar'
+], function (m2Component, vjsTitleBar) {
   'use strict';
 
   /**
-   * Title bar UI component for Magento VideoPlayer
+   * Title bar UI component for Magento Video player
    */
-  return uiComponent.extend({
+  return m2Component.extend({
     defaults: {
-      videojsComponent: titleBar
+      videojsComponent: vjsTitleBar,
+      template: 'Qunity_Video/video/component/title-bar',
+      imports: {
+        title: '${ $.ns }:options.titleBar.title'
+      }
     },
 
     /**
