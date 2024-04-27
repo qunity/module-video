@@ -16,8 +16,8 @@ define([
       initialize(player) {
         player.on('error', this._onErrorProcessing.bind(this));
 
-        player.error = ko.observable(null);
-        player.error.subscribe(this._showErrorInfo.bind(this));
+        player.failed = ko.observable(null);
+        player.failed.subscribe(this._showErrorInfo.bind(this));
       }
 
       /**
@@ -25,8 +25,8 @@ define([
        * @private
        */
       _onErrorProcessing() {
-        this._showErrorInfo();
-        this.player.off();
+        this.player().failed.valueHasMutated();
+        this.player().off();
       }
 
       /**
