@@ -12,7 +12,7 @@ define([
     defaults: {
       videojsComponent: vjsErrorInfo,
       template: 'Qunity_Video/video/component/error-info',
-      svgTemplate: 'Qunity_Video/video/component/error-info/svg-icon',
+      svgTemplate: 'Qunity_Video/video/component/error-info/icon',
       defaultMessage: $t('Playback error.'),
       defaultDescription: $t('Please try again later or contact your administrator.')
     },
@@ -59,7 +59,7 @@ define([
      * @returns {uiComponent}
      */
     initSvgIcon: function () {
-      this.downloadSvgIcon(svgIcon => { this.svgIcon = svgIcon });
+      this.downloadSvgIcons([ this.svgTemplate ], svgIcon => { this.svgIcon = svgIcon });
 
       return this;
     },

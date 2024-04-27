@@ -80,16 +80,15 @@ define([
     },
 
     /**
-     * Download element SVG icon
+     * Download element SVG icons
      * @public
      *
+     * @param {String[]} paths
      * @param {VoidFunction} callback
      */
-    downloadSvgIcon: function (callback = () => {}) {
-      const path = this.svgTemplate
-        .replace(/^(\w+_\w+)/, '$1/template');
-
-      require([`text!${path}.html`], callback);
+    downloadSvgIcons: function (paths, callback = () => {}) {
+      require(paths.map(path =>
+        `text!${path.replace(/^(\w+_\w+)/, '$1/images')}.svg`), callback);
     }
   });
 });

@@ -1,8 +1,7 @@
 define([
   'video/m2Component',
-  'video/vjsBigPlayButton',
-  'mage/template'
-], function (m2Component, vjsBigPlayButton, mageTemplate) {
+  'video/vjsBigPlayButton'
+], function (m2Component, vjsBigPlayButton) {
   'use strict';
 
   /**
@@ -12,10 +11,9 @@ define([
     defaults: {
       videojsComponent: vjsBigPlayButton,
       template: 'Qunity_Video/video/component/big-play-button',
-      svgTemplate: 'Qunity_Video/video/component/big-play-button/svg-icon',
-      svgButtons: {
-        play: 'M16 10v28l22-14z',
-        pause: 'M12 38h8V10h-8v28zm16-28v28h8V10h-8z'
+      svgIcons: {
+        play: 'Qunity_Video/video/component/big-play-button/icon-play',
+        pause: 'Qunity_Video/video/component/big-play-button/icon-pause'
       },
       svgIcon: null,
       active: 'play'
@@ -58,10 +56,13 @@ define([
      * @returns {uiComponent}
      */
     initSvgButton: function () {
-      this.downloadSvgIcon(svgIconTpl => {
-        this.svgIconTpl = svgIconTpl;
+      const types = Object.keys(this.svgIcons);
+
+      this.downloadSvgIcons(Object.values(this.svgIcons), function (...svgIcons) {
+        types.forEach((type, index) => this.svgIcons[type] = svgIcons[index]);
+
         this.changeSvgButton(this.active());
-      });
+      }.bind(this));
 
       return this;
     },
@@ -85,7 +86,7 @@ define([
      * @param {String} type
      */
     changeSvgButton: function (type) {
-      this.svgIcon(mageTemplate(this.svgIconTpl, { path: this.svgButtons[type] }));
+      this.svgIcon(this.svgIcons[type]);
     }
   });
 });
