@@ -1,0 +1,13 @@
+<div class="vjs-error-info" data-bind="if: display, afterRender: element">
+    <div class="vjs-error-wrapper">
+        <div class="vjs-error-icon" data-bind="html: svgIcon"></div>
+        <div class="vjs-error-content">
+            <div class="vjs-error-message" data-bind="if: message">
+                <span data-bind="text: message"></span>
+            </div>
+            <div class="vjs-error-description" data-bind="if: description">
+                <span data-bind="text: description"></span>
+            </div>
+        </div>
+    </div>
+</div>

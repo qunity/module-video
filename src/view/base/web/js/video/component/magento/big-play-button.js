@@ -12,12 +12,12 @@ define([
     defaults: {
       videojsComponent: vjsBigPlayButton,
       template: 'Qunity_Video/video/component/big-play-button',
-      svgTemplate: 'Qunity_Video/video/component/big-play-button/svg-image',
+      svgTemplate: 'Qunity_Video/video/component/big-play-button/svg-icon',
       svgButtons: {
         play: 'M16 10v28l22-14z',
         pause: 'M12 38h8V10h-8v28zm16-28v28h8V10h-8z'
       },
-      svgImage: null,
+      svgIcon: null,
       active: 'play'
     },
 
@@ -36,7 +36,7 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['svgImage', 'active']);
+      this.observe(['svgIcon', 'active']);
 
       return this;
     },
@@ -52,17 +52,14 @@ define([
     },
 
     /**
-     * Initializes starting SVG image
+     * Initializes starting SVG icon
      * @public
      *
      * @returns {uiComponent}
      */
     initSvgButton: function () {
-      const path = this.svgTemplate
-        .replace(/^(\w+_\w+)/, '$1/template');
-
-      require([`text!${path}.html`], svgImageTpl => {
-        this.svgImageTpl = svgImageTpl;
+      this.downloadSvgIcon(svgIconTpl => {
+        this.svgIconTpl = svgIconTpl;
         this.changeSvgButton(this.active());
       });
 
@@ -82,13 +79,13 @@ define([
     },
 
     /**
-     * Change SVG image for button
+     * Change SVG icon for button
      * @public
      *
      * @param {String} type
      */
     changeSvgButton: function (type) {
-      this.svgImage(mageTemplate(this.svgImageTpl, { path: this.svgButtons[type] }));
+      this.svgIcon(mageTemplate(this.svgIconTpl, { path: this.svgButtons[type] }));
     }
   });
 });

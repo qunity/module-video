@@ -77,6 +77,19 @@ define([
 
       element.classList.add(this.animationClass);
       element.addEventListener('animationend', fnRemoveClass, { once: true });
+    },
+
+    /**
+     * Download element SVG icon
+     * @public
+     *
+     * @param {VoidFunction} callback
+     */
+    downloadSvgIcon: function (callback = () => {}) {
+      const path = this.svgTemplate
+        .replace(/^(\w+_\w+)/, '$1/template');
+
+      require([`text!${path}.html`], callback);
     }
   });
 });
