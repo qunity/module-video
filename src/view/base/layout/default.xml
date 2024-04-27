@@ -14,56 +14,26 @@
                             <item name="{{video_id}}" xsi:type="array">
                                 <item name="component" xsi:type="string">uiVideo</item>
                                 <item name="displayArea" xsi:type="string">{{video_id}}</item>
-                                <item name="config" xsi:type="array">
-                                    <item name="template" xsi:type="string">Qunity_Video/video</item>
-                                </item>
                                 <item name="children" xsi:type="array">
-                                    <item name="preview" xsi:type="array">
-                                        <item name="component" xsi:type="string">video/preview</item>
-                                        <item name="displayArea" xsi:type="string">preview</item>
-                                        <item name="config" xsi:type="array">
-                                            <item name="template" xsi:type="string">
-                                                Qunity_Video/video/preview
-                                            </item>
-                                        </item>
+                                    <item name="player" xsi:type="array">
+                                        <item name="component" xsi:type="string">video/player</item>
                                         <item name="children" xsi:type="array">
                                             <item name="titleBar" xsi:type="array">
-                                                <item name="component" xsi:type="string">video/uiTitleBar</item>
-                                                <item name="displayArea" xsi:type="string">preview-child</item>
-                                                <item name="config" xsi:type="array">
-                                                    <item name="template" xsi:type="string">
-                                                        Qunity_Video/video/component/title-bar
-                                                    </item>
-                                                </item>
+                                                <item name="component" xsi:type="string">video/m2TitleBar</item>
                                             </item>
                                             <item name="bigPlayButton" xsi:type="array">
-                                                <item name="component" xsi:type="string">video/uiBigPlayButton</item>
-                                                <item name="displayArea" xsi:type="string">preview-child</item>
-                                                <item name="config" xsi:type="array">
-                                                    <item name="template" xsi:type="string">
-                                                        Qunity_Video/video/component/big-play-button
-                                                    </item>
-                                                </item>
+                                                <item name="component" xsi:type="string">video/m2BigPlayButton</item>
                                             </item>
                                             <item name="posterImage" xsi:type="array">
-                                                <item name="component" xsi:type="string">video/uiPosterImage</item>
-                                                <item name="displayArea" xsi:type="string">preview-child</item>
-                                                <item name="config" xsi:type="array">
-                                                    <item name="template" xsi:type="string">
-                                                        Qunity_Video/video/component/poster-image
-                                                    </item>
-                                                </item>
+                                                <item name="component" xsi:type="string">video/m2PosterImage</item>
+                                            </item>
+                                            <item name="errorInfo" xsi:type="array">
+                                                <item name="component" xsi:type="string">video/m2ErrorInfo</item>
                                             </item>
                                         </item>
                                     </item>
-                                    <item name="errorInfo" xsi:type="array">
-                                        <item name="component" xsi:type="string">video/uiErrorInfo</item>
-                                        <item name="displayArea" xsi:type="string">error</item>
-                                        <item name="config" xsi:type="array">
-                                            <item name="template" xsi:type="string">
-                                                Qunity_Video/video/component/error-info
-                                            </item>
-                                        </item>
+                                    <item name="preview" xsi:type="array">
+                                        <item name="component" xsi:type="string">video/preview</item>
                                     </item>
                                 </item>
                             </item>
