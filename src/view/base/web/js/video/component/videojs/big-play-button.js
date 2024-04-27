@@ -1,5 +1,5 @@
 define([
-  'videojs/component',
+  'video/vjsComponent',
   'ko'
 ], function (vjsComponent, ko) {
   'use strict';
@@ -7,57 +7,59 @@ define([
   /**
    * Big play button component for VideoJs player
    */
-  return class BigPlayButton extends vjsComponent { // noinspection JSUnusedGlobalSymbols
+  return function (m2Component) {
+    return class BigPlayButton extends vjsComponent(m2Component) {
 
-    /**
-     * @inheritDoc
-     */
-    _initialize() {
-      this.on('click', this._onPlayPauseToggle.bind(this));
+      /**
+       * @inheritDoc
+       */
+      initialize() {
+        this.on('click', this._onPlayPauseToggle.bind(this));
 
-      this.paused = ko.observable(null);
-      this.paused.subscribe(this._animateSubElements.bind(this));
-    }
-
-    /**
-     * Process event of toggle play/pause states
-     * @private
-     */
-    _onPlayPauseToggle() {
-      const player = this.player();
-      if (!player.isReady_) {
-        return;
+        this.paused = ko.observable(null);
+        this.paused.subscribe(this._animateElement.bind(this));
       }
 
-      const tech = player.tech(player.techName_);
-      this._callPlayPauseToggle(tech);
-    }
+      /**
+       * Process event of toggle play/pause states
+       * @private
+       */
+      _onPlayPauseToggle() {
+        const player = this.player();
+        if (!player.isReady_) {
+          return;
+        }
 
-    /**
-     * Call process of toggle play/pause states
-     * @private
-     *
-     * @param {Object} tech
-     */
-    _callPlayPauseToggle(tech) {
-      const isPaused = tech.paused();
-      isPaused ? tech.play() : tech.pause();
+        const tech = player.tech(player.techName_);
+        this._callPlayPauseToggle(tech);
+      }
 
-      (this.paused() === isPaused)
-        ? this.paused.valueHasMutated() : this.paused(isPaused);
-    }
+      /**
+       * Call process of toggle play/pause states
+       * @private
+       *
+       * @param {Object} tech
+       */
+      _callPlayPauseToggle(tech) {
+        const isPaused = tech.paused();
+        isPaused ? tech.play() : tech.pause();
 
-    /**
-     * Animate sub-buttons HTML elements
-     * @private
-     *
-     * @param {Boolean} paused
-     */
-    _animateSubElements(paused) {
-      const type = paused ? 'play' : 'pause';
+        (this.paused() === isPaused)
+          ? this.paused.valueHasMutated() : this.paused(isPaused);
+      }
 
-      (this.wrapper.active() === type) ?
-        this.wrapper.active.valueHasMutated() : this.wrapper.active(type);
-    }
-  }
+      /**
+       * Animate button HTML element
+       * @private
+       *
+       * @param {Boolean} paused
+       */
+      _animateElement(paused) {
+        const type = paused ? 'play' : 'pause';
+
+        (this.wrapper.active() === type) ?
+          this.wrapper.active.valueHasMutated() : this.wrapper.active(type);
+      }
+    };
+  };
 });

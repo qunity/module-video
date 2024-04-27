@@ -1,24 +1,34 @@
-// noinspection JSUnusedGlobalSymbols
-
 define([
-  'video/uiComponent',
-  'videojs/component/big-play-button',
-  "mage/template"
-], function (uiComponent, vjsBigPlayButton, mageTemplate) {
+  'video/m2Component',
+  'video/vjsBigPlayButton',
+  'mage/template'
+], function (m2Component, vjsBigPlayButton, mageTemplate) {
   'use strict';
 
   /**
-   * Big play button UI component for Magento VideoPlayer
+   * Big play button UI component for Magento Video player
    */
-  return uiComponent.extend({
+  return m2Component.extend({
     defaults: {
       videojsComponent: vjsBigPlayButton,
-      buttons: {
+      template: 'Qunity_Video/video/component/big-play-button',
+      svgTemplate: 'Qunity_Video/video/component/big-play-button/svg-image',
+      svgButtons: {
         play: 'M16 10v28l22-14z',
         pause: 'M12 38h8V10h-8v28zm16-28v28h8V10h-8z'
       },
-      svgId: 'big-button-svg-${ $.ns }',
+      svgImage: null,
       active: 'play'
+    },
+
+    /**
+     * @inheritDoc
+     */
+    initialize: function () {
+      this._super();
+      this.initSvgButton();
+
+      return this;
     },
 
     /**
@@ -26,7 +36,7 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['svg', 'active']);
+      this.observe(['svgImage', 'active']);
 
       return this;
     },
@@ -42,6 +52,24 @@ define([
     },
 
     /**
+     * Initializes starting SVG image
+     * @public
+     *
+     * @returns {uiComponent}
+     */
+    initSvgButton: function () {
+      const path = this.svgTemplate
+        .replace(/^(\w+_\w+)/, '$1/template');
+
+      require([`text!${path}.html`], svgImageTpl => {
+        this.svgImageTpl = svgImageTpl;
+        this.changeSvgButton(this.active());
+      });
+
+      return this;
+    },
+
+    /**
      * Set active button by it type
      * @public
      *
@@ -49,44 +77,18 @@ define([
      *
      */
     activeButton: function (type) {
-      this._changeSvgButton(type);
-      this._getButtonElement().classList.add('_animate');
-    },
-
-    /**
-     * Completing button animation
-     * @public
-     */
-    animationComplete: function () {
-      this._getButtonElement().classList.remove('_animate');
-    },
-
-    /**
-     * Initialize SVG image for button
-     * @public
-     */
-    initialSvgButton: function () {
-      this._changeSvgButton(this.active());
+      this.changeSvgButton(type);
+      this.animate();
     },
 
     /**
      * Change SVG image for button
-     * @private
+     * @public
      *
      * @param {String} type
      */
-    _changeSvgButton: function (type) {
-      this.svg(mageTemplate(`#${this.svgId}`, { path: this.buttons[type] }));
-    },
-
-    /**
-     * Get button element from base element children
-     * @private
-     *
-     * @return {HTMLElement}
-     */
-    _getButtonElement: function () {
-      return this.element().querySelector(':first-child');
+    changeSvgButton: function (type) {
+      this.svgImage(mageTemplate(this.svgImageTpl, { path: this.svgButtons[type] }));
     }
   });
 });
