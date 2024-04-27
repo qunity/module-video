@@ -30,13 +30,20 @@ define([
       }
 
       /**
-       * Show error information into HTML element
+       * Show error information in HTML element
        *
-       * @param {String|null} message
+       * @param {Object|String|null} text
        * @private
        */
-      _showErrorInfo(message = null) {
-        this.wrapper.show(message);
+      _showErrorInfo(text = null) {
+        let message = null, description = null;
+
+        if (text && typeof text == 'object') {
+          message = text.message ?? null;
+          description = text.description ?? null;
+        }
+
+        this.wrapper.show(message, description);
       }
     };
   };
