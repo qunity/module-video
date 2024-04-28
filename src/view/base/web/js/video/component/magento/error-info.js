@@ -1,8 +1,7 @@
 define([
   'video/m2Component',
-  'video/vjsErrorInfo',
-  'mage/translate'
-], function (m2Component, vjsErrorInfo, $t) {
+  'video/vjsErrorInfo'
+], function (m2Component, vjsErrorInfo) {
   'use strict';
 
   /**
@@ -11,10 +10,7 @@ define([
   return m2Component.extend({
     defaults: {
       videojsComponent: vjsErrorInfo,
-      template: 'Qunity_Video/video/component/error-info',
-      svgTemplate: 'Qunity_Video/video/component/error-info/icon',
-      defaultMessage: $t('Playback error.'),
-      defaultDescription: $t('Please try again later or contact your administrator.')
+      template: 'Qunity_Video/video/component/error-info'
     },
 
     /**
@@ -22,9 +18,7 @@ define([
      */
     initialize: function () {
       this._super();
-
       this.initDefaultInfo();
-      this.initSvgIcon();
 
       return this;
     },
@@ -46,20 +40,8 @@ define([
      * @returns {uiComponent}
      */
     initDefaultInfo: function () {
-      this.message(this.defaultMessage);
-      this.description(this.defaultDescription);
-
-      return this;
-    },
-
-    /**
-     * Initializes SVG icon
-     * @public
-     *
-     * @returns {uiComponent}
-     */
-    initSvgIcon: function () {
-      this.downloadSvgIcons([ this.svgTemplate ], svgIcon => { this.svgIcon = svgIcon });
+      this.message(this.options.message);
+      this.description(this.options.description);
 
       return this;
     },
@@ -72,8 +54,8 @@ define([
      * @param {String|null} description
      */
     show: function (message = null, description = null) {
-      this.message(message ?? this.defaultMessage);
-      this.description(description ?? this.defaultDescription);
+      this.message(message ?? this.options.message);
+      this.description(description ?? this.options.description);
 
       this.display(true);
     }

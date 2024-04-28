@@ -8,7 +8,10 @@ define([
    */
   return uiComponent.extend({
     defaults: {
-      animationClass: '_animate'
+      animationClass: '_animate',
+      imports: {
+        options: '${ $.ns }:options.${ $.index }'
+      }
     },
 
     /**
@@ -77,18 +80,6 @@ define([
 
       element.classList.add(this.animationClass);
       element.addEventListener('animationend', fnRemoveClass, { once: true });
-    },
-
-    /**
-     * Download element SVG icons
-     * @public
-     *
-     * @param {String[]} paths
-     * @param {VoidFunction} callback
-     */
-    downloadSvgIcons: function (paths, callback = () => {}) {
-      require(paths.map(path =>
-        `text!${path.replace(/^(\w+_\w+)/, '$1/images')}.svg`), callback);
     }
   });
 });

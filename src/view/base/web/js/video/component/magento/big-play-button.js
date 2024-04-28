@@ -11,22 +11,7 @@ define([
     defaults: {
       videojsComponent: vjsBigPlayButton,
       template: 'Qunity_Video/video/component/big-play-button',
-      svgIcons: {
-        play: 'Qunity_Video/video/component/big-play-button/icon-play',
-        pause: 'Qunity_Video/video/component/big-play-button/icon-pause'
-      },
-      svgIcon: null,
       active: 'play'
-    },
-
-    /**
-     * @inheritDoc
-     */
-    initialize: function () {
-      this._super();
-      this.initSvgButton();
-
-      return this;
     },
 
     /**
@@ -34,7 +19,7 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['svgIcon', 'active']);
+      this.observe(['active']);
 
       return this;
     },
@@ -50,43 +35,11 @@ define([
     },
 
     /**
-     * Initializes starting SVG icon
+     * Activate button state
      * @public
-     *
-     * @returns {uiComponent}
      */
-    initSvgButton: function () {
-      const types = Object.keys(this.svgIcons);
-
-      this.downloadSvgIcons(Object.values(this.svgIcons), function (...svgIcons) {
-        types.forEach((type, index) => this.svgIcons[type] = svgIcons[index]);
-
-        this.changeSvgButton(this.active());
-      }.bind(this));
-
-      return this;
-    },
-
-    /**
-     * Set active button by it type
-     * @public
-     *
-     * @param {String} type
-     *
-     */
-    activeButton: function (type) {
-      this.changeSvgButton(type);
+    activeButton: function () {
       this.animate();
-    },
-
-    /**
-     * Change SVG icon for button
-     * @public
-     *
-     * @param {String} type
-     */
-    changeSvgButton: function (type) {
-      this.svgIcon(this.svgIcons[type]);
     }
   });
 });
