@@ -10,17 +10,11 @@ define([
   return m2Component.extend({
     defaults: {
       videojsComponent: vjsErrorInfo,
-      template: 'Qunity_Video/video/component/error-info'
-    },
-
-    /**
-     * @inheritDoc
-     */
-    initialize: function () {
-      this._super();
-      this.initDefaultInfo();
-
-      return this;
+      template: 'Qunity_Video/video/component/error-info',
+      imports: {
+        message: '${ $.name }:options.message',
+        description: '${ $.name }:options.description'
+      }
     },
 
     /**
@@ -29,19 +23,6 @@ define([
     initObservable: function () {
       this._super();
       this.observe(['display', 'message', 'description']);
-
-      return this;
-    },
-
-    /**
-     * Initializes default error information
-     * @public
-     *
-     * @returns {uiComponent}
-     */
-    initDefaultInfo: function () {
-      this.message(this.options.message);
-      this.description(this.options.description);
 
       return this;
     },

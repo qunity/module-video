@@ -1,5 +1,5 @@
 define([
-  'videojs/component',
+  'video/vjsComponent',
   'ko'
 ], function (vjsComponent, ko) {
   'use strict';
@@ -7,24 +7,26 @@ define([
   /**
    * Poster image component for VideoJs player
    */
-  return class PosterImage extends vjsComponent { // noinspection JSUnusedGlobalSymbols
+  return function (m2Component) {
+    return class PosterImage extends vjsComponent(m2Component) {
 
-    /**
-     * @inheritDoc
-     */
-    _initialize(player) {
-      player.poster = ko.observable(null);
-      player.poster.subscribe(this._updateImage.bind(this));
-    }
+      /**
+       * @inheritDoc
+       */
+      initialize(player) {
+        player.poster = ko.observable(null);
+        player.poster.subscribe(this._updateImage.bind(this));
+      }
 
-    /**
-     * Update image link
-     * @private
-     *
-     * @param {String} link
-     */
-    _updateImage(link) {
-      this.wrapper.src(link);
-    }
-  }
+      /**
+       * Update image link in HTML element
+       * @private
+       *
+       * @param {String} link
+       */
+      _updateImage(link) {
+        this.wrapper.src(link);
+      }
+    };
+  };
 });
