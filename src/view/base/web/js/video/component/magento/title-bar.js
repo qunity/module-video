@@ -12,7 +12,7 @@ define([
       videojsComponent: vjsTitleBar,
       template: 'Qunity_Video/video/component/title-bar',
       imports: {
-        title: '${ $.ns }:options.titleBar.title'
+        title: '${ $.name }:options.title'
       }
     },
 
