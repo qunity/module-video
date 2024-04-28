@@ -5,7 +5,7 @@ define([
   'use strict';
 
   /**
-   * Title bar UI component for Magento Video player
+   * TitleBar UI component for Magento Video player
    */
   return m2Component.extend({
     defaults: {
