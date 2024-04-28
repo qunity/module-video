@@ -1,17 +1,19 @@
 define([
-  'video/uiComponent',
-  'videojs/component/poster-image'
-], function (uiComponent, vjsPosterImage) {
+  'video/m2Component',
+  'video/vjsPosterImage'
+], function (m2Component, vjsPosterImage) {
   'use strict';
 
   /**
-   * Poster image UI component for Magento VideoPlayer
+   * Poster image UI component for Magento Video player
    */
-  return uiComponent.extend({
+  return m2Component.extend({
     defaults: {
       videojsComponent: vjsPosterImage,
+      template: 'Qunity_Video/video/component/poster-image',
       imports: {
-        'alt': '${ $.parentName }.titleBar:title'
+        src: '${ $.name }:options.src',
+        alt: '${ $.name }:options.alt'
       }
     },
 

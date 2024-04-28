@@ -13,6 +13,9 @@ define([
       template: 'Qunity_Video/video/component/title-bar',
       imports: {
         title: '${ $.name }:options.title'
+      },
+      exports: {
+        title: '${ $.parentName }.posterImage:alt'
       }
     },
 
