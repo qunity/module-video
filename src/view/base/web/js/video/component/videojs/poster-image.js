@@ -13,7 +13,7 @@ define([
        * @inheritDoc
        */
       initialize(player) {
-        player.poster = this.wrapper.poster;
+        player.poster = this.wrapper.info;
       }
     };
   };

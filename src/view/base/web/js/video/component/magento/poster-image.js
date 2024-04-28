@@ -22,7 +22,7 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['poster', 'src', 'alt']);
+      this.observe(['info', 'src', 'alt']);
 
       return this;
     },
@@ -32,7 +32,7 @@ define([
      */
     initSubscriber: function () {
       this._super();
-      this.poster.subscribe(this._setPosterInfo.bind(this));
+      this.info.subscribe(this._setInfo.bind(this));
 
       return this;
     },
@@ -41,14 +41,19 @@ define([
      * Set poster information
      * @private
      *
-     * @param {Object|String|null} poster
+     * @param {Object|String} info
      */
-    _setPosterInfo: function (poster) {
-      let src = poster, alt = null;
+    _setInfo: function (info) {
+      if (info === undefined) {
+        this.info({ src: this.src(), alt: this.alt() });
+        return;
+      }
 
-      if (poster && typeof poster == 'object') {
-        src = poster.src ?? null;
-        alt = poster.alt ?? null;
+      let src = info, alt = null;
+
+      if (info && typeof info == 'object') {
+        src = info.src ?? null;
+        alt = info.alt ?? null;
       }
 
       !src ? this.src.valueHasMutated() : this.src(src);

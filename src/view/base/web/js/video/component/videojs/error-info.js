@@ -1,11 +1,10 @@
 define([
-  'video/vjsComponent',
-  'ko'
-], function (vjsComponent, ko) {
+  'video/vjsComponent'
+], function (vjsComponent) {
   'use strict';
 
   /**
-   * Error info component for VideoJs player
+   * ErrorInfo component for VideoJs player
    */
   return function (m2Component) {
     return class ErrorInfo extends vjsComponent(m2Component) {
@@ -15,9 +14,7 @@ define([
        */
       initialize(player) {
         player.on('error', this._onErrorProcessing.bind(this));
-
-        player.failed = ko.observable(null);
-        player.failed.subscribe(this._showErrorInfo.bind(this));
+        player.critical = this.wrapper.info;
       }
 
       /**
@@ -25,25 +22,8 @@ define([
        * @private
        */
       _onErrorProcessing() {
-        this.player().failed.valueHasMutated();
+        this.wrapper.info.valueHasMutated();
         this.player().off();
-      }
-
-      /**
-       * Show error information in HTML element
-       *
-       * @param {Object|String|null} text
-       * @private
-       */
-      _showErrorInfo(text = null) {
-        let message = null, description = null;
-
-        if (text && typeof text == 'object') {
-          message = text.message ?? null;
-          description = text.description ?? null;
-        }
-
-        this.wrapper.show(message, description);
       }
     };
   };

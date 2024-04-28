@@ -5,7 +5,7 @@ define([
   'use strict';
 
   /**
-   * Error info UI component for Magento Video player
+   * ErrorInfo UI component for Magento Video player
    */
   return m2Component.extend({
     defaults: {
@@ -22,23 +22,42 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['display', 'message', 'description']);
+      this.observe(['info', 'message', 'description']);
 
       return this;
     },
 
     /**
-     * Show element with error information
-     * @public
-     *
-     * @param {String|null} message
-     * @param {String|null} description
+     * @inheritDoc
      */
-    show: function (message = null, description = null) {
-      this.message(message ?? this.options.message);
-      this.description(description ?? this.options.description);
+    initSubscriber: function () {
+      this._super();
+      this.info.subscribe(this._setInfo.bind(this));
 
-      this.display(true);
+      return this;
+    },
+
+    /**
+     * Set error information
+     * @private
+     *
+     * @param {Object|String} info
+     */
+    _setInfo: function (info) {
+      if (info === undefined) {
+        this.info({ message: this.message(), description: this.description() });
+        return;
+      }
+
+      let message = info, description = null;
+
+      if (info && typeof info == 'object') {
+        message = info.message ?? null;
+        description = info.description ?? null;
+      }
+
+      !message ? this.message.valueHasMutated() : this.message(message);
+      !description ? this.description.valueHasMutated() : this.description(description);
     }
   });
 });
