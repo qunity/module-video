@@ -1,3 +1,5 @@
 <div class="vjs-poster-image" data-bind="if: src, afterRender: element">
-    <picture><img src="" alt="" data-bind="attr: { src: src, alt: alt }"/></picture>
+    <picture>
+        <img src="" alt="" data-bind="attr: { src: src, alt: alt, onerror: onerror.replace('%s', pixel) }"/>
+    </picture>
 </div>
