@@ -11,7 +11,8 @@ define([
       animationClass: '_animate',
       imports: {
         options: '${ $.ns }:options.${ $.index }'
-      }
+      },
+      videojsObservable: []
     },
 
     /**
@@ -37,7 +38,7 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['element']);
+      this.observe(['element', 'info']);
 
       return this;
     },
@@ -49,6 +50,8 @@ define([
      * @returns {uiComponent}
      */
     initSubscriber: function () {
+      this.info.subscribe(this._updateVideoJsObservable.bind(this));
+
       return this;
     },
 
@@ -72,14 +75,27 @@ define([
      *
      * @param {VoidFunction} callback
      */
-    animate: function (callback = () => {}) {
+    animate: function (callback) {
       const element = this.element(), fnRemoveClass = () => {
         element.classList.remove(this.animationClass);
-        callback(this);
+        callback ? callback(this) : false;
       };
 
       element.classList.add(this.animationClass);
       element.addEventListener('animationend', fnRemoveClass, { once: true });
+    },
+
+    /**
+     * Update observable properties of VideoJs component
+     * @private
+     *
+     * @param {Object} info
+     */
+    _updateVideoJsObservable: function (info) {
+      this.observable.forEach(name => {
+        const value = info[name] ?? null;
+        !value ? this[name].valueHasMutated() : this[name](value);
+      });
     }
   });
 });

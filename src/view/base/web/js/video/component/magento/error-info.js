@@ -14,7 +14,8 @@ define([
       imports: {
         message: '${ $.name }:options.message',
         description: '${ $.name }:options.description'
-      }
+      },
+      observable: ['message', 'description']
     },
 
     /**
@@ -22,42 +23,9 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['info', 'message', 'description']);
+      this.observe(['message', 'description']);
 
       return this;
-    },
-
-    /**
-     * @inheritDoc
-     */
-    initSubscriber: function () {
-      this._super();
-      this.info.subscribe(this._setInfo.bind(this));
-
-      return this;
-    },
-
-    /**
-     * Set error information
-     * @private
-     *
-     * @param {Object|String} info
-     */
-    _setInfo: function (info) {
-      if (info === undefined) {
-        this.info({ message: this.message(), description: this.description() });
-        return;
-      }
-
-      let message = info, description = null;
-
-      if (info && typeof info == 'object') {
-        message = info.message ?? null;
-        description = info.description ?? null;
-      }
-
-      !message ? this.message.valueHasMutated() : this.message(message);
-      !description ? this.description.valueHasMutated() : this.description(description);
     }
   });
 });

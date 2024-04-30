@@ -4,16 +4,16 @@ define([
   'use strict';
 
   /**
-   * TitleBar component for VideoJs player
+   * TopBar component for VideoJs player
    */
   return function (m2Component) {
-    return class TitleBar extends vjsComponent(m2Component) {
+    return class TopBar extends vjsComponent(m2Component) {
 
       /**
        * @inheritDoc
        */
       initialize(player) {
-        player.title = this.wrapper.title;
+        player.info = this.wrapper.info;
       }
     };
   };

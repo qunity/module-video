@@ -11,53 +11,23 @@ define([
     defaults: {
       videojsComponent: vjsPosterImage,
       template: 'Qunity_Video/video/component/poster-image',
+      pixel: 'Qunity_Video/images/video/component/poster-image/pixel.webp',
       imports: {
         src: '${ $.name }:options.src',
         alt: '${ $.name }:options.alt'
-      }
+      },
+      observable: ['src', 'alt']
     },
+    onerror: 'this.src=require.toUrl("%s");',
 
     /**
      * @inheritDoc
      */
     initObservable: function () {
       this._super();
-      this.observe(['info', 'src', 'alt']);
+      this.observe(['src', 'alt']);
 
       return this;
-    },
-
-    /**
-     * @inheritDoc
-     */
-    initSubscriber: function () {
-      this._super();
-      this.info.subscribe(this._setInfo.bind(this));
-
-      return this;
-    },
-
-    /**
-     * Set poster information
-     * @private
-     *
-     * @param {Object|String} info
-     */
-    _setInfo: function (info) {
-      if (info === undefined) {
-        this.info({ src: this.src(), alt: this.alt() });
-        return;
-      }
-
-      let src = info, alt = null;
-
-      if (info && typeof info == 'object') {
-        src = info.src ?? null;
-        alt = info.alt ?? null;
-      }
-
-      !src ? this.src.valueHasMutated() : this.src(src);
-      !alt ? this.alt.valueHasMutated() : this.alt(alt);
     }
   });
 });
