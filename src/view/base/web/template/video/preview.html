@@ -1,5 +1,5 @@
-<div class="vjs-video-preview" data-bind="event: { click: initVideo }, afterRender: element">
-    <!-- ko foreach: $parent.player().getRegion('component') -->
+<div class="vjs-preview" data-bind="event: { click: initVideo }, afterRender: element">
+    <!-- ko foreach: getComponents() -->
         <!-- ko template: getTemplate() --><!-- /ko -->
     <!-- /ko -->
 </div>
