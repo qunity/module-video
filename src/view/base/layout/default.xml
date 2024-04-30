@@ -18,8 +18,8 @@
                                     <item name="player" xsi:type="array">
                                         <item name="component" xsi:type="string">video/player</item>
                                         <item name="children" xsi:type="array">
-                                            <item name="titleBar" xsi:type="array">
-                                                <item name="component" xsi:type="string">video/m2TitleBar</item>
+                                            <item name="topBar" xsi:type="array">
+                                                <item name="component" xsi:type="string">video/m2TopBar</item>
                                             </item>
                                             <item name="bigPlayButton" xsi:type="array">
                                                 <item name="component" xsi:type="string">video/m2BigPlayButton</item>
