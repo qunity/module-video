@@ -94,6 +94,11 @@ define([
      * @param {Object} info
      */
     _updateVideoJsObservable: function (info) {
+      if (info === undefined) {
+        info = {}; this.observable.forEach(name => info[name] = this[name]());
+        return this.info(info);
+      }
+
       this.observable.forEach(name => {
         const value = info[name] ?? null;
         !value ? this[name].valueHasMutated() : this[name](value);
