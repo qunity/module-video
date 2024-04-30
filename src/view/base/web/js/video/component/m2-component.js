@@ -73,15 +73,17 @@ define([
      * Animate component elements
      * @public
      *
+     * @param {String} name
      * @param {VoidFunction} callback
      */
-    animate: function (callback) {
-      const element = this.element(), fnRemoveClass = () => {
-        element.classList.remove(this.animationClass);
-        callback ? callback(this) : false;
+    animate: function (name = '', callback= () => {}) {
+      const className = name ? `${this.animationClass}-${name}` : this.animationClass,
+        element = this.element(), fnRemoveClass = () => {
+        element.classList.remove(className);
+        callback(element);
       };
 
-      element.classList.add(this.animationClass);
+      element.classList.add(className);
       element.addEventListener('animationend', fnRemoveClass, { once: true });
     },
 
