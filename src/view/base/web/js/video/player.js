@@ -21,25 +21,17 @@ define([
     },
 
     /**
-     * Component initialization
+     * Video player initialization
      * @public
-     *
-     * @returns {Object}
      */
-    initialize: function () {
-      this._super();
-
+    init: function () {
       this._addLanguages();
       this._registerComponents();
-
-      return this;
     },
 
     /**
      * Create Video player
      * @public
-     *
-     * @returns {Object}
      */
     create: function () {
       this.parent().element().classList.add(this.loadingClass);
