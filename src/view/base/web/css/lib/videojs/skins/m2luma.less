@@ -29,18 +29,32 @@
   user-select: none;
 
   .vjs-poster-image {
+    visibility: hidden;
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: #000;
     z-index: 1;
 
-    &._animate, &._animate > img {
-      animation: 1s posterImageFadeOut .5s linear 1 normal forwards;
+    &._animate-init > picture > img {
+      visibility: visible;
+      animation: .7s posterImageFadeOutInit .5s ease-out;
     }
 
-    &._animate > img {
-      animation-name: posterImageFadeOutImg;
+    &._animate-create > picture {
+      visibility: visible;
+      animation: posterImageFadeOutCreate .5s ease-out;
+    }
+
+    &._animate-create > picture > img {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    picture {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
     }
 
     img {
@@ -50,24 +64,24 @@
       object-position: left top;
     }
 
-    @keyframes posterImageFadeOut {
+    @keyframes posterImageFadeOutInit {
       from {
         opacity: 1;
       }
-      80% {
-        opacity: 1;
+      25% {
+        opacity: 0;
       }
       to {
         opacity: 0;
       }
     }
 
-    @keyframes posterImageFadeOutImg {
+    @keyframes posterImageFadeOutCreate {
       from {
         opacity: 1;
       }
-      25% {
-        opacity: 0;
+      75% {
+        opacity: 1;
       }
       to {
         opacity: 0;
@@ -133,13 +147,14 @@
     left: 0;
     cursor: pointer;
 
-    &:not(._animate) > button {
-      visibility: hidden;
-    }
-
     &._animate > button {
       visibility: visible;
-      animation: bigButtonFadeOutButton .5s linear 1 normal forwards, scale;
+      animation: bigButtonFadeOutButton .5s linear, scale;
+    }
+
+    &:not(._animate) > button {
+      visibility: hidden;
+      opacity: 0;
     }
 
     button {

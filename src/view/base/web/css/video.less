@@ -9,12 +9,20 @@
   width: max-content;
   height: max-content;
 
-  .video-js.vjs-loading,
   .video-js.vjs-preview {
     position: absolute;
     width: 100%;
     height: 100%;
     background-color: @preview-background-color;
+
+    &:not(._animate) {
+      .vjs-poster-image:not(._animate-init,._animate-create) > picture,
+      .vjs-poster-image:not(._animate-init,._animate-create) > picture > img,
+      .vjs-big-button:not(._animate) > button {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
 
     .vjs-poster-image {
       z-index: 1;
@@ -26,10 +34,6 @@
 
     .vjs-big-button {
       z-index: 2;
-
-      &:not(._animate) > button {
-        visibility: visible;
-      }
 
       button {
         .vjs-icon-placeholder {
