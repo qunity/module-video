@@ -1,38 +1,30 @@
 define([
-  'uiComponent',
-  'uiRegistry',
+  'video/uiAbstract',
   'videojs'
-], function (uiComponent, uiRegistry, videojs) {
+], function (uiAbstract, videojs) {
   'use strict';
 
   /**
    * Component for configuration of VideoJs player library
    * @see https://videojs.com
    */
-  return uiComponent.extend({
+  return uiAbstract.extend({
     defaults: {
-      languages: {
-        ru: 'videojs/lang/ru'
-      },
-      components: {
-        titleBar: '${ $.name }.titleBar',
+      modules: {
+        parent: '${ $.parentName }',
+        topBar: '${ $.name }.topBar',
         bigPlayButton: '${ $.name }.bigPlayButton',
         posterImage: '${ $.name }.posterImage',
         errorInfo: '${ $.name }.errorInfo'
       },
-      modules: {
-        titleBar: '${ $.components.titleBar }',
-        bigPlayButton: '${ $.components.bigPlayButton }',
-        posterImage: '${ $.components.posterImage }',
-        errorInfo: '${ $.components.errorInfo }'
-      }
+      loadingClass: 'vjs-loading'
     },
 
     /**
      * Component initialization
      * @public
      *
-     * @return {Object}
+     * @returns {Object}
      */
     initialize: function () {
       this._super();
@@ -44,33 +36,26 @@ define([
     },
 
     /**
-     * Create new video player object
+     * Create Video player
      * @public
-     *
-     * @param {String} id
-     * @param {Object} options
-     * @param {Function} ready
      *
      * @returns {Object}
      */
-    create: function (id, options, ready) {
-      this.bigPlayButton().active.valueHasMutated();
-      this.posterImage().animation(
-        component => component.element().style.visibility = 'hidden'
-      );
-
-      return videojs(id, options, ready);
+    create: function () {
+      this.parent().element().classList.add(this.loadingClass);
+      this.vjsplayer = videojs(this.options.id, this.options);
+      this.vjsplayer.one('canplay', () => this.vjsplayer.el().classList.remove(this.loadingClass));
     },
 
     /**
-     * Display error information
+     * Displaying information about critical error
      * @public
      *
      * @param {String|null} message
      * @param {String|null} description
      */
-    error: function (message = null, description = null) {
-      this.errorInfo().show(message, description);
+    critical: function (message = null, description = null) {
+      this.vjsplayer.critical({ message: message, description: description });
     },
 
     /**
@@ -78,12 +63,8 @@ define([
      * @private
      */
     _addLanguages: function () {
-      const names = Object.keys(this.languages),
-        query = names.map(name => `json!${this.languages[name]}`);
-
-      require(query, function (...languages) {
-        names.forEach((name, index) => videojs.addLanguage(name, languages[index]));
-      });
+      Object.entries(this.languages).forEach(([name, language]) =>
+        videojs.addLanguage(name, language));
     },
 
     /**
@@ -91,10 +72,8 @@ define([
      * @private
      */
     _registerComponents: function () {
-      Object.entries(this.components).forEach(([name, query]) =>
-          uiRegistry.get(query, uiComponent =>
-            videojs.registerComponent(name, uiComponent.videojsComponent))
-      );
+      Object.entries(this.components).forEach(([name, uiComponent]) =>
+        videojs.registerComponent(name, uiComponent.videojsComponent));
     }
   });
 });
