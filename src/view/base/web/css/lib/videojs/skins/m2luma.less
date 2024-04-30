@@ -1,18 +1,91 @@
 @player-elements-color: #eee;
 @player-background-gradient-color: rgba(0, 0, 0, .7);
 @player-background-filter: blur(3em);
-@player-big-buttons-size: 1em;
-@player-video-title-size: 2em;
-@player-video-title-text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+@player-big-button-size: 1em;
+@player-big-button-play-icon: 'Qunity_Video::images/video/component/big-play-button/icon-play.svg';
+@player-big-button-pause-icon: 'Qunity_Video::images/video/component/big-play-button/icon-pause.svg';
+@player-top-bar-title-size: 2.4em;
+@player-top-bar-description-size: 1.8em;
+@player-top-bar-title-color: #eee;
+@player-top-bar-description-color: rgba(238, 238, 238, .7);
+@player-top-bar-text-shadow: 0 0 2px rgba(0, 0, 0, .5);
 @player-control-bar-height: 5em;
 @player-control-bar-background-color: rgba(0, 0, 0, .3);
+@player-error-background-color: rgb(40, 40, 40);
+@player-error-message-size: 2.4em;
+@player-error-description-size: 1.8em;
+@player-error-text-message-color: #eee;
+@player-error-text-description-color: rgba(238, 238, 238, .7);
+@player-error-icon: 'Qunity_Video::images/video/component/error-info/icon.svg';
+
+.vjs-playing.vjs-user-inactive {
+  .vjs-top-bar {
+    opacity: 0;
+    transition: opacity 1s;
+  }
+}
 
 .video-js.vjs-m2luma-skin {
-  .vjs-title-bar {
+  user-select: none;
+
+  .vjs-poster-image {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    background-color: #000;
+    z-index: 1;
+
+    &._animate, &._animate > img {
+      animation: 1s posterImageFadeOut .5s linear 1 normal forwards;
+    }
+
+    &._animate > img {
+      animation-name: posterImageFadeOutImg;
+    }
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      object-position: left top;
+    }
+
+    @keyframes posterImageFadeOut {
+      from {
+        opacity: 1;
+      }
+      80% {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+
+    @keyframes posterImageFadeOutImg {
+      from {
+        opacity: 1;
+      }
+      25% {
+        opacity: 0;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+  }
+
+  .vjs-top-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
     padding: 0;
     font-size: 1em;
     background: transparent;
-    z-index: 1;
+    pointer-events: none;
+    cursor: pointer;
+    z-index: 2;
 
     &:before {
       content: '';
@@ -25,24 +98,27 @@
       z-index: -1;
     }
 
-    span {
+    .vjs-top-wrapper {
       display: inline-block;
-      padding: .8em 1em 1em;
+      padding: 1.8em 2em 2em;
       width: 100%;
-      font-size: @player-video-title-size;
-      text-shadow: @player-video-title-text-shadow;
+      text-shadow: @player-top-bar-text-shadow;
     }
-  }
 
-  .vjs-poster-image {
-    height: 100%;
-    width: 100%;
+    .vjs-top-title > span {
+      display: inline-block;
+      font-size: @player-top-bar-title-size;
+      font-weight: 400;
+      line-height: 1.1;
+      color: @player-top-bar-title-color;
+    }
 
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      object-position: left top;
+    .vjs-top-description > span {
+      display: inline-block;
+      padding-top: .3em;
+      font-size: @player-top-bar-description-size;
+      line-height: 1.2;
+      color: @player-top-bar-description-color;
     }
   }
 
@@ -57,15 +133,24 @@
     left: 0;
     cursor: pointer;
 
+    &:not(._animate) > button {
+      visibility: hidden;
+    }
+
+    &._animate > button {
+      visibility: visible;
+      animation: bigButtonFadeOutButton .5s linear 1 normal forwards, scale;
+    }
+
     button {
       position: absolute;
-      width: @player-big-buttons-size;
-      height: @player-big-buttons-size;
+      width: @player-big-button-size;
+      height: @player-big-button-size;
       margin: 0;
       padding: .6em;
-      font-size: calc(@player-big-buttons-size * 7);
+      font-size: calc(@player-big-button-size * 7);
       line-height: 1;
-      border-radius: @player-big-buttons-size;
+      border-radius: @player-big-button-size;
       color: @player-elements-color;
 
       &:before {
@@ -75,19 +160,10 @@
         left: 0;
         width: 100%;
         height: 100%;
-        border-radius: @player-big-buttons-size;
+        border-radius: @player-big-button-size;
         mask: radial-gradient(@player-background-gradient-color, transparent);
         backdrop-filter: @player-background-filter;
         background-color: @player-background-gradient-color;
-      }
-
-      &:not(._animate) {
-        visibility: hidden;
-      }
-
-      &._animate {
-        visibility: visible;
-        animation: fadeOut .5s linear 1 normal forwards, scale;
       }
 
       .vjs-icon-placeholder:hover {
@@ -95,19 +171,36 @@
       }
 
       .vjs-svg-icon {
-        width: 1em;
-        height: 1em;
+        position: relative;
+        width: @player-big-button-size;
+        height: @player-big-button-size;
         transform: translate(-50%, -50%);
-      }
 
-      @keyframes fadeOut {
-        from {
-          opacity: 1;
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 100%;
+          height: 100%;
+          opacity: .7;
         }
-        to {
-          opacity: 0;
-          transform: scale(1.2);
+
+        &.play:before {
+          content: url(@player-big-button-play-icon) !important;
         }
+
+        &.pause:before {
+          content: url(@player-big-button-pause-icon) !important;
+        }
+      }
+    }
+
+    @keyframes bigButtonFadeOutButton {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+        transform: scale(1.2);
       }
     }
   }
@@ -117,7 +210,6 @@
     color: @player-elements-color;
     background-color: @player-control-bar-background-color;
     backdrop-filter: @player-background-filter;
-    z-index: 2;
 
     .vjs-time-control,
     .vjs-volume-control {
@@ -169,9 +261,67 @@
       &:hover {
         .vjs-progress-holder,
         .vjs-time-tooltip {
-          font-size: 10px;
+          font-size: 1em;
         }
       }
+    }
+  }
+
+  .vjs-error-info {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: @player-error-background-color;
+    z-index: 3;
+
+    &:empty {
+      visibility: hidden;
+    }
+
+    .vjs-error-wrapper {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 4.8em;
+    }
+
+    .vjs-error-icon {
+      position: relative;
+      min-height: 6.4em;
+      min-width: 6.4em;
+
+      &:before {
+        content: url(@player-error-icon);
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        opacity: .7;
+      }
+    }
+
+    .vjs-error-content {
+      margin-left: 1.6em;
+    }
+
+    .vjs-error-message > span {
+      display: inline-block;
+      font-size: @player-error-message-size;
+      font-weight: 600;
+      line-height: 1.1;
+      color: @player-error-text-message-color;
+    }
+
+    .vjs-error-description > span {
+      display: inline-block;
+      padding-top: .7em;
+      font-size: @player-error-description-size;
+      line-height: 1.2;
+      color: @player-error-text-description-color;
     }
   }
 }
