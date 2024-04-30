@@ -13,7 +13,7 @@ define([
         ru: 'videojs/lang/ru'
       },
       components: {
-        titleBar: '${ $.parentName }.player.titleBar',
+        topBar: '${ $.parentName }.player.topBar',
         bigPlayButton: '${ $.parentName }.player.bigPlayButton',
         posterImage: '${ $.parentName }.player.posterImage',
         errorInfo: '${ $.parentName }.player.errorInfo'
