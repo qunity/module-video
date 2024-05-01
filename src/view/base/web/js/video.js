@@ -36,7 +36,6 @@ define([
           message: $t('Playback error.'),
           description: $t('Please try again later or contact your administrator.')
         },
-
         titleBar: false,
         liveTracker: false,
         textTrackDisplay: false,
@@ -85,6 +84,56 @@ define([
      */
     initSubscriber: function () {
       return this;
+    },
+
+    /**
+     * Initializes VideoJs player
+     * @public
+     */
+    initVideoPlayer: function () {
+      try {
+        this.player().init();
+      } catch (e) {
+        this.player().critical(); throw e;
+      }
+    },
+
+    /**
+     * Initializes VideoJs player
+     * @public
+     */
+    createVideoPlayer: function () {
+      try {
+        this.player().create();
+      } catch (e) {
+        this.player().critical(); throw e;
+      }
+    },
+
+    /**
+     * Process execute when VideoJs player is ready
+     * @public
+     */
+    onReadyEvent: function (vjsPlayer) {
+      // ...
+    },
+
+    /**
+     * Process execute when VideoJs player is ended playing
+     * @public
+     */
+    onEndedEvent: function (vjsPlayer) {
+      vjsPlayer.isFullscreen() && vjsPlayer.exitFullscreen();
+      vjsPlayer.hasStarted(false);
+    },
+
+    /**
+     * Process execute when VideoJs player is error
+     * @public
+     */
+    onErrorEvent: function (vjsPlayer) {
+      this.player().critical();
+      vjsPlayer.off();
     }
   });
 });

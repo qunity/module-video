@@ -37,6 +37,10 @@ define([
       this.parent().element().classList.add(this.loadingClass);
       this.vjsplayer = videojs(this.options.id, this.options);
       this.vjsplayer.one('canplay', () => this.vjsplayer.el().classList.remove(this.loadingClass));
+
+      this.vjsplayer.on('ready', this._onReady.bind(this));
+      this.vjsplayer.on('ended', this._onEnded.bind(this));
+      this.vjsplayer.on('error', this._onError.bind(this));
     },
 
     /**
@@ -48,6 +52,30 @@ define([
      */
     critical: function (message = null, description = null) {
       this.vjsplayer.critical({ message: message, description: description });
+    },
+
+    /**
+     * Process execute when VideoJs player is ready
+     * @private
+     */
+    _onReady: function () {
+      this.parent().onReadyEvent(this.vjsplayer);
+    },
+
+    /**
+     * Process execute when VideoJs player is ended playing
+     * @private
+     */
+    _onEnded: function () {
+      this.parent().onEndedEvent(this.vjsplayer);
+    },
+
+    /**
+     * Process execute when VideoJs player is error
+     * @private
+     */
+    _onError: function () {
+      this.parent().onErrorEvent(this.vjsplayer);
     },
 
     /**

@@ -14,7 +14,6 @@ define([
       displayArea: 'preview',
       modules: {
         parent: '${ $.parentName }',
-        player: '${ $.parentName }.player',
         bigPlayButton: '${ $.components.bigPlayButton }',
         posterImage: '${ $.components.posterImage }'
       }
@@ -44,10 +43,10 @@ define([
       element.classList.add('_animate');
       this.bigPlayButton().active.valueHasMutated();
 
-      this.player().init();
+      this.parent().initVideoPlayer();
       this.posterImage().animate('init', () => {
 
-        this.player().create();
+        this.parent().createVideoPlayer();
         this.posterImage().animate('create', () => element.remove());
       });
     },

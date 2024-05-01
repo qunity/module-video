@@ -13,17 +13,7 @@ define([
        * @inheritDoc
        */
       initialize(player) {
-        player.on('error', this._onErrorProcessing.bind(this));
         player.critical = this.wrapper.info;
-      }
-
-      /**
-       * Process event of error in video player
-       * @private
-       */
-      _onErrorProcessing() {
-        this.wrapper.info.valueHasMutated();
-        this.player().off();
       }
     };
   };
