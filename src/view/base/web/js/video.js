@@ -123,7 +123,6 @@ define([
      */
     onEndedEvent: function (vjsPlayer) {
       vjsPlayer.isFullscreen() && vjsPlayer.exitFullscreen();
-      vjsPlayer.hasStarted(false);
     },
 
     /**

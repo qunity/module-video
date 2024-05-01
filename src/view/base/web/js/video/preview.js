@@ -37,18 +37,16 @@ define([
      * @public
      */
     createVideoPlayer: function () {
-      /** @var {HTMLElement} element */
-      const element = this.element();
+      const element = this.element(), fnRemoveElement = () => {
+        !element.children.length ? element.remove() : true;
+      };
 
       element.classList.add('_animate');
       this.bigPlayButton().active.valueHasMutated();
+      this.posterImage().animate(fnRemoveElement);
 
       this.parent().initVideoPlayer();
-      this.posterImage().animate('init', () => {
-
-        this.parent().createVideoPlayer();
-        this.posterImage().animate('create', () => element.remove());
-      });
+      this.parent().createVideoPlayer();
     },
 
     /**

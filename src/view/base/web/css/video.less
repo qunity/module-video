@@ -9,6 +9,7 @@
   width: max-content;
   height: max-content;
 
+  .video-js.vjs-loading,
   .video-js.vjs-preview {
     position: absolute;
     width: 100%;
@@ -16,20 +17,12 @@
     background-color: @preview-background-color;
 
     &:not(._animate) {
-      .vjs-poster-image:not(._animate-init,._animate-create) > picture,
-      .vjs-poster-image:not(._animate-init,._animate-create) > picture > img,
+      .vjs-poster-image:not(._animate) > picture,
+      .vjs-poster-image:not(._animate) > picture > img,
       .vjs-big-button:not(._animate) > button {
         visibility: visible;
         opacity: 1;
       }
-    }
-
-    .vjs-poster-image {
-      z-index: 1;
-    }
-
-    .vjs-top-bar {
-      z-index: 2;
     }
 
     .vjs-big-button {
@@ -53,10 +46,6 @@
           }
         }
       }
-    }
-
-    .vjs-error-info {
-      z-index: 3;
     }
   }
 }

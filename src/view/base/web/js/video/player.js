@@ -51,7 +51,7 @@ define([
      * @param {String|null} description
      */
     critical: function (message = null, description = null) {
-      this.vjsplayer.critical({ message: message, description: description });
+      this.errorInfo().info({ message: message, description: description });
     },
 
     /**

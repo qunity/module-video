@@ -30,24 +30,24 @@
 
   .vjs-poster-image {
     visibility: hidden;
-    position: relative;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     height: 100%;
     width: 100%;
+    pointer-events: none;
     z-index: 1;
 
-    &._animate-init > picture > img {
+    &._animate > picture {
       visibility: visible;
-      animation: .7s posterImageFadeOutInit .5s ease-out;
+      animation: 1s posterImageFadeOut .5s ease-out;
     }
 
-    &._animate-create > picture {
+    &._animate > picture > img {
       visibility: visible;
-      animation: posterImageFadeOutCreate .5s ease-out;
-    }
-
-    &._animate-create > picture > img {
-      visibility: hidden;
-      opacity: 0;
+      animation: 1s posterImageFadeOutImg .5s ease-out;
     }
 
     picture {
@@ -62,26 +62,27 @@
       width: 100%;
       object-fit: cover;
       object-position: left top;
+      background-color: #000;
     }
 
-    @keyframes posterImageFadeOutInit {
+    @keyframes posterImageFadeOut {
       from {
         opacity: 1;
       }
-      25% {
-        opacity: 0;
+      85% {
+        opacity: 1;
       }
       to {
         opacity: 0;
       }
     }
 
-    @keyframes posterImageFadeOutCreate {
+    @keyframes posterImageFadeOutImg {
       from {
         opacity: 1;
       }
-      75% {
-        opacity: 1;
+      25% {
+        opacity: 0;
       }
       to {
         opacity: 0;
@@ -98,8 +99,7 @@
     font-size: 1em;
     background: transparent;
     pointer-events: none;
-    cursor: pointer;
-    z-index: 2;
+    z-index: 3;
 
     &:before {
       content: '';
@@ -285,10 +285,13 @@
   .vjs-error-info {
     position: absolute;
     top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: @player-error-background-color;
-    z-index: 3;
+    z-index: 5;
 
     &:empty {
       visibility: hidden;
