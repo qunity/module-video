@@ -12,7 +12,7 @@ define([
       imports: {
         options: '${ $.ns }:options.${ $.index }'
       },
-      videojsObservable: []
+      observable: []
     },
 
     /**
@@ -94,7 +94,7 @@ define([
     _updateVideoJsObservable: function (info) {
       if (info === undefined) {
         info = {}; this.observable.forEach(name => info[name] = this[name]());
-        return this.info(info);
+        this.info(info); return;
       }
 
       this.observable.forEach(name => {

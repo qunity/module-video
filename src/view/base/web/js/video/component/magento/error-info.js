@@ -1,7 +1,8 @@
 define([
   'video/m2Component',
-  'video/vjsErrorInfo'
-], function (m2Component, vjsErrorInfo) {
+  'video/vjsErrorInfo',
+  'mage/translate'
+], function (m2Component, vjsErrorInfo, $t) {
   'use strict';
 
   /**
@@ -15,7 +16,9 @@ define([
         message: '${ $.name }:options.message',
         description: '${ $.name }:options.description'
       },
-      observable: ['message', 'description']
+      observable: ['message', 'description'],
+      message: $t('Playback error.'),
+      description: $t('Please try again later or contact your administrator.')
     },
 
     /**

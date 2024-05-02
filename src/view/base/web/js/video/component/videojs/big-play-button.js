@@ -5,7 +5,7 @@ define([
   'use strict';
 
   /**
-   * Big play button component for VideoJs player
+   * BigPlayButton component for VideoJs player
    */
   return function (m2Component) {
     return class BigPlayButton extends vjsComponent(m2Component) {

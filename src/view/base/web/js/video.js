@@ -1,7 +1,6 @@
 define([
-  'uiComponent',
-  'mage/translate'
-], function (uiComponent, $t) {
+  'uiComponent'
+], function (uiComponent) {
   'use strict';
 
   /**
@@ -19,7 +18,7 @@ define([
         controls: true,
         autoplay: true,
         loop: false,
-        autoSetup: true,
+        autoSetup: false,
         experimentalSvgIcons: true,
         errorDisplay: false,
         controlBar: {
@@ -31,10 +30,7 @@ define([
         topBar: { title: null, description: null },
         posterImage: { src: null, alt: null },
         bigPlayButton: true,
-        errorInfo: {
-          message: $t('Playback error.'),
-          description: $t('Please try again later or contact your administrator.')
-        },
+        errorInfo: { message: null, description: null },
         titleBar: false,
         liveTracker: false,
         textTrackDisplay: false,

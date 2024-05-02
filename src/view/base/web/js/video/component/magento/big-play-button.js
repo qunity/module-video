@@ -5,13 +5,12 @@ define([
   'use strict';
 
   /**
-   * Big play button UI component for Magento Video player
+   * BigPlayButton UI component for Magento Video player
    */
   return m2Component.extend({
     defaults: {
       videojsComponent: vjsBigPlayButton,
       template: 'Qunity_Video/video/component/big-play-button',
-      observable: ['active'],
       active: 'play'
     },
 
