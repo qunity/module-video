@@ -11,6 +11,7 @@ define([
     defaults: {
       videojsComponent: vjsBigPlayButton,
       template: 'Qunity_Video/video/component/big-play-button',
+      observable: ['active'],
       active: 'play'
     },
 

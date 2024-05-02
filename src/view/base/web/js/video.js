@@ -28,7 +28,7 @@ define([
           volumePanel: { inline: true }
         },
         loadingSpinner: true,
-        topBar: { title: null },
+        topBar: { title: null, description: null },
         posterImage: { src: null, alt: null },
         bigPlayButton: true,
         errorInfo: {

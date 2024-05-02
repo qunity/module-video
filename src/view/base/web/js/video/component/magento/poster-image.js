@@ -16,7 +16,8 @@ define([
         src: '${ $.name }:options.src',
         alt: '${ $.name }:options.alt'
       },
-      observable: ['src', 'alt']
+      observable: ['src', 'alt'],
+      src: ''
     },
     onerror: 'this.src=require.toUrl("%s");',
 
