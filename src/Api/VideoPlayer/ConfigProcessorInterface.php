@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Qunity\Video\Api\VideoPlayer;
 
 use Magento\Framework\Exception\LocalizedException;
-use Qunity\Video\Api\VideoPlayer\Data\ConfigInterface;
+use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
 
 interface ConfigProcessorInterface
 {
