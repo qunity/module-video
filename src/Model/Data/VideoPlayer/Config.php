@@ -1,25 +1,34 @@
 <?php
 
+/**
+ * @noinspection PhpSameParameterValueInspection
+ */
+
 declare(strict_types=1);
 
-namespace Qunity\Video\Model\VideoPlayer\Data;
+namespace Qunity\Video\Model\Data\VideoPlayer;
 
 use Magento\Framework\Api\ExtensionAttributesFactory;
 use Magento\Framework\Api\ExtensionAttributesInterface;
 use Magento\Framework\DataObject;
-use Qunity\Video\Api\VideoPlayer\Data\ConfigExtensionInterface;
-use Qunity\Video\Api\VideoPlayer\Data\ConfigInterface;
+use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface;
+use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterfaceFactory;
+use Qunity\Video\Api\Data\VideoPlayer\ConfigExtensionInterface;
+use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
 
 /**
  * @SuppressWarnings(PHPMD.LongVariable)
+ * @SuppressWarnings(PHPMD.CamelCaseMethodName)
  */
 class Config extends DataObject implements ConfigInterface
 {
     /**
+     * @param ComponentInterfaceFactory $componentFactory
      * @param ExtensionAttributesFactory $extensionAttributesFactory
      * @param array $data
      */
     public function __construct(
+        private readonly ComponentInterfaceFactory $componentFactory,
         private readonly ExtensionAttributesFactory $extensionAttributesFactory,
         array $data = []
     ) {
@@ -46,18 +55,38 @@ class Config extends DataObject implements ConfigInterface
     /**
      * @inheritDoc
      */
-    public function getVideoSrc(): ?string
+    public function getSrc(): ?string
     {
-        return $this->hasData(self::VIDEO_SRC)
-            ? (string)$this->getData(self::VIDEO_SRC) : null;
+        return $this->hasData(self::SRC)
+            ? (string)$this->getData(self::SRC) : null;
     }
 
     /**
      * @inheritDoc
      */
-    public function setVideoSrc(string $videoSrc): ConfigInterface
+    public function setSrc(string $src): ConfigInterface
     {
-        return $this->setData(self::VIDEO_SRC, $videoSrc);
+        return $this->setData(self::SRC, $src);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getComponent(): ComponentInterface
+    {
+        if (!$this->hasData(self::COMPONENT)) {
+            $this->populateComponent();
+        }
+
+        return $this->getData(self::COMPONENT);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setComponent(ComponentInterface $component): ConfigInterface
+    {
+        return $this->_setComponent($component);
     }
 
     /**
@@ -65,7 +94,7 @@ class Config extends DataObject implements ConfigInterface
      */
     public function getExtensionAttributes(): ConfigExtensionInterface
     {
-        if (!$this->getData(self::EXTENSION_ATTRIBUTES_KEY)) {
+        if (!$this->hasData(self::EXTENSION_ATTRIBUTES_KEY)) {
             $this->populateExtensionAttributes();
         }
 
@@ -81,12 +110,32 @@ class Config extends DataObject implements ConfigInterface
     }
 
     /**
+     * Instantiate JS component object and populate it with the provided data
+     *
+     * @param array $component
+     * @return void
+     */
+    private function populateComponent(array $component = []): void
+    {
+        $this->_setComponent($this->componentFactory->create($component));
+    }
+
+    /**
+     * Set an JS component object
+     *
+     * @param ComponentInterface $component
+     * @return ConfigInterface
+     */
+    private function _setComponent(ComponentInterface $component): ConfigInterface
+    {
+        return $this->setData(self::COMPONENT, $component);
+    }
+
+    /**
      * Instantiate extension attributes object and populate it with the provided data
      *
      * @param array $extensionAttributesData
      * @return void
-     *
-     * @noinspection PhpSameParameterValueInspection
      */
     private function populateExtensionAttributes(array $extensionAttributesData = []): void
     {
@@ -99,8 +148,6 @@ class Config extends DataObject implements ConfigInterface
      *
      * @param ExtensionAttributesInterface $extensionAttributes
      * @return $this
-     *
-     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     private function _setExtensionAttributes(ExtensionAttributesInterface $extensionAttributes): ConfigInterface
     {
