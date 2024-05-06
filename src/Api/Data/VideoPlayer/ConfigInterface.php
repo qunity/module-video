@@ -6,14 +6,16 @@
 
 declare(strict_types=1);
 
-namespace Qunity\Video\Api\VideoPlayer\Data;
+namespace Qunity\Video\Api\Data\VideoPlayer;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
+use Qunity\Video\Api\Data\VideoPlayer\Config\TypeInterface;
 
 interface ConfigInterface extends ExtensibleDataInterface
 {
     public const VIDEO_ID = 'video_id';
-    public const VIDEO_SRC = 'video_src';
+    public const SRC = 'src';
+    public const TYPE = 'type';
 
     /**
      * Get video ID
@@ -35,27 +37,42 @@ interface ConfigInterface extends ExtensibleDataInterface
      *
      * @return string|null
      */
-    public function getVideoSrc(): ?string;
+    public function getSrc(): ?string;
 
     /**
      * Set video SRC
      *
-     * @param string $videoSrc
+     * @param string $src
      * @return $this
      */
-    public function setVideoSrc(string $videoSrc): self;
+    public function setSrc(string $src): self;
+
+    /**
+     * Get video Type
+     *
+     * @return \Qunity\Video\Api\Data\VideoPlayer\Config\TypeInterface
+     */
+    public function getType(): TypeInterface;
+
+    /**
+     * Set video Type
+     *
+     * @param \Qunity\Video\Api\Data\VideoPlayer\Config\TypeInterface $type
+     * @return $this
+     */
+    public function setType(TypeInterface $type): self;
 
     /**
      * Retrieve existing extension attributes object or create a new one
      *
-     * @return \Qunity\Video\Api\VideoPlayer\Data\ConfigExtensionInterface
+     * @return \Qunity\Video\Api\Data\VideoPlayer\ConfigExtensionInterface
      */
     public function getExtensionAttributes(): ConfigExtensionInterface;
 
     /**
      * Set an extension attributes object
      *
-     * @param \Qunity\Video\Api\VideoPlayer\Data\ConfigExtensionInterface $extensionAttributes
+     * @param \Qunity\Video\Api\Data\VideoPlayer\ConfigExtensionInterface $extensionAttributes
      * @return $this
      */
     public function setExtensionAttributes(ConfigExtensionInterface $extensionAttributes): self;
