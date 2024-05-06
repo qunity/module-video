@@ -9,13 +9,13 @@ declare(strict_types=1);
 namespace Qunity\Video\Api\Data\VideoPlayer;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
-use Qunity\Video\Api\Data\VideoPlayer\Config\TypeInterface;
+use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface;
 
 interface ConfigInterface extends ExtensibleDataInterface
 {
     public const VIDEO_ID = 'video_id';
     public const SRC = 'src';
-    public const TYPE = 'type';
+    public const COMPONENT = 'component';
 
     /**
      * Get video ID
@@ -48,19 +48,19 @@ interface ConfigInterface extends ExtensibleDataInterface
     public function setSrc(string $src): self;
 
     /**
-     * Get video Type
+     * Get video JS component
      *
-     * @return \Qunity\Video\Api\Data\VideoPlayer\Config\TypeInterface
+     * @return \Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface
      */
-    public function getType(): TypeInterface;
+    public function getComponent(): ComponentInterface;
 
     /**
-     * Set video Type
+     * Set video JS component
      *
-     * @param \Qunity\Video\Api\Data\VideoPlayer\Config\TypeInterface $type
+     * @param \Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface $component
      * @return $this
      */
-    public function setType(TypeInterface $type): self;
+    public function setComponent(ComponentInterface $component): self;
 
     /**
      * Retrieve existing extension attributes object or create a new one
