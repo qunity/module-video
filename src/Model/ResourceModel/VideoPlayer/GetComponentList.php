@@ -39,7 +39,7 @@ class GetComponentList
 
         foreach ($this->data as $code => $item) {
             $item[ComponentInterface::CODE] = $code;
-            $this->items[$code] = $this->componentFactory->create(['data'=> $item]);
+            $this->items[$code] = $this->componentFactory->create(['data' => $item]);
         }
 
         return $this->items;
