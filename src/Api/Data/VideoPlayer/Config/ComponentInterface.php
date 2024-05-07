@@ -7,18 +7,17 @@ namespace Qunity\Video\Api\Data\VideoPlayer\Config;
 interface ComponentInterface
 {
     public const CODE = 'code';
-    public const ALIAS = 'alias';
     public const PATH = 'path';
 
     /**
-     * Get video JS component code
+     * Get video JS Component code
      *
      * @return string|null
      */
     public function getCode(): ?string;
 
     /**
-     * Set video JS component code
+     * Set video JS Component code
      *
      * @param string $code
      * @return $this
@@ -26,29 +25,14 @@ interface ComponentInterface
     public function setCode(string $code): self;
 
     /**
-     * Get video JS component alias
-     *
-     * @return string|null
-     */
-    public function getAlias(): ?string;
-
-    /**
-     * Set video JS component alias
-     *
-     * @param string $alias
-     * @return $this
-     */
-    public function setAlias(string $alias): self;
-
-    /**
-     * Get video JS component path
+     * Get video JS Component path/alias
      *
      * @return string|null
      */
     public function getPath(): ?string;
 
     /**
-     * Set video JS component path
+     * Set video JS Component path/alias
      *
      * @param string $path
      * @return $this

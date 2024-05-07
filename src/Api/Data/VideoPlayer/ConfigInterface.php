@@ -14,7 +14,7 @@ use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface;
 interface ConfigInterface extends ExtensibleDataInterface
 {
     public const VIDEO_ID = 'video_id';
-    public const SRC = 'src';
+    public const LINK_URL = 'link_url';
     public const COMPONENT = 'component';
 
     /**
@@ -33,29 +33,29 @@ interface ConfigInterface extends ExtensibleDataInterface
     public function setVideoId(string $videoId): self;
 
     /**
-     * Get video SRC
+     * Get video Link URL
      *
      * @return string|null
      */
-    public function getSrc(): ?string;
+    public function getLinkUrl(): ?string;
 
     /**
-     * Set video SRC
+     * Set video Link URL
      *
-     * @param string $src
+     * @param string $url
      * @return $this
      */
-    public function setSrc(string $src): self;
+    public function setLinkUrl(string $url): self;
 
     /**
-     * Get video JS component
+     * Get video JS Component
      *
      * @return \Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface
      */
     public function getComponent(): ComponentInterface;
 
     /**
-     * Set video JS component
+     * Set video JS Component
      *
      * @param \Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface $component
      * @return $this
