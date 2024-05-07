@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Qunity\Video\Model;
 
+use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
+use Qunity\Video\Api\Data\VideoPlayer\ConfigInterfaceFactory;
 use Qunity\Video\Api\VideoPlayer\ConfigProcessorInterface;
-use Qunity\Video\Api\VideoPlayer\Data\ConfigInterface;
-use Qunity\Video\Api\VideoPlayer\Data\ConfigInterfaceFactory;
 use Qunity\Video\Api\VideoPlayerInterface;
 
 class VideoPlayer implements VideoPlayerInterface
@@ -25,7 +25,9 @@ class VideoPlayer implements VideoPlayerInterface
         private readonly ConfigInterfaceFactory $configFactory,
         private readonly array $configProcessors = []
     ) {
-        // ...
+        $this->config = $this->configFactory->create();
+        $this->config->getExtensionAttributes();
+        $this->config->getComponent();
     }
 
     /**

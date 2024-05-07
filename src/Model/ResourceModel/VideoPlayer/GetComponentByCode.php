@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace Qunity\Video\Model\ResourceModel\VideoPlayer;
 
 use Magento\Framework\Exception\NoSuchEntityException;
+use Psr\Log\LoggerInterface;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface;
 
 class GetComponentByCode
 {
     /**
+     * @param LoggerInterface $logger
      * @param GetComponentList $getComponentList
      */
     public function __construct(
+        private readonly LoggerInterface $logger,
         private readonly GetComponentList $getComponentList
     ) {
         // ...
@@ -31,9 +34,10 @@ class GetComponentByCode
         $components = $this->getComponentList->execute();
 
         if (!isset($components[$code])) {
-            throw new NoSuchEntityException(
-                __("JS Component that was requested doesn't exist.")
-            );
+            $exceptionMessage = "JS Component that was requested doesn't exist.";
+            $this->logger->critical($exceptionMessage, ['code' => $code]);
+
+            throw new NoSuchEntityException(__($exceptionMessage));
         }
 
         return $components[$code];

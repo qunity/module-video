@@ -7,17 +7,20 @@ namespace Qunity\Video\Model\ResourceModel\VideoPlayer;
 use Laminas\Uri\UriInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Psr\Log\LoggerInterface;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface;
 
 class GetComponentByUri
 {
     /**
+     * @param LoggerInterface $logger
      * @param UriInterface $zendUri
      * @param ScopeConfigInterface $scopeConfig
      * @param GetComponentByCode $getComponentByCode
      * @param array $mapper
      */
     public function __construct(
+        private readonly LoggerInterface $logger,
         private readonly UriInterface $zendUri,
         private readonly ScopeConfigInterface $scopeConfig,
         private readonly GetComponentByCode $getComponentByCode,
@@ -46,9 +49,10 @@ class GetComponentByUri
             }
         }
 
-        throw new NoSuchEntityException(
-            __("JS Component for requested URI could not be determined.")
-        );
+        $exceptionMessage = "JS Component for requested URI could not be determined.";
+        $this->logger->critical($exceptionMessage, ['uri' => $uri]);
+
+        throw new NoSuchEntityException(__($exceptionMessage));
     }
 
     /**
