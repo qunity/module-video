@@ -30,7 +30,7 @@ class GetComponentByUri
     }
 
     /**
-     * Get JS Components for Video Player by URI
+     * Get JS components for Video Player by URI
      *
      * @param string $uri
      *
@@ -49,7 +49,7 @@ class GetComponentByUri
             }
         }
 
-        $exceptionMessage = "JS Component for requested URI could not be determined.";
+        $exceptionMessage = "JS component for requested URI could not be determined.";
         $this->logger->critical($exceptionMessage, ['uri' => $uri]);
 
         throw new NoSuchEntityException(__($exceptionMessage));

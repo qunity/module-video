@@ -10,6 +10,7 @@ use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterfaceFactory;
 class GetComponentList
 {
     /**
+     * List of PHP objects containing JS components info for Video Player
      * @var ComponentInterface[]
      */
     private array $items;
@@ -26,7 +27,7 @@ class GetComponentList
     }
 
     /**
-     * Get all registered JS Components for Video Player
+     * Get all registered JS components for Video Player
      *
      * @return ComponentInterface[]
      */

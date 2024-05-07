@@ -22,7 +22,7 @@ class GetComponentByCode
     }
 
     /**
-     * Get JS Components for Video Player by code
+     * Get JS components for Video Player by code
      *
      * @param string $code
      *
@@ -34,7 +34,7 @@ class GetComponentByCode
         $components = $this->getComponentList->execute();
 
         if (!isset($components[$code])) {
-            $exceptionMessage = "JS Component that was requested doesn't exist.";
+            $exceptionMessage = "JS component that was requested doesn't exist.";
             $this->logger->critical($exceptionMessage, ['code' => $code]);
 
             throw new NoSuchEntityException(__($exceptionMessage));
