@@ -19,10 +19,10 @@ interface VideoPlayerInterface
     /**
      * Update config of Video Player
      *
-     * @param array $config
+     * @param array $data
      *
-     * @return ConfigInterface
+     * @return $this
      * @throws LocalizedException
      */
-    public function updateConfig(array $config): ConfigInterface;
+    public function updateConfig(array $data): self;
 }

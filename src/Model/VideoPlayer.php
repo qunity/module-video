@@ -26,6 +26,8 @@ class VideoPlayer implements VideoPlayerInterface
         private readonly array $configProcessors = []
     ) {
         $this->config = $this->configFactory->create();
+
+        // TODO: remove it after test
         $this->config->getExtensionAttributes();
         $this->config->getComponent();
     }
@@ -41,13 +43,16 @@ class VideoPlayer implements VideoPlayerInterface
     /**
      * @inheritDoc
      */
-    public function updateConfig(array $config): ConfigInterface
+    public function updateConfig(array $data): VideoPlayerInterface
     {
-        $this->config = $this->configFactory->create();
+        $newConfig = $this->configFactory->create();
+
         foreach ($this->configProcessors as $processor) {
-            $processor->process($this->config, $config);
+            $processor->process($newConfig, $data);
         }
 
-        return $this->config;
+        $this->config = $newConfig;
+
+        return $this;
     }
 }
