@@ -17,14 +17,14 @@ class GetComponentByUri
      * @param UriInterface $zendUri
      * @param ScopeConfigInterface $scopeConfig
      * @param GetComponentByCode $getComponentByCode
-     * @param array $mapper
+     * @param array $componentMapper
      */
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly UriInterface $zendUri,
         private readonly ScopeConfigInterface $scopeConfig,
         private readonly GetComponentByCode $getComponentByCode,
-        private readonly array $mapper = []
+        private readonly array $componentMapper = []
     ) {
         // ...
     }
@@ -41,7 +41,7 @@ class GetComponentByUri
     {
         $urlHost = $this->getPreparedHost($uri);
 
-        foreach ($this->mapper as $code => $item) {
+        foreach ($this->componentMapper as $code => $item) {
             foreach ($item as $host) {
                 if ($this->getPreparedHost($host) == $urlHost) {
                     return $this->getComponentByCode->execute($code);

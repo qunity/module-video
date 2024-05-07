@@ -17,11 +17,11 @@ class GetComponentList
 
     /**
      * @param ComponentInterfaceFactory $componentFactory
-     * @param array $data
+     * @param array $components
      */
     public function __construct(
         private readonly ComponentInterfaceFactory $componentFactory,
-        private readonly array $data = []
+        private readonly array $components = []
     ) {
         // ...
     }
@@ -37,7 +37,7 @@ class GetComponentList
             return $this->items;
         }
 
-        foreach ($this->data as $code => $item) {
+        foreach ($this->components as $code => $item) {
             $item[ComponentInterface::CODE] = $code;
             $this->items[$code] = $this->componentFactory->create(['data' => $item]);
         }
