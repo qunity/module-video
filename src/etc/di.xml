@@ -27,10 +27,10 @@
         <arguments>
             <argument name="data" xsi:type="array">
                 <item name="local" xsi:type="array">
-                    <item name="name" xsi:type="string">uiVideo</item>
+                    <item name="path" xsi:type="string">uiVideo</item>
                 </item>
                 <item name="youtube" xsi:type="array">
-                    <item name="name" xsi:type="string">uiYouTube</item>
+                    <item name="path" xsi:type="string">uiYouTube</item>
                 </item>
             </argument>
         </arguments>
