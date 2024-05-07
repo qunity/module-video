@@ -4,7 +4,7 @@
     <policies>
         <policy id="connect-src">
             <values>
-                <value id="google_apis_youtube" type="host">https://www.googleapis.com/youtube/</value>
+                <value id="Qunity_Video::google_apis_youtube" type="host">https://www.googleapis.com/youtube/</value>
             </values>
         </policy>
     </policies>

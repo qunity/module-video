@@ -25,7 +25,7 @@
     </type>
     <type name="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentList">
         <arguments>
-            <argument name="data" xsi:type="array">
+            <argument name="components" xsi:type="array">
                 <item name="local" xsi:type="array">
                     <item name="path" xsi:type="string">uiVideo</item>
                 </item>
@@ -37,7 +37,7 @@
     </type>
     <type name="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentByUri">
         <arguments>
-            <argument name="mapper" xsi:type="array">
+            <argument name="componentMapper" xsi:type="array">
                 <item name="local" xsi:type="array">
                     <item name="Qunity_Video::unsecure_default" xsi:type="const">
                         Magento\Store\Model\Store::XML_PATH_UNSECURE_BASE_URL
