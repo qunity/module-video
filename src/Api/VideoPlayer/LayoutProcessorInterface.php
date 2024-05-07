@@ -9,7 +9,7 @@ use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
 interface LayoutProcessorInterface
 {
     /**
-     * Process JS Layout of block
+     * Process JS layout of block
      *
      * @param array $jsLayout
      * @param ConfigInterface $config

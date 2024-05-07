@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Qunity\Video\Block\VideoPlayer\LayoutProcessor;
 
 use Magento\Framework\Stdlib\ArrayManager;
-use Qunity\Video\Api\VideoPlayer\Data\ConfigInterface;
+use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
 use Qunity\Video\Api\VideoPlayer\LayoutProcessorInterface;
 
 class RequiredConfig implements LayoutProcessorInterface
@@ -25,14 +25,14 @@ class RequiredConfig implements LayoutProcessorInterface
     public function process(array &$jsLayout, ConfigInterface $config): void
     {
         $videoId = $config->getVideoId();
-        $videoSrc = $config->getVideoSrc();
+        $linkUrl = $config->getLinkUrl();
 
         $delimiter = ArrayManager::DEFAULT_PATH_DELIMITER;
-        $path = implode($delimiter, ['components', $videoId, 'config']);
+        $path = implode($delimiter, ['components', $videoId]);
 
-        $jsLayout = $this->arrayManager->merge($path, $jsLayout, [
-            'videoId' => $videoId,
-            'videoSrc' => $videoSrc,
-        ]);
+        $jsLayout = $this->arrayManager->merge($path, $jsLayout, ['config' => ['options' => [
+            'id' => $videoId,
+            'sources' => [0 => ['src' => $linkUrl]]],
+        ]]);
     }
 }
