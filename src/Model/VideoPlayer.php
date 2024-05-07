@@ -46,7 +46,6 @@ class VideoPlayer implements VideoPlayerInterface
     public function updateConfig(array $data): VideoPlayerInterface
     {
         $newConfig = $this->configFactory->create();
-
         foreach ($this->configProcessors as $processor) {
             $processor->process($newConfig, $data);
         }
