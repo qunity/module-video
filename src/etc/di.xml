@@ -2,8 +2,11 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Qunity\Video\Api\VideoPlayerInterface" type="Qunity\Video\Model\VideoPlayer"/>
-    <preference for="Qunity\Video\Api\VideoPlayer\Data\ConfigInterface"
-                type="Qunity\Video\Model\VideoPlayer\Data\Config"/>
+    <preference for="Qunity\Video\Api\Data\VideoPlayer\ConfigInterface"
+                type="Qunity\Video\Model\Data\VideoPlayer\Config"/>
+    <preference for="Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface"
+                type="Qunity\Video\Model\Data\VideoPlayer\Config\Component"/>
+    <preference for="Laminas\Uri\UriInterface" type="Laminas\Uri\Uri"/>
     <type name="Qunity\Video\Model\VideoPlayer">
         <arguments>
             <argument name="configProcessors" xsi:type="array">
@@ -17,6 +20,37 @@
             <argument name="layoutProcessors" xsi:type="array">
                 <item name="Qunity_Video::required_config"
                       xsi:type="object">Qunity\Video\Block\VideoPlayer\LayoutProcessor\RequiredConfig\Proxy</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentList">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="local" xsi:type="array">
+                    <item name="name" xsi:type="string">uiVideo</item>
+                </item>
+                <item name="youtube" xsi:type="array">
+                    <item name="name" xsi:type="string">uiYouTube</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentByUri">
+        <arguments>
+            <argument name="mapper" xsi:type="array">
+                <item name="local" xsi:type="array">
+                    <item name="Qunity_Video::unsecure_default" xsi:type="const">
+                        Magento\Store\Model\Store::XML_PATH_UNSECURE_BASE_URL
+                    </item>
+                    <item name="Qunity_Video::secure_default" xsi:type="const">
+                        Magento\Store\Model\Store::XML_PATH_SECURE_BASE_URL
+                    </item>
+                </item>
+                <item name="youtube" xsi:type="array">
+                    <item name="Qunity_Video::youtu.be" xsi:type="string">https://youtu.be/</item>
+                    <item name="Qunity_Video::youtube.com" xsi:type="string">https://youtube.com/</item>
+                    <item name="Qunity_Video::www.youtube.com" xsi:type="string">https://www.youtube.com/</item>
+                </item>
             </argument>
         </arguments>
     </type>
