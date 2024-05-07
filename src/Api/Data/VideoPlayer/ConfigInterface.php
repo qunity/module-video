@@ -48,14 +48,14 @@ interface ConfigInterface extends ExtensibleDataInterface
     public function setLinkUrl(string $url): self;
 
     /**
-     * Retrieve video JS Component object or create a new one
+     * Retrieve video JS component object or create a new one
      *
      * @return \Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface
      */
     public function getComponent(): ComponentInterface;
 
     /**
-     * Set an video JS Component object
+     * Set an video JS component object
      *
      * @param \Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface $component
      * @return $this

@@ -110,7 +110,7 @@ class Config extends DataObject implements ConfigInterface
     }
 
     /**
-     * Instantiate JS Component object and populate it with the provided data
+     * Instantiate JS component object and populate it with the provided data
      *
      * @param array $data
      * @return void
@@ -121,7 +121,7 @@ class Config extends DataObject implements ConfigInterface
     }
 
     /**
-     * Set an JS Component object
+     * Set an JS component object
      *
      * @param ComponentInterface $component
      * @return $this
