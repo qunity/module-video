@@ -10,14 +10,14 @@ interface ComponentInterface
     public const PATH = 'path';
 
     /**
-     * Get video JS Component code
+     * Get video JS component code
      *
      * @return string|null
      */
     public function getCode(): ?string;
 
     /**
-     * Set video JS Component code
+     * Set video JS component code
      *
      * @param string $code
      * @return $this
@@ -25,14 +25,14 @@ interface ComponentInterface
     public function setCode(string $code): self;
 
     /**
-     * Get video JS Component path/alias
+     * Get video JS component path/alias
      *
      * @return string|null
      */
     public function getPath(): ?string;
 
     /**
-     * Set video JS Component path/alias
+     * Set video JS component path/alias
      *
      * @param string $path
      * @return $this
