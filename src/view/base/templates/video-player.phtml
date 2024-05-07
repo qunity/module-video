@@ -3,8 +3,9 @@
  * @var Qunity\Video\Block\VideoPlayer $block
  * @var Magento\Framework\Escaper $escaper
  */
+$videoId = $block->getVideoId();
 ?>
-<?php if (!empty($videoId = $block->getVideoId())): ?>
+<?php if (!empty($videoId)): ?>
     <div class="video-wrapper" data-role="video" data-bind="scope: '<?= $escaper->escapeHtmlAttr($videoId) ?>'">
         <!-- ko template: getTemplate() --><!-- /ko -->
     </div>
