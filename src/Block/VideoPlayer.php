@@ -8,7 +8,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\ManagerInterface as MessageManagerInterface;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\View\Element\Template;
-use Qunity\Video\Api\VideoPlayer\Data\ConfigInterface;
+use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
 use Qunity\Video\Api\VideoPlayer\LayoutProcessorInterface;
 use Qunity\Video\Api\VideoPlayerInterface;
 
@@ -56,7 +56,7 @@ class VideoPlayer extends Template
     {
         try {
             $this->videoPlayer->updateConfig($config);
-            $this->updateJsLayout($this->getVideoId());
+            $this->updateJsLayout($this->getConfig());
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         }
@@ -65,27 +65,31 @@ class VideoPlayer extends Template
     }
 
     /**
-     * Get Video ID from Video Player config
+     * Get video ID from Video Player config
      *
      * @return string
      */
     public function getVideoId(): string
     {
-        return (string) $this->videoPlayer->getConfig()->getVideoId();
+        return (string) $this->getConfig()->getVideoId();
     }
 
     /**
-     * Update js Layout data to match current video ID
+     * Update js layout data to match current video ID
      *
-     * @param string $videoId
+     * @param ConfigInterface $config
      * @return void
      */
-    private function updateJsLayout(string $videoId): void
+    private function updateJsLayout(ConfigInterface $config): void
     {
         $components = &$this->jsLayout['components'];
 
+        $videoId = $config->getVideoId();
+        $component = $config->getComponent()->getPath();
+
         $components[$videoId] = array_shift($components);
         $components[$videoId]['displayArea'] = $videoId;
+        $components[$videoId]['component'] = $component;
     }
 
     /**
