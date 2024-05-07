@@ -44,7 +44,7 @@ class RequiredConfig implements ConfigProcessorInterface
     }
 
     /**
-     * Get link URL for Video Player
+     * Get link URL for Video Player configuration
      *
      * @param array $data
      *
@@ -66,7 +66,7 @@ class RequiredConfig implements ConfigProcessorInterface
     }
 
     /**
-     * Get video ID for Video Player
+     * Get video ID for Video Player configuration
      *
      * @param string $uri
      * @return string
@@ -77,7 +77,7 @@ class RequiredConfig implements ConfigProcessorInterface
     }
 
     /**
-     * Get JS Component for Video Player
+     * Get JS component for Video Player configuration
      *
      * @param string $uri
      *
