@@ -85,11 +85,11 @@ class VideoPlayer extends Template
         $components = &$this->jsLayout['components'];
 
         $videoId = $config->getVideoId();
-        $component = $config->getComponent()->getPath();
+        $componentPath = $config->getComponent()->getPath();
 
         $components[$videoId] = array_shift($components);
         $components[$videoId]['displayArea'] = $videoId;
-        $components[$videoId]['component'] = $component;
+        $components[$videoId]['component'] = $componentPath;
     }
 
     /**

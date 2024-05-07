@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- TODO: check whether the file is needed -->
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <exclude>
+        <item type="file">Qunity_Video::js/lib/requirejs/json.min.js</item>
+        <item type="directory">Qunity_Video::js/lib/videojs</item>
+    </exclude>
+</view>
