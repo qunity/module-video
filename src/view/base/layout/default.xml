@@ -12,7 +12,7 @@
                     <argument name="jsLayout" xsi:type="array">
                         <item name="components" xsi:type="array">
                             <item name="{{video_id}}" xsi:type="array">
-                                <item name="component" xsi:type="string">uiVideo</item>
+                                <item name="component" xsi:type="string">{{component}}</item>
                                 <item name="displayArea" xsi:type="string">{{video_id}}</item>
                                 <item name="children" xsi:type="array">
                                     <item name="player" xsi:type="array">
