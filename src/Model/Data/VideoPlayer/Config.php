@@ -41,7 +41,7 @@ class Config extends DataObject implements ConfigInterface
     public function getVideoId(): ?string
     {
         return $this->hasData(self::VIDEO_ID)
-            ? (string)$this->getData(self::VIDEO_ID) : null;
+            ? (string) $this->getData(self::VIDEO_ID) : null;
     }
 
     /**
@@ -55,18 +55,18 @@ class Config extends DataObject implements ConfigInterface
     /**
      * @inheritDoc
      */
-    public function getSrc(): ?string
+    public function getLinkUrl(): ?string
     {
-        return $this->hasData(self::SRC)
-            ? (string)$this->getData(self::SRC) : null;
+        return $this->hasData(self::LINK_URL)
+            ? (string) $this->getData(self::LINK_URL) : null;
     }
 
     /**
      * @inheritDoc
      */
-    public function setSrc(string $src): ConfigInterface
+    public function setLinkUrl(string $url): ConfigInterface
     {
-        return $this->setData(self::SRC, $src);
+        return $this->setData(self::LINK_URL, $url);
     }
 
     /**
@@ -110,21 +110,21 @@ class Config extends DataObject implements ConfigInterface
     }
 
     /**
-     * Instantiate JS component object and populate it with the provided data
+     * Instantiate JS Component object and populate it with the provided data
      *
-     * @param array $component
+     * @param array $data
      * @return void
      */
-    private function populateComponent(array $component = []): void
+    private function populateComponent(array $data = []): void
     {
-        $this->_setComponent($this->componentFactory->create($component));
+        $this->_setComponent($this->componentFactory->create(['data' => $data]));
     }
 
     /**
-     * Set an JS component object
+     * Set an JS Component object
      *
      * @param ComponentInterface $component
-     * @return ConfigInterface
+     * @return $this
      */
     private function _setComponent(ComponentInterface $component): ConfigInterface
     {
@@ -134,12 +134,13 @@ class Config extends DataObject implements ConfigInterface
     /**
      * Instantiate extension attributes object and populate it with the provided data
      *
-     * @param array $extensionAttributesData
+     * @param array $data
      * @return void
      */
-    private function populateExtensionAttributes(array $extensionAttributesData = []): void
+    private function populateExtensionAttributes(array $data = []): void
     {
-        $extensionAttributes = $this->extensionAttributesFactory->create(get_class($this), $extensionAttributesData);
+        $className = get_class($this);
+        $extensionAttributes = $this->extensionAttributesFactory->create($className, $data);
         $this->_setExtensionAttributes($extensionAttributes);
     }
 

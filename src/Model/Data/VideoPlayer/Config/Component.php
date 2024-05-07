@@ -29,23 +29,6 @@ class Component extends DataObject implements ComponentInterface
     /**
      * @inheritDoc
      */
-    public function getAlias(): ?string
-    {
-        return $this->hasData(self::ALIAS)
-            ? (string) $this->getData(self::ALIAS) : null;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setAlias(string $alias): ComponentInterface
-    {
-        return $this->setData(self::ALIAS, $alias);
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getPath(): ?string
     {
         return $this->hasData(self::PATH)
