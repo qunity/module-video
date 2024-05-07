@@ -75,7 +75,7 @@ class VideoPlayer extends Template
     }
 
     /**
-     * Update js layout data to match current video ID
+     * Update JS layout data to match current video ID
      *
      * @param ConfigInterface $config
      * @return void

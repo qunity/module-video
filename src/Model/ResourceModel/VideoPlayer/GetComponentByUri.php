@@ -49,7 +49,7 @@ class GetComponentByUri
             }
         }
 
-        $exceptionMessage = "JS component for requested URI could not be determined.";
+        $exceptionMessage = "JS component for requested URI couldn't be determined.";
         $this->logger->critical($exceptionMessage, ['uri' => $uri]);
 
         throw new NoSuchEntityException(__($exceptionMessage));

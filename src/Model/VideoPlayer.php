@@ -27,7 +27,7 @@ class VideoPlayer implements VideoPlayerInterface
     ) {
         $this->config = $this->configFactory->create();
 
-        // TODO: remove it after test
+        // TODO: remove it after completion realize module
         $this->config->getExtensionAttributes();
         $this->config->getComponent();
     }
