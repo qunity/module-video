@@ -17,7 +17,7 @@ interface VideoPlayerInterface
     public function getConfig(): ConfigInterface;
 
     /**
-     * Update Video Player config
+     * Update config of Video Player
      *
      * @param array $config
      *
