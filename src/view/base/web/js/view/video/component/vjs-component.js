@@ -25,7 +25,7 @@ define([
        * Get component wrapper
        * @public
        *
-       * @returns {m2Component}
+       * @return {m2Component}
        */
       get wrapper() {
         const value = this.constructor.wrapper;
@@ -70,7 +70,7 @@ define([
        * Create HTML element
        * @public
        *
-       * @returns {HTMLElement}
+       * @return {HTMLElement}
        */
       createEl() {
         // noinspection JSUnresolvedReference

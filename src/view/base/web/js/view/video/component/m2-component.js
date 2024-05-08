@@ -4,14 +4,14 @@ define([
   'use strict';
 
   /**
-   * UI component for integration into Magento Video
+   * UI component for integration into Magento video
    */
   return uiComponent.extend({
     defaults: {
-      animationClass: '_animate',
       imports: {
         options: '${ $.ns }:options.${ $.index }'
       },
+      animationClass: '_animate',
       observable: []
     },
 
@@ -19,7 +19,7 @@ define([
      * Component initialization
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initialize: function () {
       this._super();
@@ -34,7 +34,7 @@ define([
      * Initializes observable properties
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initObservable: function () {
       this._super();
@@ -47,7 +47,7 @@ define([
      * Initializes subscription properties
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initSubscriber: function () {
       this.info.subscribe(this._updateVideoJsObservable.bind(this));
@@ -59,7 +59,7 @@ define([
      * Initializes VideoJs component
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initVjsComponent: function () {
       if (this.videojsComponent) {
@@ -75,10 +75,10 @@ define([
      *
      * @param {VoidFunction|null} callback
      */
-    animate: function (callback= null) {
+    animate: function (callback = null) {
       const element = this.element(), fnRemoveClass = () => {
         element.classList.remove(this.animationClass);
-        callback ? callback(element) : true;
+        if (callback) callback(element);
       };
 
       element.classList.add(this.animationClass);
@@ -93,14 +93,27 @@ define([
      */
     _updateVideoJsObservable: function (info) {
       if (info === undefined) {
-        info = {}; this.observable.forEach(name => info[name] = this[name]());
-        this.info(info); return;
+        this.info(this._getObservableData());
+        return;
       }
 
       this.observable.forEach(name => {
         const value = info[name] ?? null;
         !value ? this[name].valueHasMutated() : this[name](value);
       });
+    },
+
+    /**
+     * Get current data from observable properties
+     * @private
+     *
+     * @return {Object}
+     */
+    _getObservableData: function () {
+      let data = {};
+      this.observable.forEach(name => data[name] = this[name]());
+
+      return data;
     }
   });
 });
