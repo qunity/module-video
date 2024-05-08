@@ -6,7 +6,7 @@ define([
   'use strict';
 
   /**
-   * Preview video for Magento player
+   * Preview video component for Magento player
    */
   return uiAbstract.extend({
     defaults: {
@@ -42,13 +42,11 @@ define([
      */
     createVideoPlayer: function () {
       this._destroyElement();
-
-      this.parent().initVideoPlayer();
-      this.parent().createVideoPlayer();
+      this.parent().initVideoPlayer().createVideoPlayer();
     },
 
     /**
-     * Get registered components
+     * Get registered components in preview video component
      * @public
      *
      * @return {uiComponent[]}

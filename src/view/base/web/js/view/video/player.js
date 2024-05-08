@@ -12,9 +12,6 @@ define([
     defaults: {
       modules: {
         parent: '${ $.parentName }',
-        topBar: '${ $.name }.topBar',
-        bigPlayButton: '${ $.name }.bigPlayButton',
-        posterImage: '${ $.name }.posterImage',
         errorInfo: '${ $.name }.errorInfo'
       }
     },

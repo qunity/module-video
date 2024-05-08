@@ -28,9 +28,7 @@ define([
        * @return {m2Component}
        */
       get wrapper() {
-        const value = this.constructor.wrapper;
-
-        if (value === null || typeof value !== 'object') {
+        if (this.constructor.wrapper === undefined) {
           throw new Error('Class wrapper has not been installed');
         }
 
@@ -44,10 +42,6 @@ define([
        * @param {m2Component} value
        */
       set wrapper(value) {
-        if (value === null || typeof value !== 'object') {
-          throw new Error('Inputted wrapper value is not an object');
-        }
-
         if (this.constructor.wrapper) {
           throw new Error('Class wrapper is already installed');
         }
@@ -67,7 +61,7 @@ define([
       }
 
       /**
-       * Create HTML element
+       * Create HTML element of component
        * @public
        *
        * @return {HTMLElement}

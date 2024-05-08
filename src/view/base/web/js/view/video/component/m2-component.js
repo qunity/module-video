@@ -89,7 +89,7 @@ define([
      * Update observable properties of VideoJs component
      * @private
      *
-     * @param {Object} info
+     * @param {Object|undefined} info
      */
     _updateVideoJsObservable: function (info) {
       if (info === undefined) {

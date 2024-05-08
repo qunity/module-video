@@ -84,27 +84,33 @@ define([
     /**
      * Initializes video player
      * @public
+     *
+     * @return {uiComponent}
      */
     initVideoPlayer: function () {
+      const player = this.player();
+
       try {
-        this.player().init();
-      } catch (e) {
-        this.player().critical();
-        throw e;
-      }
+        player.init();
+      } catch (e) { player.critical(); throw e; }
+
+      return this;
     },
 
     /**
      * Creates video player
      * @public
+     *
+     * @return {uiComponent}
      */
     createVideoPlayer: function () {
+      const player = this.player();
+
       try {
-        this.player().create();
-      } catch (e) {
-        this.player().critical();
-        throw e;
-      }
+        player.create();
+      } catch (e) { player.critical(); throw e; }
+
+      return this;
     },
 
     /**
