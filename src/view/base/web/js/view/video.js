@@ -8,10 +8,17 @@ define([
    */
   return uiComponent.extend({
     defaults: {
+      template: 'Qunity_Video/video',
+      modules: {
+        player: '${ $.name }.player'
+      },
+      exports: {
+        options: '${ $.name }.player:options'
+      },
       options: {
         preload: 'auto',
         techOrder: [ 'html5' ],
-        sources: [ { type: 'video/mp4' } ],
+        sources: [{ type: 'video/mp4' }],
         theme: 'vjs-m2luma-skin',
         width: 640,
         height: 360,
@@ -24,7 +31,7 @@ define([
         controlBar: {
           pictureInPictureToggle: false,
           playToggle: { replay: true },
-          volumePanel: { inline: true }
+          volumePanel: { inline: true, volume: '0.73' }
         },
         loadingSpinner: true,
         topBar: { title: null, description: null },
@@ -34,14 +41,7 @@ define([
         titleBar: false,
         liveTracker: false,
         textTrackDisplay: false,
-        textTrackSettings: false,
-      },
-      template: 'Qunity_Video/video',
-      modules: {
-        player: '${ $.name }.player'
-      },
-      exports: {
-        options: '${ $.name }.player:options'
+        textTrackSettings: false
       }
     },
 
@@ -89,19 +89,21 @@ define([
       try {
         this.player().init();
       } catch (e) {
-        this.player().critical(); throw e;
+        this.player().critical();
+        throw e;
       }
     },
 
     /**
-     * Initializes VideoJs player
+     * Creates VideoJs player
      * @public
      */
     createVideoPlayer: function () {
       try {
         this.player().create();
       } catch (e) {
-        this.player().critical(); throw e;
+        this.player().critical();
+        throw e;
       }
     },
 
@@ -110,7 +112,7 @@ define([
      * @public
      */
     onReadyEvent: function (vjsPlayer) {
-      // ...
+      vjsPlayer.volume(this.options.controlBar.volumePanel.volume);
     },
 
     /**
@@ -118,7 +120,9 @@ define([
      * @public
      */
     onEndedEvent: function (vjsPlayer) {
-      vjsPlayer.isFullscreen() && vjsPlayer.exitFullscreen();
+      if (vjsPlayer.isFullscreen()) {
+        vjsPlayer.exitFullscreen();
+      }
     },
 
     /**
