@@ -4,7 +4,7 @@ define([
   'use strict';
 
   /**
-   * Main UI Video component for Magento
+   * Main UI video component for Magento
    */
   return uiComponent.extend({
     defaults: {
@@ -82,7 +82,7 @@ define([
     },
 
     /**
-     * Initializes VideoJs player
+     * Initializes video player
      * @public
      */
     initVideoPlayer: function () {
@@ -95,7 +95,7 @@ define([
     },
 
     /**
-     * Creates VideoJs player
+     * Creates video player
      * @public
      */
     createVideoPlayer: function () {
@@ -108,36 +108,36 @@ define([
     },
 
     /**
-     * Process execute when VideoJs player is ready
+     * Process execute when video player is ready
      * @public
      *
-     * @param {Object} vjsPlayer
+     * @param {Object} player
      */
-    onReadyEvent: function (vjsPlayer) {
-      vjsPlayer.volume(this.options.controlBar.volumePanel.volume);
+    onReadyEvent: function (player) {
+      player.volume(this.options.controlBar.volumePanel.volume);
     },
 
     /**
-     * Process execute when VideoJs player is ended playing
+     * Process execute when video player is ended playing
      * @public
      *
-     * @param {Object} vjsPlayer
+     * @param {Object} player
      */
-    onEndedEvent: function (vjsPlayer) {
-      if (vjsPlayer.isFullscreen()) {
-        vjsPlayer.exitFullscreen();
+    onEndedEvent: function (player) {
+      if (player.isFullscreen()) {
+        player.exitFullscreen();
       }
     },
 
     /**
-     * Process execute when VideoJs player is error
+     * Process execute when video player is error
      * @public
      *
-     * @param {Object} vjsPlayer
+     * @param {Object} player
      */
-    onErrorEvent: function (vjsPlayer) {
-      this.player().critical();
-      vjsPlayer.off();
+    onErrorEvent: function (player) {
+      player.critical.valueHasMutated();
+      player.off();
     }
   });
 });

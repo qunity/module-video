@@ -16,12 +16,11 @@ define([
         bigPlayButton: '${ $.name }.bigPlayButton',
         posterImage: '${ $.name }.posterImage',
         errorInfo: '${ $.name }.errorInfo'
-      },
-      loadingClass: 'vjs-loading'
+      }
     },
 
     /**
-     * Video player initialization
+     * Initializes video player
      * @public
      */
     init: function () {
@@ -30,13 +29,11 @@ define([
     },
 
     /**
-     * Create Video player
+     * Creates video player
      * @public
      */
     create: function () {
-      this.parent().element().classList.add(this.loadingClass);
       this.vjsplayer = videojs(this.options.id, this.options);
-      this.vjsplayer.one('canplay', () => this.vjsplayer.el().classList.remove(this.loadingClass));
 
       this.vjsplayer.on('ready', this._onReady.bind(this));
       this.vjsplayer.on('ended', this._onEnded.bind(this));
@@ -55,7 +52,7 @@ define([
     },
 
     /**
-     * Process execute when VideoJs player is ready
+     * Process execute when video player is ready
      * @private
      */
     _onReady: function () {
@@ -63,7 +60,7 @@ define([
     },
 
     /**
-     * Process execute when VideoJs player is ended playing
+     * Process execute when video player is ended playing
      * @private
      */
     _onEnded: function () {
@@ -71,7 +68,7 @@ define([
     },
 
     /**
-     * Process execute when VideoJs player is error
+     * Process execute when video player is error
      * @private
      */
     _onError: function () {
@@ -79,7 +76,7 @@ define([
     },
 
     /**
-     * Add languages to Video player
+     * Add languages to video player
      * @private
      */
     _addLanguages: function () {
@@ -88,7 +85,7 @@ define([
     },
 
     /**
-     * Register components into Video player
+     * Register components into video player
      * @private
      */
     _registerComponents: function () {

@@ -5,7 +5,7 @@ define([
   'use strict';
 
   /**
-   * YouTube UI Video component for Magento
+   * YouTube UI video component for Magento
    */
   return uiVideo.extend({
     defaults: {
