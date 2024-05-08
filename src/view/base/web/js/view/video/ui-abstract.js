@@ -24,7 +24,7 @@ define([
      * Component initialization
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initialize: function () {
       this._super();
@@ -40,7 +40,7 @@ define([
      * Initializes observable properties
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initObservable: function () {
       this._super();
@@ -53,7 +53,7 @@ define([
      * Initializes subscription properties
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initSubscriber: function () {
       return this;
@@ -63,7 +63,7 @@ define([
      * Initializes registered languages
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initLanguages: function () {
       const names = Object.keys(this.languages);
@@ -79,7 +79,7 @@ define([
      * Initializes registered components
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initComponents: function () {
       Object.entries(this.components).forEach(([name, query]) =>
