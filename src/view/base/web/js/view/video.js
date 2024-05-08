@@ -110,6 +110,8 @@ define([
     /**
      * Process execute when VideoJs player is ready
      * @public
+     *
+     * @param {Object} vjsPlayer
      */
     onReadyEvent: function (vjsPlayer) {
       vjsPlayer.volume(this.options.controlBar.volumePanel.volume);
@@ -118,6 +120,8 @@ define([
     /**
      * Process execute when VideoJs player is ended playing
      * @public
+     *
+     * @param {Object} vjsPlayer
      */
     onEndedEvent: function (vjsPlayer) {
       if (vjsPlayer.isFullscreen()) {
@@ -128,6 +132,8 @@ define([
     /**
      * Process execute when VideoJs player is error
      * @public
+     *
+     * @param {Object} vjsPlayer
      */
     onErrorEvent: function (vjsPlayer) {
       this.player().critical();
