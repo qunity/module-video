@@ -49,7 +49,7 @@ define([
      * Component initialization
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initialize: function () {
       this._super();
@@ -62,7 +62,7 @@ define([
      * Initializes observable properties
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initObservable: function () {
       this._super();
@@ -75,7 +75,7 @@ define([
      * Initializes subscription properties
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initSubscriber: function () {
       return this;
