@@ -18,7 +18,7 @@ define([
         posterImage: '${ $.components.posterImage }'
       },
       animationClass: '_animate',
-      wrapperSelector: '[data-role="video"]'
+      wrapperSelector: '.video-wrapper[data-role="video"]'
     },
 
     /**
@@ -29,7 +29,9 @@ define([
      */
     initSubscriber: function () {
       this._super();
+
       this.element.subscribe(this._updatePreviewClass.bind(this));
+      this.element.subscribe(this._updateWrapperStyle.bind(this));
 
       return this;
     },
@@ -80,24 +82,35 @@ define([
     },
 
     /**
-     * Update HTML classes for preview video
+     * Update HTML classes of preview video element
      * @private
      *
      * @param {HTMLElement} element
      */
     _updatePreviewClass: function (element) {
-      /** @var {HTMLElement} parentElement */
-      const parentElement = this.parent().element();
+      /** @var {HTMLElement} videoElement */
+      const videoElement = this.parent().element();
 
       /** @var {String} classes */
-      const classes = parentElement.className;
+      const classes = videoElement.className;
       element.classList.add(...classes.split(' '));
+    },
 
+    /**
+     * Update HTML styles of wrapper video element
+     * @private
+     *
+     * @param {HTMLElement} element
+     */
+    _updateWrapperStyle: function (element) {
       /** @var {HTMLElement} wrapperElement */
-      const wrapperElement = element.closest('[data-role="video"]');
+      const wrapperElement = element.closest(this.wrapperSelector);
 
-      wrapperElement.style['min-width'] = parentElement.style['min-width'];
-      wrapperElement.style['min-height'] = parentElement.style['min-height'];
+      /** @var {Object} options */
+      const options = this.parent().options;
+
+      wrapperElement.style['min-width'] = `${options.width}px`;
+      wrapperElement.style['min-height'] = `${options.height}px`;
     }
   });
 });
