@@ -10,10 +10,10 @@ define([
     defaults: {
       template: 'Qunity_Video/video',
       modules: {
-        player: '${ $.name }.player'
+        player: '${ $.ns }.player'
       },
       exports: {
-        options: '${ $.name }.player:options'
+        options: '${ $.ns }.player:options'
       },
       options: {
         preload: 'auto',
@@ -21,7 +21,7 @@ define([
         sources: [{ type: 'video/mp4' }],
         theme: 'vjs-m2luma-skin',
         width: 640,
-        height: 360,
+        height: 320,
         controls: true,
         autoplay: true,
         loop: false,
