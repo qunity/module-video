@@ -6,7 +6,7 @@ define([
   'use strict';
 
   /**
-   * Preview Magento Video player
+   * Preview video for Magento player
    */
   return uiAbstract.extend({
     defaults: {
@@ -16,14 +16,16 @@ define([
         parent: '${ $.parentName }',
         bigPlayButton: '${ $.components.bigPlayButton }',
         posterImage: '${ $.components.posterImage }'
-      }
+      },
+      animationClass: '_animate',
+      wrapperSelector: '[data-role="video"]'
     },
 
     /**
      * Initializes subscription properties
      * @public
      *
-     * @returns {uiComponent}
+     * @return {uiComponent}
      */
     initSubscriber: function () {
       this._super();
@@ -33,17 +35,11 @@ define([
     },
 
     /**
-     * Create Video player
+     * Creates video player
      * @public
      */
     createVideoPlayer: function () {
-      const element = this.element(), fnRemoveElement = () => {
-        !element.children.length ? element.remove() : true;
-      };
-
-      element.classList.add('_animate');
-      this.bigPlayButton().active.valueHasMutated();
-      this.posterImage().animate(fnRemoveElement);
+      this._destroyElement();
 
       this.parent().initVideoPlayer();
       this.parent().createVideoPlayer();
@@ -53,7 +49,7 @@ define([
      * Get registered components
      * @public
      *
-     * @returns {uiComponent[]}
+     * @return {uiComponent[]}
      */
     getComponents: function () {
       return [
@@ -65,7 +61,26 @@ define([
     },
 
     /**
-     * Update HTML classes for Preview Video
+     * Destroy preview video element
+     * @private
+     */
+    _destroyElement: function () {
+      const element = this.element(),
+        wrapperElement = element.closest(this.wrapperSelector),
+        fnEndDestroyProcess = () => {
+          element.remove();
+          wrapperElement.classList.remove(this.animationClass);
+        };
+
+      wrapperElement.classList.add(this.animationClass);
+      element.classList.add(this.animationClass);
+
+      this.bigPlayButton().active.valueHasMutated();
+      this.posterImage().animate(fnEndDestroyProcess);
+    },
+
+    /**
+     * Update HTML classes for preview video
      * @private
      *
      * @param {HTMLElement} element
