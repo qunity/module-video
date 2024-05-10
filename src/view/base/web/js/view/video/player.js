@@ -33,6 +33,7 @@ define([
       this.vjsplayer = videojs(this.options.id, this.options);
 
       this.vjsplayer.on('ready', this._onReady.bind(this));
+      this.vjsplayer.on('timeupdate', this._onTimeUpdate.bind(this));
       this.vjsplayer.on('ended', this._onEnded.bind(this));
       this.vjsplayer.on('error', this._onError.bind(this));
     },
@@ -54,6 +55,14 @@ define([
      */
     _onReady: function () {
       this.parent().onReadyEvent(this.vjsplayer);
+    },
+
+    /**
+     * Process execute when video player time has changed
+     * @private
+     */
+    _onTimeUpdate: function () {
+      this.parent().onTimeUpdateEvent(this.vjsplayer);
     },
 
     /**
