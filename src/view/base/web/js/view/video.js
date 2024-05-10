@@ -21,7 +21,7 @@ define([
         sources: [{ type: 'video/mp4' }],
         theme: 'vjs-m2luma-skin',
         width: 640,
-        height: 320,
+        height: 360,
         controls: true,
         autoplay: true,
         loop: false,
@@ -35,7 +35,11 @@ define([
         },
         loadingSpinner: true,
         topBar: { title: null, description: null },
-        posterImage: { src: null, alt: null },
+        posterImage: {
+          src: null,
+          alt: null,
+          animation: { startClass: 'vjs-start-time', finalClass: 'vjs-final-time' }
+        },
         bigPlayButton: true,
         errorInfo: { message: null, description: null },
         titleBar: false,
@@ -121,6 +125,16 @@ define([
      */
     onReadyEvent: function (player) {
       player.volume(this.options.controlBar.volumePanel.volume);
+    },
+
+    /**
+     * Process execute when video player time has changed
+     * @public
+     *
+     * @param {Object} player
+     */
+    onTimeUpdateEvent: function (player) {
+      // ...
     },
 
     /**
