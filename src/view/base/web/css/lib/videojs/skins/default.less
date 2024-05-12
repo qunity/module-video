@@ -1,0 +1,283 @@
+@player-background-color: #000;
+
+@player-top-bar-title-size: 2.4em;
+@player-top-bar-description-size: 1.6em;
+
+@player-big-button-size: 7em;
+@player-big-button-play-icon: 'Qunity_Video::images/video/component/big-play-button/icon-play.svg';
+@player-big-button-pause-icon: 'Qunity_Video::images/video/component/big-play-button/icon-pause.svg';
+
+@player-error-message-size: 2.4em;
+@player-error-description-size: 1.6em;
+@player-error-icon: 'Qunity_Video::images/video/component/error-info/icon.svg';
+
+//
+// Main video player styles
+// _____________________________________________
+.video-wrapper {
+  position: relative;
+  width: max-content;
+  height: max-content;
+}
+
+.vjs-preview {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.video-js {
+  user-select: none;
+}
+
+.vjs-svg-icon {
+  transition: .15s;
+}
+
+//
+// Fade in/out at start end finish of playing
+// _____________________________________________
+.video-js {
+  &.vjs-has-started {
+    .vjs-tech, video {
+      opacity: 1;
+    }
+  }
+
+  &.vjs-preview, &.vjs-creating {
+    .vjs-poster-image {
+      opacity: 1;
+    }
+  }
+
+  &.vjs-final-time {
+    .vjs-tech, video {
+      opacity: 0;
+    }
+  }
+
+  &.vjs-ended {
+    .vjs-tech, video {
+      visibility: hidden;
+      transition: none;
+    }
+
+    .vjs-poster-image {
+      opacity: 1;
+    }
+  }
+
+  .vjs-tech, video,
+  .vjs-poster-image {
+    opacity: 0;
+    visibility: visible;
+    transition: visibility .25s, opacity .25s ease-in;
+  }
+}
+
+//
+// Hides YouTube player elements
+// _____________________________________________
+.video-js.vjs-youtube {
+  overflow: hidden;
+
+  .vjs-tech {
+    top: -50% !important;
+    height: 200% !important;
+  }
+}
+
+//
+// Dynamics when playback ends and user inactivity
+// _____________________________________________
+.vjs-has-started.vjs-user-inactive.vjs-playing {
+  .vjs-top-bar, .vjs-control-bar {
+    opacity: 0;
+    transition: visibility 1s, opacity 1s;
+  }
+
+  &.vjs-ended {
+    .vjs-top-bar, .vjs-control-bar {
+      opacity: 1;
+      transition: visibility .1s, opacity .1s;
+    }
+  }
+}
+
+//
+// Component layer display order
+// _____________________________________________
+.video-js {
+  &:not(.vjs-has-started) {
+    .vjs-control-bar {
+      z-index: 0;
+    }
+  }
+
+  .vjs-poster-image {
+    z-index: 1;
+  }
+
+  .vjs-top-bar {
+    z-index: 2;
+  }
+
+  .vjs-big-button {
+    z-index: 3;
+  }
+
+  .vjs-control-bar {
+    z-index: 4;
+  }
+}
+
+//
+// Restyle video components for video preview
+// _____________________________________________
+.video-js.vjs-preview {
+  .vjs-big-button {
+    .vjs-svg-icon:before, button {
+      opacity: 1;
+    }
+  }
+}
+
+//
+// PosterImage video component
+// _____________________________________________
+.vjs-poster-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+//
+// TopBar video component
+// _____________________________________________
+.vjs-top-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  .vjs-top-wrapper {
+    padding: 1.8em 2em 2em;
+  }
+
+  .vjs-top-title {
+    font-size: @player-top-bar-title-size;
+  }
+
+  .vjs-top-description {
+    font-size: @player-top-bar-description-size;
+  }
+}
+
+//
+// BigButton video component
+// _____________________________________________
+.vjs-big-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  &:not(._animate) button {
+    opacity: 0;
+  }
+
+  &._animate button {
+    animation: bigButtonFadeOut .5s linear forwards, scale;
+  }
+
+  button {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .vjs-svg-icon {
+    width: @player-big-button-size;
+    height: @player-big-button-size;
+
+    &:before {
+      opacity: .7;
+    }
+
+    &.play:before {
+      content: url(@player-big-button-play-icon) !important;
+    }
+
+    &.pause:before {
+      content: url(@player-big-button-pause-icon) !important;
+    }
+  }
+
+  @keyframes bigButtonFadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      transform: scale(1.2);
+    }
+  }
+}
+
+//
+// ErrorInfo video component
+// _____________________________________________
+.vjs-error-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+
+  &:empty {
+    visibility: hidden;
+  }
+
+  .vjs-error-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 4.8em;
+    background-color: @player-background-color;
+  }
+
+  .vjs-error-content {
+    margin-left: 1.6em;
+  }
+
+  .vjs-error-icon {
+    min-width: 6.4em;
+    min-height: 6.4em;
+
+    &:before {
+      content: url(@player-error-icon);
+    }
+  }
+
+  .vjs-error-message {
+    font-size: @player-error-message-size;
+  }
+
+  .vjs-error-description {
+    font-size: @player-error-description-size;
+  }
+}
