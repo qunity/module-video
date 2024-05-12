@@ -135,7 +135,7 @@
 // Restyle video initialization state
 // _____________________________________________
 .video-js {
-  &.vjs-preview {
+  &.vjs-preview, &.vjs-ended {
     .vjs-big-button {
       .vjs-svg-icon:before, button {
         opacity: 1;
@@ -143,7 +143,7 @@
     }
   }
 
-  &.vjs-creating {
+  &.vjs-creating, &.vjs-ended {
     .vjs-big-button {
       .vjs-svg-icon:before {
         opacity: 1;
