@@ -132,11 +132,19 @@
 }
 
 //
-// Restyle video components for video preview
+// Restyle video initialization state
 // _____________________________________________
-.video-js.vjs-preview {
-  .vjs-big-button {
-    .vjs-svg-icon:before, button {
+.video-js {
+  &.vjs-preview {
+    .vjs-big-button {
+      .vjs-svg-icon:before, button {
+        opacity: 1;
+      }
+    }
+  }
+
+  &.vjs-creating {
+    .vjs-svg-icon:before {
       opacity: 1;
     }
   }
