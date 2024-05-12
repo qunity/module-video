@@ -91,16 +91,16 @@
 // Dynamics when playback ends and user inactivity
 // _____________________________________________
 .vjs-has-started.vjs-user-inactive.vjs-playing {
-  .vjs-top-bar, .vjs-control-bar {
-    opacity: 0;
-    transition: visibility 1s, opacity 1s;
-  }
-
   &.vjs-ended {
     .vjs-top-bar, .vjs-control-bar {
       opacity: 1;
       transition: visibility .1s, opacity .1s;
     }
+  }
+
+  .vjs-top-bar, .vjs-control-bar {
+    opacity: 0;
+    transition: visibility 1s, opacity 1s;
   }
 }
 
