@@ -1,233 +1,114 @@
+@import "default";
+
 @player-elements-color: #eee;
-@player-background-gradient-color: rgba(0, 0, 0, .7);
-@player-background-filter: blur(3em);
-@player-big-button-size: 1em;
-@player-big-button-play-icon: 'Qunity_Video::images/video/component/big-play-button/icon-play.svg';
-@player-big-button-pause-icon: 'Qunity_Video::images/video/component/big-play-button/icon-pause.svg';
-@player-top-bar-title-size: 2.4em;
-@player-top-bar-description-size: 1.8em;
+@player-background-filter: blur(10px);
+
 @player-top-bar-title-color: #eee;
+@player-top-bar-title-shadow: 0 0 5px rgba(0, 0, 0, .3);
 @player-top-bar-description-color: rgba(238, 238, 238, .7);
-@player-top-bar-text-shadow: 0 0 2px rgba(0, 0, 0, .5);
+@player-top-bar-description-shadow: 0 0 5px rgba(0, 0, 0, .3);
+@player-top-bar-mask-gradient: linear-gradient(to bottom, rgba(0, 0, 0, .7), transparent);
+@player-top-bar-background-gradient-color: rgba(0, 0, 0, .7);
+
+@player-big-button-hover-color: #eee;
+@player-big-button-mask-gradient: radial-gradient(#000, rgba(0, 0, 0, .5));
+@player-big-button-background-gradient-color: rgba(0, 0, 0, .3);
+@player-big-button-wrapper-size: 8.5em;
+@player-big-button-size: 6.5em;
+
 @player-control-bar-height: 5em;
 @player-control-bar-background-color: rgba(0, 0, 0, .3);
-@player-error-background-color: rgb(40, 40, 40);
-@player-error-message-size: 2.4em;
+
+@player-error-message-color: #eee;
 @player-error-description-size: 1.8em;
-@player-error-text-message-color: #eee;
-@player-error-text-description-color: rgba(238, 238, 238, .7);
-@player-error-icon: 'Qunity_Video::images/video/component/error-info/icon.svg';
+@player-error-description-color: rgba(238, 238, 238, .7);
+@player-error-background-color: rgb(40, 40, 40);
 
-.vjs-playing.vjs-user-inactive {
-  .vjs-top-bar {
-    opacity: 0;
-    transition: opacity 1s;
-  }
-}
+.vjs-m2luma-skin {
 
-.video-js.vjs-m2luma-skin {
-  user-select: none;
+  //
+  // Restyle video initialization and ended states
+  // _____________________________________________
+  &.video-js {
+    &.vjs-preview, &.vjs-ended {
+      .vjs-big-button {
+        .vjs-icon-placeholder {
+          &:hover {
+            filter: drop-shadow(0 0 .5em @player-big-button-hover-color);
+            transform: scale(1.05);
+          }
 
-  .vjs-poster-image {
-    visibility: hidden;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    z-index: 1;
-
-    &._animate > picture {
-      visibility: visible;
-      animation: 1s posterImageFadeOut .5s ease-out;
-    }
-
-    &._animate > picture > img {
-      visibility: visible;
-      animation: 1s posterImageFadeOutImg .5s ease-out;
-    }
-
-    picture {
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-      background-color: #000;
-    }
-
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-      object-position: left top;
-      background-color: #000;
-    }
-
-    @keyframes posterImageFadeOut {
-      from {
-        opacity: 1;
-      }
-      85% {
-        opacity: 1;
-      }
-      to {
-        opacity: 0;
-      }
-    }
-
-    @keyframes posterImageFadeOutImg {
-      from {
-        opacity: 1;
-      }
-      25% {
-        opacity: 0;
-      }
-      to {
-        opacity: 0;
+          &:active {
+            transform: scale(.95);
+          }
+        }
       }
     }
   }
 
+  //
+  // TopBar video component
+  // _____________________________________________
   .vjs-top-bar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    padding: 0;
-    font-size: 1em;
-    background: transparent;
-    pointer-events: none;
-    z-index: 2;
+    transition: .25s;
 
     &:before {
       content: '';
       position: absolute;
       width: 100%;
       height: 100%;
-      mask: linear-gradient(to bottom, @player-background-gradient-color, transparent);
+      mask: @player-top-bar-mask-gradient;
       backdrop-filter: @player-background-filter;
-      background-color: @player-background-gradient-color;
+      background-color: @player-top-bar-background-gradient-color;
       z-index: -1;
     }
 
-    .vjs-top-wrapper {
-      display: inline-block;
-      padding: 1.8em 2em 2em;
-      width: 100%;
-      text-shadow: @player-top-bar-text-shadow;
-    }
-
-    .vjs-top-title > span {
-      display: inline-block;
-      font-size: @player-top-bar-title-size;
+    .vjs-top-title {
       font-weight: 400;
       line-height: 1.1;
       color: @player-top-bar-title-color;
+      text-shadow: @player-top-bar-title-shadow;
     }
 
-    .vjs-top-description > span {
-      display: inline-block;
+    .vjs-top-description {
       padding-top: .3em;
-      font-size: @player-top-bar-description-size;
       line-height: 1.2;
       color: @player-top-bar-description-color;
+      text-shadow: @player-top-bar-description-shadow;
     }
   }
 
+  //
+  // BigButton video component
+  // _____________________________________________
   .vjs-big-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    cursor: pointer;
-
-    &._animate {
-      z-index: 3;
-    }
-
-    &._animate > button {
-      visibility: visible;
-      animation: bigButtonFadeOutButton .5s linear, scale;
-    }
-
-    &:not(._animate) > button {
-      visibility: hidden;
-      opacity: 0;
-    }
-
-    button {
+    button:before {
+      content: '';
       position: absolute;
-      width: @player-big-button-size;
-      height: @player-big-button-size;
-      margin: 0;
-      padding: .6em;
-      font-size: calc(@player-big-button-size * 7);
-      line-height: 1;
-      border-radius: @player-big-button-size;
-      color: @player-elements-color;
-
-      &:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: @player-big-button-size;
-        mask: radial-gradient(@player-background-gradient-color, transparent);
-        backdrop-filter: @player-background-filter;
-        background-color: @player-background-gradient-color;
-      }
-
-      .vjs-icon-placeholder:hover {
-        filter: none;
-      }
-
-      .vjs-svg-icon {
-        position: relative;
-        width: @player-big-button-size;
-        height: @player-big-button-size;
-        transform: translate(-50%, -50%);
-
-        &:before {
-          content: '';
-          display: inline-block;
-          width: 100%;
-          height: 100%;
-          opacity: .7;
-        }
-
-        &.play:before {
-          content: url(@player-big-button-play-icon) !important;
-        }
-
-        &.pause:before {
-          content: url(@player-big-button-pause-icon) !important;
-        }
-      }
+      width: calc(@player-big-button-wrapper-size);
+      height: calc(@player-big-button-wrapper-size);
+      margin: calc((@player-big-button-wrapper-size - @player-big-button-size)  / -2);
+      border-radius: @player-big-button-wrapper-size;
+      mask: @player-big-button-mask-gradient;
+      backdrop-filter: @player-background-filter;
+      background-color: @player-big-button-background-gradient-color;
+      z-index: -1;
     }
 
-    @keyframes bigButtonFadeOutButton {
-      from {
-        opacity: 1;
-      }
-      to {
-        opacity: 0;
-        transform: scale(1.2);
-      }
+    .vjs-icon-placeholder:hover {
+      filter: none;
     }
   }
 
+  //
+  // ControlBar video component
+  // _____________________________________________
   .vjs-control-bar {
     height: @player-control-bar-height;
     color: @player-elements-color;
     background-color: @player-control-bar-background-color;
     backdrop-filter: @player-background-filter;
+    transition: .15s;
 
     .vjs-time-control,
     .vjs-volume-control {
@@ -285,64 +166,28 @@
     }
   }
 
+  //
+  // ErrorInfo video component
+  // _____________________________________________
   .vjs-error-info {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: @player-error-background-color;
-    z-index: 999;
-
-    &:empty {
-      visibility: hidden;
-    }
-
     .vjs-error-wrapper {
-      display: flex;
-      align-items: center;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      padding: 4.8em;
+      background-color: @player-error-background-color;
     }
 
-    .vjs-error-icon {
-      position: relative;
-      min-height: 6.4em;
-      min-width: 6.4em;
-
-      &:before {
-        content: url(@player-error-icon);
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        opacity: .7;
-      }
+    .vjs-error-icon:before {
+      opacity: .7;
     }
 
-    .vjs-error-content {
-      margin-left: 1.6em;
-    }
-
-    .vjs-error-message > span {
-      display: inline-block;
-      font-size: @player-error-message-size;
+    .vjs-error-message {
       font-weight: 600;
       line-height: 1.1;
-      color: @player-error-text-message-color;
+      color: @player-error-message-color;
     }
 
-    .vjs-error-description > span {
-      display: inline-block;
+    .vjs-error-description {
       padding-top: .7em;
-      font-size: @player-error-description-size;
       line-height: 1.2;
-      color: @player-error-text-description-color;
+      color: @player-error-description-color;
     }
   }
 }
