@@ -1,23 +1,21 @@
 @import "default";
 
-@player-elements-color: #eee;
-@player-background-filter: blur(10px);
-
 @player-top-bar-title-color: #eee;
 @player-top-bar-title-shadow: 0 0 5px rgba(0, 0, 0, .3);
-@player-top-bar-description-color: rgba(238, 238, 238, .7);
+@player-top-bar-description-color: #eee;
 @player-top-bar-description-shadow: 0 0 5px rgba(0, 0, 0, .3);
 @player-top-bar-mask-gradient: linear-gradient(to bottom, rgba(0, 0, 0, .7), transparent);
 @player-top-bar-background-gradient-color: rgba(0, 0, 0, .7);
 
 @player-big-button-hover-color: #eee;
-@player-big-button-mask-gradient: radial-gradient(#000, rgba(0, 0, 0, .5));
-@player-big-button-background-gradient-color: rgba(0, 0, 0, .3);
-@player-big-button-wrapper-size: 8.5em;
-@player-big-button-size: 6.5em;
+@player-big-button-mask-gradient: radial-gradient(rgba(0, 0, 0, .7), transparent);
+@player-big-button-background-gradient-color: rgba(0, 0, 0, .7);
+@player-big-button-wrapper-size: 9em;
 
 @player-control-bar-height: 5em;
+@player-control-bar-elements-color: #eee;
 @player-control-bar-background-color: rgba(0, 0, 0, .3);
+@player-control-bar-background-filter: blur(10px);
 
 @player-error-message-color: #eee;
 @player-error-description-size: 1.8em;
@@ -58,20 +56,17 @@
       width: 100%;
       height: 100%;
       mask: @player-top-bar-mask-gradient;
-      backdrop-filter: @player-background-filter;
       background-color: @player-top-bar-background-gradient-color;
       z-index: -1;
     }
 
     .vjs-top-title {
-      font-weight: 400;
       line-height: 1.1;
       color: @player-top-bar-title-color;
       text-shadow: @player-top-bar-title-shadow;
     }
 
     .vjs-top-description {
-      padding-top: .3em;
       line-height: 1.2;
       color: @player-top-bar-description-color;
       text-shadow: @player-top-bar-description-shadow;
@@ -82,17 +77,21 @@
   // BigButton video component
   // _____________________________________________
   .vjs-big-button {
-    button:before {
-      content: '';
-      position: absolute;
-      width: calc(@player-big-button-wrapper-size);
-      height: calc(@player-big-button-wrapper-size);
-      margin: calc((@player-big-button-wrapper-size - @player-big-button-size)  / -2);
-      border-radius: @player-big-button-wrapper-size;
-      mask: @player-big-button-mask-gradient;
-      backdrop-filter: @player-background-filter;
-      background-color: @player-big-button-background-gradient-color;
-      z-index: -1;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: @player-big-button-wrapper-size;
+        height: @player-big-button-wrapper-size;
+        border-radius: @player-big-button-wrapper-size;
+        mask: @player-big-button-mask-gradient;
+        background-color: @player-big-button-background-gradient-color;
+        z-index: -1;
+      }
     }
 
     .vjs-icon-placeholder:hover {
@@ -105,10 +104,9 @@
   // _____________________________________________
   .vjs-control-bar {
     height: @player-control-bar-height;
-    color: @player-elements-color;
+    color: @player-control-bar-elements-color;
     background-color: @player-control-bar-background-color;
-    backdrop-filter: @player-background-filter;
-    transition: .15s;
+    backdrop-filter: @player-control-bar-background-filter;
 
     .vjs-time-control,
     .vjs-volume-control {
@@ -124,44 +122,50 @@
       width: 4.5em;
     }
 
-    .vjs-play-control > .vjs-icon-placeholder {
-      margin-left: .5em;
+    .vjs-play-control {
+      .vjs-icon-placeholder {
+        margin-left: .5em;
+      }
     }
 
-    .vjs-fullscreen-control > .vjs-icon-placeholder {
-      margin-right: .5em;
+    .vjs-fullscreen-control {
+      .vjs-icon-placeholder {
+        margin-right: .5em;
+      }
     }
 
     .vjs-volume-level {
-      background-color: @player-elements-color;
+      background-color: @player-control-bar-elements-color;
     }
 
-    .vjs-progress-holder .vjs-play-progress > .vjs-icon-placeholder {
-      line-height: unset;
+    .vjs-progress-holder .vjs-play-progress {
+      .vjs-icon-placeholder {
+        line-height: unset;
+      }
     }
 
     .vjs-play-progress,
     .vjs-mouse-display {
-      background-color: @player-elements-color;
+      background-color: @player-control-bar-elements-color;
 
-      & > .vjs-time-tooltip,
-      & > .vjs-volume-tooltip {
+      .vjs-time-tooltip,
+      .vjs-volume-tooltip {
         top: calc(@player-control-bar-height / -2.3);
-        color: @player-elements-color;
+        color: @player-control-bar-elements-color;
         background: transparent;
       }
     }
 
-    .vjs-progress-control {
-      .vjs-play-progress > .vjs-time-tooltip {
-        display: none;
+    .vjs-progress-control:hover {
+      .vjs-time-tooltip,
+      .vjs-progress-holder {
+        font-size: 1em;
       }
+    }
 
-      &:hover {
-        .vjs-progress-holder,
-        .vjs-time-tooltip {
-          font-size: 1em;
-        }
+    .vjs-play-progress {
+      .vjs-time-tooltip {
+        display: none;
       }
     }
   }
@@ -170,10 +174,6 @@
   // ErrorInfo video component
   // _____________________________________________
   .vjs-error-info {
-    .vjs-error-wrapper {
-      background-color: @player-error-background-color;
-    }
-
     .vjs-error-icon:before {
       opacity: .7;
     }
@@ -185,7 +185,6 @@
     }
 
     .vjs-error-description {
-      padding-top: .7em;
       line-height: 1.2;
       color: @player-error-description-color;
     }
