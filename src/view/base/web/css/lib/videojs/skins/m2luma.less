@@ -10,7 +10,8 @@
 @player-big-button-hover-color: #eee;
 @player-big-button-mask-gradient: radial-gradient(rgba(0, 0, 0, .7), transparent);
 @player-big-button-background-gradient-color: rgba(0, 0, 0, .7);
-@player-big-button-wrapper-size: 9em;
+@player-big-button-size: 6em;
+@player-big-button-wrapper-size: 8em;
 
 @player-control-bar-height: 5em;
 @player-control-bar-elements-color: #eee;
@@ -48,7 +49,7 @@
   // TopBar video component
   // _____________________________________________
   .vjs-top-bar {
-    transition: .25s;
+    transition: .15s;
 
     &:before {
       content: '';
@@ -108,48 +109,30 @@
     background-color: @player-control-bar-background-color;
     backdrop-filter: @player-control-bar-background-filter;
 
-    .vjs-time-control,
-    .vjs-volume-control {
-      position: relative;
+    .vjs-time-control, .vjs-volume-control {
       display: flex;
-      justify-content: center;
       align-items: center;
       height: 100% !important;
     }
 
-    .vjs-play-control,
-    .vjs-fullscreen-control {
+    .vjs-play-control, .vjs-fullscreen-control {
       width: 4.5em;
     }
 
-    .vjs-play-control {
-      .vjs-icon-placeholder {
-        margin-left: .5em;
-      }
+    .vjs-play-control .vjs-icon-placeholder {
+      margin-left: .5em;
     }
 
-    .vjs-fullscreen-control {
-      .vjs-icon-placeholder {
-        margin-right: .5em;
-      }
+    .vjs-fullscreen-control .vjs-icon-placeholder {
+      margin-right: .5em;
     }
 
-    .vjs-volume-level {
+    .vjs-volume-level, .vjs-play-progress, .vjs-mouse-display {
       background-color: @player-control-bar-elements-color;
     }
 
-    .vjs-progress-holder .vjs-play-progress {
-      .vjs-icon-placeholder {
-        line-height: unset;
-      }
-    }
-
-    .vjs-play-progress,
-    .vjs-mouse-display {
-      background-color: @player-control-bar-elements-color;
-
-      .vjs-time-tooltip,
-      .vjs-volume-tooltip {
+    .vjs-play-progress, .vjs-mouse-display {
+      .vjs-time-tooltip, .vjs-volume-tooltip {
         top: calc(@player-control-bar-height / -2.3);
         color: @player-control-bar-elements-color;
         background: transparent;
@@ -157,13 +140,16 @@
     }
 
     .vjs-progress-control:hover {
-      .vjs-time-tooltip,
-      .vjs-progress-holder {
+      .vjs-time-tooltip, .vjs-progress-holder {
         font-size: 1em;
       }
     }
 
     .vjs-play-progress {
+      .vjs-icon-placeholder {
+        line-height: unset;
+      }
+
       .vjs-time-tooltip {
         display: none;
       }
