@@ -76,61 +76,6 @@
 }
 
 //
-// Hides YouTube player elements
-// _____________________________________________
-.video-js.vjs-youtube {
-  overflow: hidden;
-
-  .vjs-tech {
-    top: -50% !important;
-    height: 200% !important;
-  }
-}
-
-//
-// Dynamics when playback ends and user inactivity
-// _____________________________________________
-.vjs-has-started {
-  &.vjs-user-inactive.vjs-playing {
-    &.vjs-ended {
-      .vjs-top-bar, .vjs-control-bar {
-        opacity: 1;
-        transition: visibility .25s, opacity .25s;
-      }
-    }
-
-    .vjs-top-bar, .vjs-control-bar {
-      opacity: 0;
-      transition: visibility 1s, opacity 1s;
-    }
-  }
-
-  .vjs-top-bar, .vjs-control-bar {
-    opacity: 1;
-    transition: visibility .25s, opacity .25s;
-  }
-}
-
-//
-// Component layer display order
-// _____________________________________________
-.vjs-poster-image {
-  z-index: 1;
-}
-
-.vjs-top-bar {
-  z-index: 2;
-}
-
-.vjs-big-button {
-  z-index: 3;
-}
-
-.vjs-control-bar {
-  z-index: 4;
-}
-
-//
 // Restyle initialize and ended video states
 // _____________________________________________
 .video-js {
@@ -152,9 +97,45 @@
 }
 
 //
+// Hides YouTube player elements
+// _____________________________________________
+.video-js.vjs-youtube {
+  overflow: hidden;
+
+  .vjs-tech {
+    top: -50% !important;
+    height: 200% !important;
+  }
+}
+
+//
+// Dynamics when playback ends and user inactivity
+// _____________________________________________
+.video-js.vjs-has-started {
+  &.vjs-user-inactive.vjs-playing {
+    &.vjs-ended {
+      .vjs-top-bar, .vjs-control-bar {
+        opacity: 1;
+        transition: visibility .25s, opacity .25s;
+      }
+    }
+
+    .vjs-top-bar, .vjs-control-bar {
+      opacity: 0;
+      transition: visibility 1s, opacity 1s;
+    }
+  }
+
+  .vjs-top-bar, .vjs-control-bar {
+    opacity: 1;
+    transition: visibility .25s, opacity .25s;
+  }
+}
+
+//
 // Hiding cursor when user is inactive
 // _____________________________________________
-.vjs-has-started {
+.video-js.vjs-has-started {
   &.vjs-user-inactive.vjs-playing {
     .vjs-big-button button {
       cursor: none;
@@ -171,6 +152,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 1;
 
   img {
     width: 100%;
@@ -187,6 +169,7 @@
   top: 0;
   right: 0;
   left: 0;
+  z-index: 2;
 
   .vjs-top-wrapper {
     padding: 1.8em 2em 2em;
@@ -211,6 +194,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 3;
 
   &:not(._animate) button {
     opacity: 0;
@@ -252,6 +236,13 @@
       transform: scale(1.3);
     }
   }
+}
+
+//
+// ControlBar video component
+// _____________________________________________
+.vjs-control-bar {
+  z-index: 4;
 }
 
 //
