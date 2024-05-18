@@ -27,10 +27,11 @@
 
 .video-js {
   user-select: none;
+  font-family: unset;
 }
 
 .vjs-svg-icon {
-  transition: .1s;
+  transition: .15s;
 }
 
 //
@@ -89,17 +90,24 @@
 //
 // Dynamics when playback ends and user inactivity
 // _____________________________________________
-.vjs-has-started.vjs-user-inactive.vjs-playing {
-  &.vjs-ended {
+.vjs-has-started {
+  &.vjs-user-inactive.vjs-playing {
+    &.vjs-ended {
+      .vjs-top-bar, .vjs-control-bar {
+        opacity: 1;
+        transition: visibility .25s, opacity .25s;
+      }
+    }
+
     .vjs-top-bar, .vjs-control-bar {
-      opacity: 1;
-      transition: visibility .1s, opacity .1s;
+      opacity: 0;
+      transition: visibility 1s, opacity 1s;
     }
   }
 
   .vjs-top-bar, .vjs-control-bar {
-    opacity: 0;
-    transition: visibility 1s, opacity 1s;
+    opacity: 1;
+    transition: visibility .25s, opacity .25s;
   }
 }
 
@@ -146,9 +154,11 @@
 //
 // Hiding cursor when user is inactive
 // _____________________________________________
-.vjs-has-started.vjs-user-inactive.vjs-playing {
-  .vjs-big-button button {
-    cursor: none;
+.vjs-has-started {
+  &.vjs-user-inactive.vjs-playing {
+    .vjs-big-button button {
+      cursor: none;
+    }
   }
 }
 
