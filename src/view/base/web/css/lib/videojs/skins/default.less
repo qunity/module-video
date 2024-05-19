@@ -1,3 +1,7 @@
+@player-small-duration: .15s;
+@player-normal-duration: .25s;
+@player-large-duration: 1s;
+
 @player-top-bar-title-size: 2.4em;
 @player-top-bar-description-size: 1.6em;
 
@@ -31,7 +35,7 @@
 }
 
 .vjs-svg-icon {
-  transition: .15s;
+  transition: @player-small-duration;
 }
 
 //
@@ -71,7 +75,8 @@
   .vjs-poster-image {
     opacity: 0;
     visibility: visible;
-    transition: visibility .25s, opacity .25s ease-in;
+    transition: visibility @player-normal-duration,
+      opacity @player-normal-duration ease-in;
   }
 }
 
@@ -116,19 +121,22 @@
     &.vjs-ended {
       .vjs-top-bar, .vjs-control-bar {
         opacity: 1;
-        transition: visibility .25s, opacity .25s;
+        transition: visibility @player-normal-duration,
+          opacity @player-normal-duration;
       }
     }
 
     .vjs-top-bar, .vjs-control-bar {
       opacity: 0;
-      transition: visibility 1s, opacity 1s;
+      transition: visibility @player-large-duration,
+        opacity @player-large-duration;
     }
   }
 
   .vjs-top-bar, .vjs-control-bar {
     opacity: 1;
-    transition: visibility .25s, opacity .25s;
+    transition: visibility @player-normal-duration,
+      opacity @player-normal-duration;
   }
 }
 
