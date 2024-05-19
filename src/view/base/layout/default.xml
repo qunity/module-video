@@ -21,8 +21,8 @@
                                             <item name="topBar" xsi:type="array">
                                                 <item name="component" xsi:type="string">video/m2TopBar</item>
                                             </item>
-                                            <item name="bigPlayButton" xsi:type="array">
-                                                <item name="component" xsi:type="string">video/m2BigPlayButton</item>
+                                            <item name="bigButton" xsi:type="array">
+                                                <item name="component" xsi:type="string">video/m2BigButton</item>
                                             </item>
                                             <item name="posterImage" xsi:type="array">
                                                 <item name="component" xsi:type="string">video/m2PosterImage</item>
