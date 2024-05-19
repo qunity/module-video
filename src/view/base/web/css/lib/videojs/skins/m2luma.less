@@ -19,7 +19,7 @@
 @player-control-bar-background-filter: blur(1em);
 @player-control-bar-tooltip-size: 1em;
 
-@player-control-bar-playback-rate-font-size: 1em;
+@player-control-bar-playback-rate-value-size: 1em;
 @player-control-bar-playback-rate-hover-value-color: #fff;
 @player-control-bar-playback-rate-hover-value-shadow: 0 0 .3em rgba(255, 255, 255, .7);
 
@@ -185,7 +185,7 @@
       }
 
       .vjs-playback-rate-value {
-        font-size: @player-control-bar-playback-rate-font-size;
+        font-size: @player-control-bar-playback-rate-value-size;
         transition: @player-small-duration;
         z-index: 1;
       }
@@ -203,6 +203,7 @@
       .vjs-menu-content {
         bottom: -.3em;
         visibility: hidden;
+        overflow: visible;
         opacity: 0;
         font-family: unset;
         border-radius: @player-control-bar-playback-rate-menu-border-radius;
