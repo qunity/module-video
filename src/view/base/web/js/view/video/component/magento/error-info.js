@@ -6,7 +6,7 @@ define([
   'use strict';
 
   /**
-   * ErrorInfo UI component for Magento Video player
+   * ErrorInfo UI component for Magento video player
    */
   return m2Component.extend({
     defaults: {
@@ -16,7 +16,7 @@ define([
         message: '${ $.name }:options.message',
         description: '${ $.name }:options.description'
       },
-      observable: ['message', 'description'],
+      visible: false,
       message: $t('Playback error.'),
       description: $t('Please try again later or contact your administrator.')
     },
@@ -26,7 +26,7 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['message', 'description']);
+      this.observe(['visible', 'message', 'description']);
 
       return this;
     }

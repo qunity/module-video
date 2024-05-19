@@ -14,11 +14,8 @@ define([
       displayArea: 'preview',
       modules: {
         parent: '${ $.parentName }',
-        bigPlayButton: '${ $.components.bigPlayButton }',
-        posterImage: '${ $.components.posterImage }'
-      },
-      animationClass: '_animate',
-      wrapperSelector: '.video-wrapper[data-role="video"]'
+        bigButton: '${ $.components.bigButton }'
+      }
     },
 
     /**
@@ -29,9 +26,7 @@ define([
      */
     initSubscriber: function () {
       this._super();
-
       this.element.subscribe(this._updatePreviewClass.bind(this));
-      this.element.subscribe(this._updateWrapperStyle.bind(this));
 
       return this;
     },
@@ -41,7 +36,7 @@ define([
      * @public
      */
     createVideoPlayer: function () {
-      this._destroyElement();
+      this.bigButton().active.valueHasMutated();
       this.parent().initVideoPlayer().createVideoPlayer();
     },
 
@@ -54,29 +49,10 @@ define([
     getComponents: function () {
       return [
         this.components.topBar,
-        this.components.bigPlayButton,
+        this.components.bigButton,
         this.components.posterImage,
         this.components.errorInfo,
       ];
-    },
-
-    /**
-     * Destroy preview video element
-     * @private
-     */
-    _destroyElement: function () {
-      const element = this.element(),
-        wrapperElement = element.closest(this.wrapperSelector),
-        fnEndDestroyProcess = () => {
-          element.remove();
-          wrapperElement.classList.remove(this.animationClass);
-        };
-
-      wrapperElement.classList.add(this.animationClass);
-      element.classList.add(this.animationClass);
-
-      this.bigPlayButton().active.valueHasMutated();
-      this.posterImage().animate(fnEndDestroyProcess);
     },
 
     /**
@@ -92,23 +68,6 @@ define([
       /** @var {String} classes */
       const classes = videoElement.className;
       element.classList.add(...classes.split(' '));
-    },
-
-    /**
-     * Update HTML styles of wrapper video element
-     * @private
-     *
-     * @param {HTMLElement} element
-     */
-    _updateWrapperStyle: function (element) {
-      /** @var {HTMLElement} wrapperElement */
-      const wrapperElement = element.closest(this.wrapperSelector);
-
-      /** @var {Object} options */
-      const options = this.parent().options;
-
-      wrapperElement.style['min-width'] = `${options.width}px`;
-      wrapperElement.style['min-height'] = `${options.height}px`;
     }
   });
 });

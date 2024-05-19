@@ -1,16 +1,16 @@
 define([
   'video/m2Component',
-  'video/vjsBigPlayButton'
-], function (m2Component, vjsBigPlayButton) {
+  'video/vjsBigButton'
+], function (m2Component, vjsBigButton) {
   'use strict';
 
   /**
-   * BigPlayButton UI component for Magento Video player
+   * BigButton UI component for Magento video player
    */
   return m2Component.extend({
     defaults: {
-      videojsComponent: vjsBigPlayButton,
-      template: 'Qunity_Video/video/component/big-play-button',
+      videojsComponent: vjsBigButton,
+      template: 'Qunity_Video/video/component/big-button',
       active: 'play'
     },
 

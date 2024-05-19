@@ -8,13 +8,7 @@ define([
    */
   return function (m2Component) {
     return class PosterImage extends vjsComponent(m2Component) {
-
-      /**
-       * @inheritDoc
-       */
-      initialize(player) {
-        player.poster = this.wrapper.info;
-      }
+      // ...
     };
   };
 });

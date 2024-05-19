@@ -30,7 +30,14 @@ define([
      * @public
      */
     create: function () {
+      /** @var {HTMLElement} videoElement */
+      const videoElement = this.parent().element();
+
+      videoElement.dispatchEvent(new Event(this.events.startCreating));
       this.vjsplayer = videojs(this.options.id, this.options);
+      this.parent().element(this.vjsplayer.el());
+      this.vjsplayer.on('ready', () =>
+        videoElement.dispatchEvent(new Event(this.events.finalCreating)));
 
       this.vjsplayer.on('ready', this._onReady.bind(this));
       this.vjsplayer.on('timeupdate', this._onTimeUpdate.bind(this));
@@ -46,7 +53,12 @@ define([
      * @param {String|null} description
      */
     critical: function (message = null, description = null) {
-      this.errorInfo().info({ message: message, description: description });
+      /** @var {Object} errorInfo */
+      const errorInfo = this.errorInfo();
+
+      errorInfo.message(message);
+      errorInfo.description(description);
+      errorInfo.visible(true);
     },
 
     /**

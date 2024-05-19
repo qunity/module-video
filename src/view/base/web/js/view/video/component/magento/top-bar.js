@@ -5,7 +5,7 @@ define([
   'use strict';
 
   /**
-   * TopBar UI component for Magento Video player
+   * TopBar UI component for Magento video player
    */
   return m2Component.extend({
     defaults: {
@@ -17,8 +17,7 @@ define([
       },
       exports: {
         title: '${ $.parentName }.posterImage:alt'
-      },
-      observable: ['title', 'description']
+      }
     },
 
     /**

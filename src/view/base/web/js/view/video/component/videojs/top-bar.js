@@ -8,13 +8,7 @@ define([
    */
   return function (m2Component) {
     return class TopBar extends vjsComponent(m2Component) {
-
-      /**
-       * @inheritDoc
-       */
-      initialize(player) {
-        player.info = this.wrapper.info;
-      }
+      // ...
     };
   };
 });

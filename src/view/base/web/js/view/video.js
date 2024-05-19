@@ -13,12 +13,24 @@ define([
         player: '${ $.ns }.player'
       },
       exports: {
-        options: '${ $.ns }.player:options'
+        options: '${ $.ns }.player:options',
+        events: '${ $.ns }.player:events',
+        classes: '${ $.ns }.player:classes'
+      },
+      events: {
+        startCreating: 'start-creating',
+        finalCreating: 'final-creating'
+      },
+      classes: {
+        startTime: 'vjs-start-time',
+        finalTime: 'vjs-final-time',
+        creating: 'vjs-creating'
       },
       options: {
         preload: 'auto',
         techOrder: [ 'html5' ],
         sources: [{ type: 'video/mp4' }],
+        playbackRates: [ 0.5, 1, 1.5, 2 ],
         theme: 'vjs-m2luma-skin',
         width: 640,
         height: 360,
@@ -26,23 +38,21 @@ define([
         autoplay: true,
         loop: false,
         autoSetup: false,
+        noUITitleAttributes: true,
         experimentalSvgIcons: true,
         errorDisplay: false,
         controlBar: {
           pictureInPictureToggle: false,
           playToggle: { replay: true },
-          volumePanel: { inline: true, volume: '0.73' }
+          volumePanel: { inline: true, volume: 0.73 }
         },
         loadingSpinner: true,
         topBar: { title: null, description: null },
-        posterImage: {
-          src: null,
-          alt: null,
-          animation: { startClass: 'vjs-start-time', finalClass: 'vjs-final-time' }
-        },
-        bigPlayButton: true,
+        posterImage: { src: null, alt: null },
+        bigButton: true,
         errorInfo: { message: null, description: null },
         titleBar: false,
+        bigPlayButton: false,
         liveTracker: false,
         textTrackDisplay: false,
         textTrackSettings: false
@@ -82,6 +92,18 @@ define([
      * @return {uiComponent}
      */
     initSubscriber: function () {
+      this.element.subscribe(element => {
+        element.addEventListener(
+          this.events.startCreating,
+          this.onStartCreatingEvent.bind(this)
+        );
+
+        element.addEventListener(
+          this.events.finalCreating,
+          this.onFinalCreatingEvent.bind(this)
+        );
+      });
+
       return this;
     },
 
@@ -96,7 +118,10 @@ define([
 
       try {
         player.init();
-      } catch (e) { player.critical(); throw e; }
+      } catch (e) {
+        player.critical();
+        throw e;
+      }
 
       return this;
     },
@@ -112,9 +137,28 @@ define([
 
       try {
         player.create();
-      } catch (e) { player.critical(); throw e; }
+      } catch (e) {
+        player.critical();
+        throw e;
+      }
 
       return this;
+    },
+
+    /**
+     * Process execute when before video player creating
+     * @public
+     */
+    onStartCreatingEvent: function () {
+      this.element().classList.add(this.classes.creating);
+    },
+
+    /**
+     * Process execute when after video player creating
+     * @public
+     */
+    onFinalCreatingEvent: function () {
+      this.element().classList.remove(this.classes.creating);
     },
 
     /**
@@ -134,7 +178,22 @@ define([
      * @param {Object} player
      */
     onTimeUpdateEvent: function (player) {
-      // ...
+      /** @var {Integer} currentTime */
+      const currentTime = player.currentTime();
+
+      this._processElementClass(
+        this.classes.startTime,
+        currentTime,
+        { from: 0.0, to: 1.0 }
+      );
+
+      /** @var {Integer} duration */
+      const duration = player.duration();
+      this._processElementClass(
+        this.classes.finalTime,
+        currentTime,
+        { from: duration - 1.0, to: duration }
+      );
     },
 
     /**
@@ -156,8 +215,31 @@ define([
      * @param {Object} player
      */
     onErrorEvent: function (player) {
-      player.critical.valueHasMutated();
+      player.errorInfo.wrapper.visible(true);
       player.off();
+    },
+
+    /**
+     * Adding HTML class to element at given time period
+     * @private
+     *
+     * @param {Integer} time
+     * @param {String} className
+     *
+     * @param {{from:Integer,to:Integer}} diapasonTime
+     */
+    _processElementClass(className, time, diapasonTime) {
+      /** @var {HTMLElement} element */
+      const element = this.element();
+
+      if (!(time >= diapasonTime.from && time < diapasonTime.to)) {
+        element.classList.remove(className);
+        return;
+      }
+
+      if (!this.element().classList.contains(className)) {
+        element.classList.add(className)
+      }
     }
   });
 });

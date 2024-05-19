@@ -5,7 +5,7 @@ define([
   'use strict';
 
   /**
-   * PosterImage UI component for Magento Video player
+   * PosterImage UI component for Magento video player
    */
   return m2Component.extend({
     defaults: {
@@ -16,7 +16,6 @@ define([
         src: '${ $.name }:options.src',
         alt: '${ $.name }:options.alt'
       },
-      observable: ['src', 'alt'],
       src: ''
     },
     onerror: 'this.src=require.toUrl("%s");',

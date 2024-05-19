@@ -14,7 +14,7 @@ define([
       },
       components: {
         topBar: '${ $.parentName }.player.topBar',
-        bigPlayButton: '${ $.parentName }.player.bigPlayButton',
+        bigButton: '${ $.parentName }.player.bigButton',
         posterImage: '${ $.parentName }.player.posterImage',
         errorInfo: '${ $.parentName }.player.errorInfo'
       }

@@ -5,10 +5,10 @@ define([
   'use strict';
 
   /**
-   * BigPlayButton component for VideoJs player
+   * BigButton component for VideoJs player
    */
   return function (m2Component) {
-    return class BigPlayButton extends vjsComponent(m2Component) {
+    return class BigButton extends vjsComponent(m2Component) {
 
       /**
        * @inheritDoc
