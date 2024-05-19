@@ -42,8 +42,8 @@ class GetComponentByUri
         $urlHost = $this->getPreparedHost($uri);
 
         foreach ($this->componentMapper as $code => $item) {
-            foreach ($item as $host) {
-                if ($this->getPreparedHost($host) == $urlHost) {
+            foreach ($item as $itemUri) {
+                if ($this->getPreparedHost($itemUri) == $urlHost) {
                     return $this->getComponentByCode->execute($code);
                 }
             }

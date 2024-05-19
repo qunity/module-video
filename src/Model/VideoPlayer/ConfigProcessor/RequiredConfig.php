@@ -10,8 +10,8 @@ use Psr\Log\LoggerInterface;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface;
 use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
 use Qunity\Video\Api\VideoPlayer\ConfigProcessorInterface;
-use Qunity\Video\Model\ResourceModel\VideoPlayer\GetIdByUri;
 use Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentByUri;
+use Qunity\Video\Model\ResourceModel\VideoPlayer\GetIdByUri;
 
 class RequiredConfig implements ConfigProcessorInterface
 {

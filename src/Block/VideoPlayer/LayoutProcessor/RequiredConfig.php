@@ -27,11 +27,14 @@ class RequiredConfig implements LayoutProcessorInterface
         $videoId = $config->getVideoId();
         $linkUrl = $config->getLinkUrl();
 
+        $data = ['config' => ['options' => [
+            'id' => $videoId,
+            'sources' => [0 => ['src' => $linkUrl]],
+        ]]];
+
         $delimiter = ArrayManager::DEFAULT_PATH_DELIMITER;
         $path = implode($delimiter, ['components', $videoId]);
 
-        $jsLayout = $this->arrayManager->merge($path, $jsLayout, ['config' =>
-            ['options' => [ 'id' => $videoId, 'sources' => [0 => ['src' => $linkUrl]]] ]
-        ]);
+        $jsLayout = $this->arrayManager->merge($path, $jsLayout, $data);
     }
 }
