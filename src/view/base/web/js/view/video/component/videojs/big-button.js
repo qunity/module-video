@@ -57,8 +57,8 @@ define([
       _animateElement(paused) {
         const type = paused ? 'play' : 'pause';
 
-        (this.wrapper.active() === type) ?
-          this.wrapper.active.valueHasMutated() : this.wrapper.active(type);
+        (this.wrapper.active() === type)
+          ? this.wrapper.active.valueHasMutated() : this.wrapper.active(type);
       }
     };
   };
