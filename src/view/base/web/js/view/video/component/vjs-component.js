@@ -29,7 +29,7 @@ define([
        */
       get wrapper() {
         if (this.constructor.wrapper === undefined) {
-          throw new Error('Class wrapper has not been installed');
+          throw new Error("Class wrapper hasn't been installed");
         }
 
         return this.constructor.wrapper;
