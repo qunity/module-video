@@ -13,18 +13,7 @@ define([
         player: '${ $.ns }.player'
       },
       exports: {
-        options: '${ $.ns }.player:options',
-        events: '${ $.ns }.player:events',
-        classes: '${ $.ns }.player:classes'
-      },
-      events: {
-        startCreating: 'start-creating',
-        finalCreating: 'final-creating'
-      },
-      classes: {
-        startTime: 'vjs-start-time',
-        finalTime: 'vjs-final-time',
-        creating: 'vjs-creating'
+        options: '${ $.ns }.player:options'
       },
       options: {
         preload: 'auto',
@@ -56,7 +45,10 @@ define([
         liveTracker: false,
         textTrackDisplay: false,
         textTrackSettings: false
-      }
+      },
+      creatingClass: 'vjs-creating',
+      startTimeClass: 'vjs-start-time',
+      finalTimeClass: 'vjs-final-time'
     },
 
     /**
@@ -92,18 +84,6 @@ define([
      * @return {uiComponent}
      */
     initSubscriber: function () {
-      this.element.subscribe(element => {
-        element.addEventListener(
-          this.events.startCreating,
-          this.onStartCreatingEvent.bind(this)
-        );
-
-        element.addEventListener(
-          this.events.finalCreating,
-          this.onFinalCreatingEvent.bind(this)
-        );
-      });
-
       return this;
     },
 
@@ -150,7 +130,7 @@ define([
      * @public
      */
     onStartCreatingEvent: function () {
-      this.element().classList.add(this.classes.creating);
+      this.element().classList.add(this.creatingClass);
     },
 
     /**
@@ -158,7 +138,7 @@ define([
      * @public
      */
     onFinalCreatingEvent: function () {
-      this.element().classList.remove(this.classes.creating);
+      this.element().classList.remove(this.creatingClass);
     },
 
     /**
@@ -182,7 +162,7 @@ define([
       const currentTime = player.currentTime();
 
       this._processElementClass(
-        this.classes.startTime,
+        this.startTimeClass,
         currentTime,
         { from: 0.0, to: 1.0 }
       );
@@ -190,7 +170,7 @@ define([
       /** @var {Integer} duration */
       const duration = player.duration();
       this._processElementClass(
-        this.classes.finalTime,
+        this.finalTimeClass,
         currentTime,
         { from: duration - 1.0, to: duration }
       );

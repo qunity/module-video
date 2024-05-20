@@ -30,14 +30,7 @@ define([
      * @public
      */
     create: function () {
-      /** @var {HTMLElement} videoElement */
-      const videoElement = this.parent().element();
-
-      videoElement.dispatchEvent(new Event(this.events.startCreating));
-      this.vjsplayer = videojs(this.options.id, this.options);
-      this.parent().element(this.vjsplayer.el());
-      this.vjsplayer.on('ready', () =>
-        videoElement.dispatchEvent(new Event(this.events.finalCreating)));
+      this.vjsplayer = this._createVjsPlayer();
 
       this.vjsplayer.on('ready', this._onReady.bind(this));
       this.vjsplayer.on('timeupdate', this._onTimeUpdate.bind(this));
@@ -59,6 +52,38 @@ define([
       errorInfo.message(message);
       errorInfo.description(description);
       errorInfo.visible(true);
+    },
+
+    /**
+     * Creates VideoJs player
+     * @private
+     *
+     * @return {Object}
+     */
+    _createVjsPlayer: function () {
+      this._onStartCreating();
+      const player = videojs(this.options.id, this.options);
+
+      this.parent().element(player.el());
+      player.on('ready', this._onFinalCreating.bind(this));
+
+      return player;
+    },
+
+    /**
+     * Process execute when before video player creating
+     * @private
+     */
+    _onStartCreating: function () {
+      this.parent().onStartCreatingEvent();
+    },
+
+    /**
+     * Process execute when after video player creating
+     * @private
+     */
+    _onFinalCreating: function () {
+      this.parent().onFinalCreatingEvent();
     },
 
     /**
