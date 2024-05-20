@@ -75,7 +75,8 @@ define([
      * @private
      */
     _onStartCreating: function () {
-      this.parent().onStartCreatingEvent();
+      const video = this.parent();
+      video.onStartCreatingEvent(video.element());
     },
 
     /**
@@ -83,7 +84,8 @@ define([
      * @private
      */
     _onFinalCreating: function () {
-      this.parent().onFinalCreatingEvent();
+      const video = this.parent();
+      video.onFinalCreatingEvent(video.element());
     },
 
     /**

@@ -13,10 +13,10 @@ define([
       videojsComponent: vjsErrorInfo,
       template: 'Qunity_Video/video/component/error-info',
       imports: {
+        visible: '${ $.name }:options.visible',
         message: '${ $.name }:options.message',
         description: '${ $.name }:options.description'
       },
-      visible: false,
       message: $t('Playback error.'),
       description: $t('Please try again later or contact your administrator.')
     },

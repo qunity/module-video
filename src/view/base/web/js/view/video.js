@@ -128,17 +128,21 @@ define([
     /**
      * Process execute when before video player creating
      * @public
+     *
+     * @var {HTMLElement} element
      */
-    onStartCreatingEvent: function () {
-      this.element().classList.add(this.creatingClass);
+    onStartCreatingEvent: function (element) {
+      element.classList.add(this.creatingClass);
     },
 
     /**
      * Process execute when after video player creating
      * @public
+     *
+     * @var {HTMLElement} element
      */
-    onFinalCreatingEvent: function () {
-      this.element().classList.remove(this.creatingClass);
+    onFinalCreatingEvent: function (element) {
+      element.classList.remove(this.creatingClass);
     },
 
     /**
