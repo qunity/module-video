@@ -14,7 +14,9 @@ define([
       pixel: 'Qunity_Video/images/video/component/poster-image/pixel.webp',
       imports: {
         src: '${ $.name }:options.src',
-        alt: '${ $.name }:options.alt'
+        alt: '${ $.name }:options.alt',
+        sizes: '${ $.name }:options.sizes',
+        srcset: '${ $.name }:options.srcset'
       },
       src: ''
     },
@@ -25,7 +27,7 @@ define([
      */
     initObservable: function () {
       this._super();
-      this.observe(['src', 'alt']);
+      this.observe(['src', 'alt', 'sizes', 'srcset']);
 
       return this;
     }
