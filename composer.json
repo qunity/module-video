@@ -1,19 +1,20 @@
 {
-    "name": "qunity/module-video",
-    "description": "N/A",
-    "version": "0.1.1",
-    "type": "qunity-magento2-module",
-    "license": "proprietary",
-    "require": {
-        "php": "^8.1",
-        "magento/framework": "^103.0"
-    },
-    "autoload": {
-        "files": [
-            "src/registration.php"
-        ],
-        "psr-4": {
-            "Qunity\\Video\\": "src"
-        }
+  "name": "qunity/module-video",
+  "description": "N/A",
+  "version": "0.1.2",
+  "type": "qunity-magento2-module",
+  "license": "proprietary",
+  "require": {
+    "php": "^8.1",
+    "magento/framework": "^103.0",
+    "qunity/module-base": "^0.1"
+  },
+  "autoload": {
+    "files": [
+      "src/registration.php"
+    ],
+    "psr-4": {
+      "Qunity\\Video\\": "src"
     }
+  }
 }
