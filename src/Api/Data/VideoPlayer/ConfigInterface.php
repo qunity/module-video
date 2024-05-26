@@ -52,7 +52,7 @@ interface ConfigInterface extends ExtensibleDataInterface
     public function setLinkUrl(string $url): self;
 
     /**
-     * Retrieve video JS component object or create a new one
+     * Retrieve existing video JS component object or create a new one
      *
      * @return \Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface
      */
@@ -97,7 +97,7 @@ interface ConfigInterface extends ExtensibleDataInterface
     public function setDescription(string $description): self;
 
     /**
-     * Retrieve video thumbnails array or create a new one
+     * Retrieve existing video thumbnails array or create a new one
      *
      * @return \Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface[]
      */
