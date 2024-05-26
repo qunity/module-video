@@ -88,7 +88,7 @@ class YouTubeMetadata implements ConfigProcessorInterface
     }
 
     /**
-     * Get video title
+     * Get video title for Video Player configuration
      *
      * @param array $data
      * @return string
@@ -99,7 +99,7 @@ class YouTubeMetadata implements ConfigProcessorInterface
     }
 
     /**
-     * Get video description
+     * Get video description for Video Player configuration
      *
      * @param array $data
      * @return string
@@ -110,7 +110,7 @@ class YouTubeMetadata implements ConfigProcessorInterface
     }
 
     /**
-     * Get video thumbnails array
+     * Get video thumbnails array for Video Player configuration
      *
      * @param ThumbnailInterface[] $data
      * @return array
