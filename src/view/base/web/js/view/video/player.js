@@ -49,8 +49,9 @@ define([
       /** @var {Object} errorInfo */
       const errorInfo = this.errorInfo();
 
-      errorInfo.message(message);
-      errorInfo.description(description);
+      if (message) errorInfo.message(message);
+      if (description) errorInfo.description(description);
+
       errorInfo.visible(true);
     },
 

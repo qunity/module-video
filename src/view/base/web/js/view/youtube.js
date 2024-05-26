@@ -1,6 +1,5 @@
 define([
-  'uiVideo',
-  'videojs/youtube'
+  'uiVideo'
 ], function (uiVideo) {
   'use strict';
 
@@ -15,6 +14,20 @@ define([
         loadingSpinner: false,
         youtube: { enablePrivacyEnhancedMode: true }
       }
+    },
+
+    /**
+     * @inheritDoc
+     */
+    createVideoPlayer: function () {
+      /** @var {Function} fnSuperCreateVideoPlayer */
+      const fnSuperCreateVideoPlayer = this._super.bind(this);
+
+      require(['videojs/youtube'], function () {
+        fnSuperCreateVideoPlayer();
+      }.bind(this));
+
+      return this;
     }
   });
 });

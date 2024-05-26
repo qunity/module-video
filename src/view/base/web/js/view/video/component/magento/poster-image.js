@@ -17,10 +17,21 @@ define([
         alt: '${ $.name }:options.alt',
         sizes: '${ $.name }:options.sizes',
         srcset: '${ $.name }:options.srcset'
-      },
-      src: ''
+      }
     },
-    onerror: 'this.src=require.toUrl("%s");',
+
+    /**
+     * @inheritDoc
+     */
+    initialize: function () {
+      this._super();
+
+      if (!this.src()) {
+        this.src(require.toUrl(this.pixel));
+      }
+
+      return this;
+    },
 
     /**
      * @inheritDoc

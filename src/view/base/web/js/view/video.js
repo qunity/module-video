@@ -12,9 +12,6 @@ define([
       modules: {
         player: '${ $.ns }.player'
       },
-      exports: {
-        options: '${ $.ns }.player:options'
-      },
       options: {
         preload: 'auto',
         techOrder: [ 'html5' ],
@@ -23,10 +20,12 @@ define([
         theme: 'vjs-m2luma-skin',
         width: 640,
         height: 360,
+        poster: true,
         controls: true,
         autoplay: true,
         loop: false,
         autoSetup: false,
+        translation: false,
         noUITitleAttributes: true,
         experimentalSvgIcons: true,
         errorDisplay: false,
@@ -36,10 +35,10 @@ define([
           volumePanel: { inline: true, volume: 0.73 }
         },
         loadingSpinner: true,
-        topBar: { title: null, description: null },
-        posterImage: { src: null, alt: null },
+        topBar: true,
+        posterImage: true,
         bigButton: true,
-        errorInfo: { message: null, description: null },
+        errorInfo: true,
         titleBar: false,
         bigPlayButton: false,
         liveTracker: false,
@@ -48,7 +47,9 @@ define([
       },
       creatingClass: 'vjs-creating',
       startTimeClass: 'vjs-start-time',
-      finalTimeClass: 'vjs-final-time'
+      finalTimeClass: 'vjs-final-time',
+      errorClass: 'vjs-error',
+      creationTimeout: 1000
     },
 
     /**
@@ -117,6 +118,7 @@ define([
 
       try {
         player.create();
+        this._creationTimeout();
       } catch (e) {
         player.critical();
         throw e;
@@ -224,6 +226,23 @@ define([
       if (!this.element().classList.contains(className)) {
         element.classList.add(className)
       }
+    },
+
+    /**
+     * Creation player timeout handler
+     * @private
+     */
+    _creationTimeout: function () {
+      const timer = setTimeout(() => {
+        /** @var {HTMLElement} DOMTokenList */
+        const classList = this.element().classList;
+
+        if (classList.contains(this.creatingClass) && !classList.contains(this.errorClass)) {
+          this.player().critical();
+        }
+
+        clearTimeout(timer);
+      }, this.creationTimeout);
     }
   });
 });

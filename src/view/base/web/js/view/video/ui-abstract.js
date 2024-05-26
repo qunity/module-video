@@ -9,6 +9,9 @@ define([
    */
   return uiComponent.extend({
     defaults: {
+      imports: {
+        options: '${ $.parentName }:options'
+      },
       languages: {
         ru: 'videojs/lang/ru'
       },
@@ -66,7 +69,8 @@ define([
      * @return {uiComponent}
      */
     initLanguages: function () {
-      const names = Object.keys(this.languages);
+      /** @var {String[]} names */
+      const names = this.options.translation ? Object.keys(this.languages) : [];
 
       require(names.map(name => `json!${this.languages[name]}`), function (...languages) {
         names.forEach((name, index) => this.languages[name] = languages[index]);
