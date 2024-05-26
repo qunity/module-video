@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Qunity\Video\Model\Service\YouTube;
 
-use Laminas\Uri\UriInterface;
+use Laminas\Uri\Uri as ZendUri;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
@@ -16,12 +16,12 @@ class GetMetadataByUri
 
     /**
      * @param LoggerInterface $logger
-     * @param UriInterface $zendUri
+     * @param ZendUri $zendUri
      * @param GetMetadataById $getMetadataById
      */
     public function __construct(
         private readonly LoggerInterface $logger,
-        private readonly UriInterface $zendUri,
+        private readonly ZendUri $zendUri,
         private readonly GetMetadataById $getMetadataById
     ) {
         // ...

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Qunity\Video\Model\ResourceModel\VideoPlayer;
 
-use Laminas\Uri\UriInterface;
+use Laminas\Uri\Uri as ZendUri;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
@@ -14,14 +14,14 @@ class GetComponentByUri
 {
     /**
      * @param LoggerInterface $logger
-     * @param UriInterface $zendUri
+     * @param ZendUri $zendUri
      * @param ScopeConfigInterface $scopeConfig
      * @param GetComponentByCode $getComponentByCode
      * @param array $componentMapper
      */
     public function __construct(
         private readonly LoggerInterface $logger,
-        private readonly UriInterface $zendUri,
+        private readonly ZendUri $zendUri,
         private readonly ScopeConfigInterface $scopeConfig,
         private readonly GetComponentByCode $getComponentByCode,
         private readonly array $componentMapper = []

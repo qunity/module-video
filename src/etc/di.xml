@@ -8,7 +8,6 @@
                 type="Qunity\Video\Model\Data\VideoPlayer\Config\Component"/>
     <preference for="Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface"
                 type="Qunity\Video\Model\Data\VideoPlayer\Config\Thumbnail"/>
-    <preference for="Laminas\Uri\UriInterface" type="Laminas\Uri\Uri"/>
     <type name="Qunity\Video\Model\VideoPlayer">
         <arguments>
             <argument name="configProcessors" xsi:type="array">

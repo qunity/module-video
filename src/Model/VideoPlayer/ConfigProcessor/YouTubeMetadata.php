@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Qunity\Video\Model\VideoPlayer\ConfigProcessor;
 
-use Laminas\Uri\UriInterface;
+use Laminas\Uri\Uri as ZendUri;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface;
@@ -17,12 +17,12 @@ use Qunity\Video\Model\Service\YouTube\GetMetadataByUri;
 class YouTubeMetadata implements ConfigProcessorInterface
 {
     /**
-     * @param UriInterface $zendUri
+     * @param ZendUri $zendUri
      * @param GetMetadataByUri $getMetadataByUri
      * @param ThumbnailInterfaceFactory $thumbnailFactory
      */
     public function __construct(
-        private readonly UriInterface $zendUri,
+        private readonly ZendUri $zendUri,
         private readonly GetMetadataByUri $getMetadataByUri,
         private readonly ThumbnailInterfaceFactory $thumbnailFactory
     ) {
