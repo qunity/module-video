@@ -94,7 +94,7 @@ class GetMetadataById
             throw new LocalizedException(__($exceptionMessage));
         }
 
-        if (!isset($data[self::KEY_ID])) {
+        if ($data['pageInfo']['totalResults'] == 0) {
             $exceptionMessage = "YouTube video metadata that was requested doesn't exist.";
             $this->logger->critical($exceptionMessage, ['video_id' => $videoId]);
 

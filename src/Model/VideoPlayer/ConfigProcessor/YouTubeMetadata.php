@@ -6,6 +6,7 @@ namespace Qunity\Video\Model\VideoPlayer\ConfigProcessor;
 
 use Laminas\Uri\UriInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterfaceFactory;
 use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
@@ -65,12 +66,13 @@ class YouTubeMetadata implements ConfigProcessorInterface
             return [];
         }
 
-        $data = $this->getMetadataByUri->execute($linkUrl);
-        if (empty($data)) {
+        try {
+            $data = $this->getMetadataByUri->execute($linkUrl);
+        } catch (NoSuchEntityException) {
             return [];
         }
 
-        return $data;
+        return $data ?: [];
     }
 
     /**
