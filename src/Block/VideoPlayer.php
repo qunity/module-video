@@ -38,24 +38,26 @@ class VideoPlayer extends Template
      */
     public function getJsLayout(): string
     {
+        $jsLayout = $this->jsLayout;
         $config = $this->getConfig();
+
         foreach ($this->layoutProcessors as $processor) {
-            $processor->process($this->jsLayout, $config);
+            $processor->process($jsLayout, $config);
         }
 
-        return $this->serializer->serialize($this->jsLayout);
+        return $this->serializer->serialize($jsLayout);
     }
 
     /**
      * Update Video Player configuration
      *
-     * @param array $config
+     * @param array $data
      * @return $this
      */
-    public function update(array $config): self
+    public function update(array $data): self
     {
         try {
-            $this->videoPlayer->updateConfig($config);
+            $this->videoPlayer->updateConfig($data);
             $this->updateJsLayout($this->getConfig());
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
@@ -65,7 +67,7 @@ class VideoPlayer extends Template
     }
 
     /**
-     * Get video ID from Video Player config
+     * Get video ID from Video Player configuration
      *
      * @return string
      */
@@ -93,7 +95,7 @@ class VideoPlayer extends Template
     }
 
     /**
-     * Get config for Video Player
+     * Get configuration for Video Player
      *
      * @return ConfigInterface
      */
