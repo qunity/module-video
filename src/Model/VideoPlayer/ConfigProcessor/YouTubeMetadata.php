@@ -34,7 +34,12 @@ class YouTubeMetadata implements ConfigProcessorInterface
      */
     public function process(ConfigInterface $config): void
     {
-        $data = $this->getYoutubeMetadata($config);
+        try {
+            $data = $this->getYoutubeMetadata($config);
+        } catch (LocalizedException) {
+            return; // YouTube video metadata isn't required to display video.
+        }
+
         if (empty($data)) {
             return;
         }
