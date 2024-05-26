@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Qunity\Video\Model\Service\YouTube;
 
 use Laminas\Http\Client;
+use Laminas\Http\Client\Exception\RuntimeException;
 use Laminas\Http\Response;
 use Laminas\Stdlib\ResponseInterface;
 use Magento\Framework\App\Cache\StateInterface;
@@ -83,13 +84,23 @@ class GetMetadataById
      */
     private function getMetadata(string $videoId): array
     {
-        /** @var Response $response */
-        $response = $this->request($videoId);
+        try {
+            /** @var Response $response */
+            $response = $this->request($videoId);
+        } catch (RuntimeException $e) {
+            $exceptionMessage = 'Failed to get video metadata from YouTube.';
+            $context = ['video_id' => $videoId, 'exception_message' => $e->getMessage()];
+            $this->logger->critical($exceptionMessage, $context);
+
+            throw new LocalizedException(__($exceptionMessage));
+        }
+
         $data = $this->getResponseBody($response);
 
         if (!$response->isSuccess()) {
-            $exceptionMessage = $data['error']['message'] ?? 'Failed to get YouTube video metadata.';
-            $this->logger->critical($exceptionMessage, ['video_id' => $videoId]);
+            $exceptionMessage = 'Failed to get video metadata from YouTube.';
+            $context = ['video_id' => $videoId, 'error_message' => $data['error']['message']];
+            $this->logger->critical($exceptionMessage, $context);
 
             throw new LocalizedException(__($exceptionMessage));
         }
