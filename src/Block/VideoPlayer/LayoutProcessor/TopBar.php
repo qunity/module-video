@@ -7,22 +7,24 @@ namespace Qunity\Video\Block\VideoPlayer\LayoutProcessor;
 use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
 use Qunity\Video\Api\VideoPlayer\LayoutProcessorInterface;
 
-class RequiredConfig extends AbstractProcessor implements LayoutProcessorInterface
+class TopBar extends AbstractProcessor implements LayoutProcessorInterface
 {
     /**
      * @inheritDoc
      */
     public function process(array &$jsLayout, ConfigInterface $config): void
     {
-        $videoId = $config->getVideoId();
-        $linkUrl = $config->getLinkUrl();
+        $title = $config->getTitle();
+        $description = $config->getDescription();
 
         $data = ['config' => ['options' => [
-            'id' => $videoId,
-            'sources' => [0 => ['src' => $linkUrl]],
+            'topBar' => [
+                'title' => $title,
+                'description' => $description,
+            ],
         ]]];
 
-        $path = implode(self::PATH_DELIMITER, ['components', $videoId]);
+        $path = implode(self::PATH_DELIMITER, ['components', $config->getVideoId()]);
         $jsLayout = $this->arrayManager->merge($path, $jsLayout, $data);
     }
 }

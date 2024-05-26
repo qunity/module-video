@@ -8,6 +8,8 @@ use Magento\Framework\Stdlib\ArrayManager;
 
 abstract class AbstractProcessor
 {
+    protected const PATH_DELIMITER = ArrayManager::DEFAULT_PATH_DELIMITER;
+
     /**
      * @param ArrayManager $arrayManager
      */
