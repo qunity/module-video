@@ -22,7 +22,7 @@ class GetComponentByCode
     }
 
     /**
-     * Get JS components for Video Player by code
+     * Get JS component for Video Player by code
      *
      * @param string $code
      * @return ComponentInterface

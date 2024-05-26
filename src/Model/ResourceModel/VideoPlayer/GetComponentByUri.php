@@ -30,7 +30,7 @@ class GetComponentByUri
     }
 
     /**
-     * Get JS components for Video Player by URI
+     * Get JS component for Video Player by URI
      *
      * @param string $uri
      * @return ComponentInterface
