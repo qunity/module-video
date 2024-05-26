@@ -74,7 +74,7 @@ class YouTubeMetadata implements ConfigProcessorInterface
     }
 
     /**
-     * Checking whether link is YouTube link
+     * Checking whether URI is YouTube link
      *
      * @param string $uri
      * @return bool

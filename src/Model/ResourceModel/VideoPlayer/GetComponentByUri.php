@@ -33,8 +33,8 @@ class GetComponentByUri
      * Get JS components for Video Player by URI
      *
      * @param string $uri
-     *
      * @return ComponentInterface
+     *
      * @throws NoSuchEntityException
      */
     public function execute(string $uri): ComponentInterface

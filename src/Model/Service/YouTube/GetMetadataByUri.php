@@ -50,7 +50,7 @@ class GetMetadataByUri
     }
 
     /**
-     * Get YouTube video ID from uri
+     * Get YouTube video ID from URI
      *
      * @param string $uri
      * @return string
