@@ -31,9 +31,9 @@ class RequiredConfig implements ConfigProcessorInterface
     /**
      * @inheritDoc
      */
-    public function process(ConfigInterface $config, array $data): void
+    public function process(ConfigInterface $config): void
     {
-        $linkUrl = $this->getLinkUrl($data);
+        $linkUrl = $this->getLinkUrl($config);
         $videoId = $this->getVideoId($linkUrl);
         $component = $this->getComponent($linkUrl);
 
@@ -46,18 +46,18 @@ class RequiredConfig implements ConfigProcessorInterface
     /**
      * Get link URL for Video Player configuration
      *
-     * @param array $data
-     *
+     * @param ConfigInterface $config
      * @return string
+     *
      * @throws LocalizedException
      */
-    private function getLinkUrl(array $data): string
+    private function getLinkUrl(ConfigInterface $config): string
     {
-        $linkUrl = $data[ConfigInterface::LINK_URL] ?? null;
+        $linkUrl = $config->getLinkUrl();
 
         if (empty($linkUrl)) {
             $exceptionMessage = 'Video link is required parameter for Video Player.';
-            $this->logger->critical($exceptionMessage, $data);
+            $this->logger->critical($exceptionMessage);
 
             throw new LocalizedException(__($exceptionMessage));
         }
@@ -80,8 +80,8 @@ class RequiredConfig implements ConfigProcessorInterface
      * Get JS component for Video Player configuration
      *
      * @param string $uri
-     *
      * @return ComponentInterface
+     *
      * @throws NoSuchEntityException
      */
     private function getComponent(string $uri): ComponentInterface
