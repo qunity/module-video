@@ -211,7 +211,6 @@ define([
      *
      * @param {Integer} time
      * @param {String} className
-     *
      * @param {{from:Integer,to:Integer}} diapasonTime
      */
     _processElementClass(className, time, diapasonTime) {
