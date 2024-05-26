@@ -22,8 +22,12 @@ class YouTubeMetadata extends TagScope
     /**
      * @param FrontendPool $cacheFrontendPool
      */
-    public function __construct(FrontendPool $cacheFrontendPool)
-    {
-        parent::__construct($cacheFrontendPool->get(self::TYPE_IDENTIFIER), self::CACHE_TAG);
+    public function __construct(
+        FrontendPool $cacheFrontendPool
+    ) {
+        parent::__construct(
+            $cacheFrontendPool->get(self::TYPE_IDENTIFIER),
+            self::CACHE_TAG
+        );
     }
 }
