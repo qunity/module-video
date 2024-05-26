@@ -128,7 +128,7 @@ class GetMetadataById
 
         $this->httpClient
             ->setUri(self::GOOGLE_APIS_URL)
-            ->setOptions(['maxredirects' => 0, 'timeout' => 2, 'keepalive' => true])
+            ->setOptions(['maxredirects' => 0, 'timeout' => 1, 'keepalive' => true])
             ->setParameterGet(['part' => $part, 'id' => $videoId, 'key' => $apiKey]);
 
         return $this->httpClient->send();
