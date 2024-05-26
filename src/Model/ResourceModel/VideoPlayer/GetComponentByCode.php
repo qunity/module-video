@@ -25,8 +25,8 @@ class GetComponentByCode
      * Get JS components for Video Player by code
      *
      * @param string $code
-     *
      * @return ComponentInterface
+     *
      * @throws NoSuchEntityException
      */
     public function execute(string $code): ComponentInterface

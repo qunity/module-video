@@ -28,7 +28,7 @@ class GetMetadataByUri
     }
 
     /**
-     * Get metadata for YouTube video by video URI
+     * Get metadata for YouTube video by URI
      *
      * @param string $uri
      * @return array

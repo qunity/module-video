@@ -10,6 +10,7 @@ use Laminas\Stdlib\ResponseInterface;
 use Magento\Framework\App\Cache\StateInterface;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Serialize\SerializerInterface;
 use Psr\Log\LoggerInterface;
 use Qunity\Video\Model\Cache\YouTubeMetadata;
@@ -51,7 +52,7 @@ class GetMetadataById
      * @param string $videoId
      * @return array
      *
-     * @throws LocalizedException
+     * @throws LocalizedException|NoSuchEntityException
      */
     public function execute(string $videoId): array
     {
@@ -78,7 +79,7 @@ class GetMetadataById
      * @param string $videoId
      * @return array
      *
-     * @throws LocalizedException
+     * @throws LocalizedException|NoSuchEntityException
      */
     private function getMetadata(string $videoId): array
     {
@@ -88,12 +89,19 @@ class GetMetadataById
 
         if (!$response->isSuccess()) {
             $exceptionMessage = $data['error']['message'] ?? 'Failed to get YouTube video metadata.';
-            $this->logger->critical($exceptionMessage, ['videoId' => $videoId]);
+            $this->logger->critical($exceptionMessage, ['video_id' => $videoId]);
 
             throw new LocalizedException(__($exceptionMessage));
         }
 
-        return $this->getVideoMetadata($data);
+        if (!isset($data[self::KEY_ID])) {
+            $exceptionMessage = "YouTube video metadata that was requested doesn't exist.";
+            $this->logger->critical($exceptionMessage, ['video_id' => $videoId]);
+
+            throw new NoSuchEntityException(__($exceptionMessage));
+        }
+
+        return $this->getPreparedMetadata($data);
     }
 
     /**
@@ -132,7 +140,7 @@ class GetMetadataById
      * @param array $data
      * @return array
      */
-    private function getVideoMetadata(array $data): array
+    private function getPreparedMetadata(array $data): array
     {
         $data = $data['items'] ?? [];
         $item = (array) array_pop($data);
@@ -144,7 +152,7 @@ class GetMetadataById
     }
 
     /**
-     * Get cache ID by video ID
+     * Get YouTube metadata cache ID by video ID
      *
      * @param string $videoId
      * @return string
