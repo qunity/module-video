@@ -33,7 +33,7 @@ class GetMetadataByUri
      * @param string $uri
      * @return array
      *
-     * @throws LocalizedException
+     * @throws LocalizedException|NoSuchEntityException
      */
     public function execute(string $uri): array
     {
