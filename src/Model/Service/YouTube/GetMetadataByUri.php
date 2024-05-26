@@ -40,7 +40,7 @@ class GetMetadataByUri
         $videoId = $this->getVideoId($uri);
 
         if (empty($videoId)) {
-            $exceptionMessage = "Video metadata for requested URI couldn't be determined.";
+            $exceptionMessage = "YouTube video metadata for requested URI couldn't be determined.";
             $this->logger->critical($exceptionMessage, ['uri' => $uri]);
 
             throw new NoSuchEntityException(__($exceptionMessage));
