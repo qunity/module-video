@@ -13,10 +13,9 @@ interface ConfigProcessorInterface
      * Process configuration of Video Player
      *
      * @param ConfigInterface $config
-     * @param array $data
-     *
      * @return void
+     *
      * @throws LocalizedException
      */
-    public function process(ConfigInterface $config, array $data): void;
+    public function process(ConfigInterface $config): void;
 }
