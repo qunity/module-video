@@ -20,7 +20,8 @@ use Qunity\Video\Model\Config as ModuleConfig;
 class GetMetadataById
 {
     public const KEY_ID = 'id', KEY_SNIPPET = 'snippet';
-    private const GOOGLE_APIS_URL = 'https://www.googleapis.com/youtube/v3/videos';
+    private const REQUEST_GOOGLE_APIS_URL = 'https://www.googleapis.com/youtube/v3/videos';
+    private const REQUEST_TIMEOUT = 1;
 
     /**
      * List of metadata keys to retrieve
@@ -127,8 +128,8 @@ class GetMetadataById
         $apiKey = $this->config->getYoutubeVideoApikey();
 
         $this->httpClient
-            ->setUri(self::GOOGLE_APIS_URL)
-            ->setOptions(['maxredirects' => 0, 'timeout' => 1, 'keepalive' => true])
+            ->setUri(self::REQUEST_GOOGLE_APIS_URL)
+            ->setOptions(['maxredirects' => 0, 'timeout' => self::REQUEST_TIMEOUT, 'keepalive' => true])
             ->setParameterGet(['part' => $part, 'id' => $videoId, 'key' => $apiKey]);
 
         return $this->httpClient->send();
