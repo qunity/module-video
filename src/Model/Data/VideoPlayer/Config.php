@@ -198,8 +198,8 @@ class Config extends DataObject implements ConfigInterface
     private function populateThumbnails(array $data = []): void
     {
         $thumbnails = [];
-        foreach ($data as $item) {
-            $thumbnails[] = $this->thumbnailFactory->create(['data' => $item]);
+        foreach ($data as $code => $item) {
+            $thumbnails[$code] = $this->thumbnailFactory->create(['data' => $item]);
         }
 
         $this->_setThumbnails($thumbnails);
