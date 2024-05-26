@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @noinspection PhpFullyQualifiedNameUsageInspection
  * @noinspection PhpUnnecessaryFullyQualifiedNameInspection
  */
 
@@ -16,6 +17,9 @@ interface ConfigInterface extends ExtensibleDataInterface
     public const VIDEO_ID = 'video_id';
     public const LINK_URL = 'link_url';
     public const COMPONENT = 'component';
+    public const TITLE = 'title';
+    public const DESCRIPTION = 'description';
+    public const THUMBNAILS = 'thumbnails';
 
     /**
      * Get video ID
@@ -61,6 +65,51 @@ interface ConfigInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setComponent(ComponentInterface $component): self;
+
+    /**
+     * Get video title
+     *
+     * @return string|null
+     */
+    public function getTitle(): ?string;
+
+    /**
+     * Set video title
+     *
+     * @param string $title
+     * @return $this
+     */
+    public function setTitle(string $title): self;
+
+    /**
+     * Get video description
+     *
+     * @return string|null
+     */
+    public function getDescription(): ?string;
+
+    /**
+     * Set video description
+     *
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription(string $description): self;
+
+    /**
+     * Retrieve video thumbnails array or create a new one
+     *
+     * @return \Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface[]
+     */
+    public function getThumbnails(): array;
+
+    /**
+     * Set a video thumbnails array
+     *
+     * @param \Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface[] $thumbnails
+     * @return $this
+     */
+    public function setThumbnails(array $thumbnails): self;
 
     /**
      * Retrieve existing extension attributes object or create a new one
