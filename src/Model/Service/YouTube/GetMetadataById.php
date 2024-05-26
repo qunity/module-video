@@ -107,7 +107,7 @@ class GetMetadataById
         }
 
         if ($data['pageInfo']['totalResults'] == 0) {
-            $exceptionMessage = "Video metadata that was requested doesn't exist.";
+            $exceptionMessage = "YouTube video metadata that was requested doesn't exist.";
             $this->logger->critical($exceptionMessage, ['video_id' => $videoId]);
 
             throw new NoSuchEntityException(__($exceptionMessage));
