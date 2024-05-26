@@ -7,7 +7,7 @@
             <class>separator-top</class>
             <label>YouTube Video</label>
             <tab>qunity</tab>
-            <resource>Qunity_Video::section</resource>
+            <resource>Qunity_Video::youtube_section</resource>
             <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
                    showInStore="1">
                 <label>General Configuration</label>
