@@ -6,12 +6,16 @@
                 type="Qunity\Video\Model\Data\VideoPlayer\Config"/>
     <preference for="Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface"
                 type="Qunity\Video\Model\Data\VideoPlayer\Config\Component"/>
+    <preference for="Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface"
+                type="Qunity\Video\Model\Data\VideoPlayer\Config\Thumbnail"/>
     <preference for="Laminas\Uri\UriInterface" type="Laminas\Uri\Uri"/>
     <type name="Qunity\Video\Model\VideoPlayer">
         <arguments>
             <argument name="configProcessors" xsi:type="array">
                 <item name="Qunity_Video::required_config"
                       xsi:type="object">Qunity\Video\Model\VideoPlayer\ConfigProcessor\RequiredConfig\Proxy</item>
+                <item name="Qunity_Video::youtube_metadata"
+                      xsi:type="object">Qunity\Video\Model\VideoPlayer\ConfigProcessor\YouTubeMetadata\Proxy</item>
             </argument>
         </arguments>
     </type>
@@ -20,6 +24,10 @@
             <argument name="layoutProcessors" xsi:type="array">
                 <item name="Qunity_Video::required_config"
                       xsi:type="object">Qunity\Video\Block\VideoPlayer\LayoutProcessor\RequiredConfig\Proxy</item>
+                <item name="Qunity_Video::top_bar"
+                      xsi:type="object">Qunity\Video\Block\VideoPlayer\LayoutProcessor\TopBar\Proxy</item>
+                <item name="Qunity_Video::poster_image"
+                      xsi:type="object">Qunity\Video\Block\VideoPlayer\LayoutProcessor\PosterImage\Proxy</item>
             </argument>
         </arguments>
     </type>

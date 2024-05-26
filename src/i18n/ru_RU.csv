@@ -1,2 +1,8 @@
 "Playback error.","Ошибка воспроизведения."
 "Please try again later or contact your administrator.","Повторите попытку позже или обратитесь к администратору."
+"YouTube Metadata","Метаданные YouTube"
+"YouTube video metadata caching","Кэширование метаданных видео с YouTube"
+"YouTube Video Section","Раздел Видео YouTube"
+"YouTube Video","Видео YouTube"
+"Google API Key","API-ключ Google"
+"This API key is used to retrieve video metadata from YouTube.","Этот ключ API используется для получения метаданных видео с YouTube."
