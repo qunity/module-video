@@ -52,9 +52,9 @@ define([
         bigPlayButton: false,
         liveTracker: false,
         textTrackDisplay: false,
-        textTrackSettings: false
-      },
-      creationTimeout: 1000
+        textTrackSettings: false,
+        creationTimeout: 1000
+      }
     },
 
     /**
@@ -123,7 +123,6 @@ define([
 
       try {
         player.create();
-        this._creationTimeout();
       } catch (e) {
         player.critical();
         throw e;
@@ -216,39 +215,20 @@ define([
      *
      * @param {Integer} time
      * @param {String} className
-     * @param {{from:Integer,to:Integer}} diapasonTime
+     * @param {{from:Integer,to:Integer}} rangeTime
      */
-    _processElementClass(className, time, diapasonTime) {
+    _processElementClass(className, time, rangeTime) {
       /** @var {HTMLElement} element */
       const element = this.element();
 
-      if (!(time >= diapasonTime.from && time < diapasonTime.to)) {
+      if (!(time >= rangeTime.from && time < rangeTime.to)) {
         element.classList.remove(className);
         return;
       }
 
-      if (!this.element().classList.contains(className)) {
-        element.classList.add(className)
+      if (!element.classList.contains(className)) {
+        element.classList.add(className);
       }
-    },
-
-    /**
-     * Timeout handler for creation player process
-     * @private
-     */
-    _creationTimeout: function () {
-      const timer = setTimeout(() => {
-        /** @var {DOMTokenList} classList */
-        const classList = this.element().classList;
-
-        if (!classList.contains(this.options.htmlClass.playing) &&
-          !classList.contains(this.options.htmlClass.error)
-        ) {
-          classList.add(this.options.htmlClass.waiting);
-        }
-
-        clearTimeout(timer);
-      }, this.creationTimeout);
     }
   });
 });
