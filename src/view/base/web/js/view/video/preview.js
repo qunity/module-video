@@ -38,6 +38,7 @@ define([
     createVideoPlayer: function () {
       this.bigButton().active.valueHasMutated();
       this.element().classList.add(this.options.htmlClass.creating);
+
       this.parent().initVideoPlayer().createVideoPlayer();
     },
 
