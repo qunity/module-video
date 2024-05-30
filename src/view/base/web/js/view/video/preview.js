@@ -36,8 +36,8 @@ define([
      * @public
      */
     createVideoPlayer: function () {
-      this.bigButton().active.valueHasMutated();
-      this.element().classList.add(this.options.htmlClass.creating);
+      this._creationTimeout();
+      this._creationProcessAnimate();
 
       this.parent().initVideoPlayer().createVideoPlayer();
     },
@@ -71,6 +71,34 @@ define([
       /** @var {String} classes */
       const classes = videoElement.className;
       element.classList.add(...classes.split(' '));
+    },
+
+    /**
+     * Animate of creation player process
+     * @private
+     */
+    _creationProcessAnimate: function () {
+      this.bigButton().active.valueHasMutated();
+      this.element().classList.add(this.options.htmlClass.creating);
+    },
+
+    /**
+     * Timeout handler for creation player process
+     * @private
+     */
+    _creationTimeout: function () {
+      const timer = setTimeout(() => {
+        /** @var {DOMTokenList} classList */
+        const classList = this.parent().element().classList;
+
+        if (!classList.contains(this.options.htmlClass.playing) &&
+          !classList.contains(this.options.htmlClass.error)
+        ) {
+          classList.add(this.options.htmlClass.waiting);
+        }
+
+        clearTimeout(timer);
+      }, this.options.creationTimeout);
     }
   });
 });
