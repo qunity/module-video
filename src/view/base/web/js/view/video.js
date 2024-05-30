@@ -17,7 +17,15 @@ define([
         techOrder: [ 'html5' ],
         sources: [{ type: 'video/mp4' }],
         playbackRates: [ 0.5, 1, 1.5, 2 ],
-        theme: 'vjs-m2luma-skin',
+        htmlClass: {
+          theme: 'vjs-m2luma-skin',
+          creating: 'vjs-creating',
+          startTime: 'vjs-start-time',
+          finalTime: 'vjs-final-time',
+          waiting: 'vjs-waiting',
+          playing: 'vjs-playing',
+          error: 'vjs-error'
+        },
         width: 640,
         height: 360,
         poster: true,
@@ -34,10 +42,11 @@ define([
           playToggle: { replay: true },
           volumePanel: { inline: true, volume: 0.73 }
         },
-        loadingSpinner: true,
+        loadingSpinner: false,
         topBar: true,
         posterImage: true,
         bigButton: true,
+        spinner: true,
         errorInfo: true,
         titleBar: false,
         bigPlayButton: false,
@@ -45,10 +54,6 @@ define([
         textTrackDisplay: false,
         textTrackSettings: false
       },
-      creatingClass: 'vjs-creating',
-      startTimeClass: 'vjs-start-time',
-      finalTimeClass: 'vjs-final-time',
-      errorClass: 'vjs-error',
       creationTimeout: 1000
     },
 
@@ -134,7 +139,7 @@ define([
      * @var {HTMLElement} element
      */
     onStartCreatingEvent: function (element) {
-      element.classList.add(this.creatingClass);
+      element.classList.add(this.options.htmlClass.creating);
     },
 
     /**
@@ -144,7 +149,7 @@ define([
      * @var {HTMLElement} element
      */
     onFinalCreatingEvent: function (element) {
-      element.classList.remove(this.creatingClass);
+      element.classList.remove(this.options.htmlClass.creating);
     },
 
     /**
@@ -168,7 +173,7 @@ define([
       const currentTime = player.currentTime();
 
       this._processElementClass(
-        this.startTimeClass,
+        this.options.htmlClass.startTime,
         currentTime,
         { from: 0.0, to: 1.0 }
       );
@@ -176,7 +181,7 @@ define([
       /** @var {Integer} duration */
       const duration = player.duration();
       this._processElementClass(
-        this.finalTimeClass,
+        this.options.htmlClass.finalTime,
         currentTime,
         { from: duration - 1.0, to: duration }
       );
@@ -228,16 +233,18 @@ define([
     },
 
     /**
-     * Creation player timeout handler
+     * Timeout handler for creation player process
      * @private
      */
     _creationTimeout: function () {
       const timer = setTimeout(() => {
-        /** @var {HTMLElement} DOMTokenList */
+        /** @var {DOMTokenList} classList */
         const classList = this.element().classList;
 
-        if (classList.contains(this.creatingClass) && !classList.contains(this.errorClass)) {
-          this.player().critical();
+        if (!classList.contains(this.options.htmlClass.playing) &&
+          !classList.contains(this.options.htmlClass.error)
+        ) {
+          classList.add(this.options.htmlClass.waiting);
         }
 
         clearTimeout(timer);
