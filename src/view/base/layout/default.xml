@@ -30,6 +30,9 @@
                                             <item name="errorInfo" xsi:type="array">
                                                 <item name="component" xsi:type="string">video/m2ErrorInfo</item>
                                             </item>
+                                            <item name="spinner" xsi:type="array">
+                                                <item name="component" xsi:type="string">video/m2Spinner</item>
+                                            </item>
                                         </item>
                                     </item>
                                     <item name="preview" xsi:type="array">

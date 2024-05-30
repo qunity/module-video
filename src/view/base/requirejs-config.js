@@ -15,7 +15,9 @@ let config = {
       "video/m2PosterImage": "Qunity_Video/js/view/video/component/magento/poster-image",
       "video/vjsPosterImage": "Qunity_Video/js/view/video/component/videojs/poster-image",
       "video/m2ErrorInfo": "Qunity_Video/js/view/video/component/magento/error-info",
-      "video/vjsErrorInfo": "Qunity_Video/js/view/video/component/videojs/error-info"
+      "video/vjsErrorInfo": "Qunity_Video/js/view/video/component/videojs/error-info",
+      "video/m2Spinner": "Qunity_Video/js/view/video/component/magento/spinner",
+      "video/vjsSpinner": "Qunity_Video/js/view/video/component/videojs/spinner"
     }
   },
   paths: {
