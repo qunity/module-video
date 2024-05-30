@@ -19,7 +19,8 @@ define([
         topBar: '${ $.parentName }.player.topBar',
         bigButton: '${ $.parentName }.player.bigButton',
         posterImage: '${ $.parentName }.player.posterImage',
-        errorInfo: '${ $.parentName }.player.errorInfo'
+        errorInfo: '${ $.parentName }.player.errorInfo',
+        spinner: '${ $.parentName }.player.spinner'
       }
     },
 
