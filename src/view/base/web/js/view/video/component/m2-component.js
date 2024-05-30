@@ -67,7 +67,7 @@ define([
     },
 
     /**
-     * Animate component elements
+     * Animate component element
      * @public
      *
      * @param {String|null} name
