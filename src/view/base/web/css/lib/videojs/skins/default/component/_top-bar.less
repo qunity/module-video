@@ -1,3 +1,5 @@
+@import "../_variables";
+
 @player-top-bar-title-size: 2.4em;
 @player-top-bar-description-size: 1.6em;
 
@@ -21,5 +23,28 @@
   .vjs-top-description {
     padding-top: .3em;
     font-size: @player-top-bar-description-size;
+  }
+}
+
+//
+// Dynamics when playback ends and user inactivity
+// _____________________________________________
+.vjs-top-bar {
+  opacity: 1;
+  transition: visibility @player-normal-duration,
+    opacity @player-normal-duration;
+}
+
+.vjs-user-inactive.vjs-playing {
+  &.vjs-ended .vjs-top-bar {
+    opacity: 1;
+    transition: visibility @player-normal-duration,
+      opacity @player-normal-duration;
+  }
+
+  .vjs-top-bar {
+    opacity: 0;
+    transition: visibility @player-large-duration,
+      opacity @player-large-duration;
   }
 }

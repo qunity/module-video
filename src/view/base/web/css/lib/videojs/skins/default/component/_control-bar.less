@@ -1,6 +1,31 @@
+@import "../_variables";
+
 //
 // ControlBar video component
 // _____________________________________________
 .vjs-control-bar {
   z-index: 4;
+}
+
+//
+// Dynamics when playback ends and user inactivity
+// _____________________________________________
+.vjs-control-bar {
+  opacity: 1;
+  transition: visibility @player-normal-duration,
+    opacity @player-normal-duration;
+}
+
+.vjs-user-inactive.vjs-playing {
+  &.vjs-ended .vjs-control-bar {
+    opacity: 1;
+    transition: visibility @player-normal-duration,
+      opacity @player-normal-duration;
+  }
+
+  .vjs-control-bar {
+    opacity: 0;
+    transition: visibility @player-large-duration,
+      opacity @player-large-duration;
+  }
 }
