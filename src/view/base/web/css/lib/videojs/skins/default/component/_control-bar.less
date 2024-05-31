@@ -1,4 +1,5 @@
 @import "../_variables";
+@import "../_mixins";
 
 //
 // ControlBar video component
@@ -11,21 +12,15 @@
 // Dynamics when playback ends / user inactivity
 // _____________________________________________
 .vjs-control-bar {
-  opacity: 1;
-  transition: visibility @player-normal-duration,
-    opacity @player-normal-duration;
+  .animation(1, @player-normal-duration, ease-out);
 }
 
 .vjs-user-inactive.vjs-playing {
   &.vjs-ended .vjs-control-bar {
-    opacity: 1;
-    transition: visibility @player-normal-duration,
-      opacity @player-normal-duration;
+    .animation(1, @player-normal-duration, ease-out);
   }
 
   .vjs-control-bar {
-    opacity: 0;
-    transition: visibility @player-large-duration,
-      opacity @player-large-duration;
+    .animation(0, @player-large-duration, ease-out);
   }
 }
