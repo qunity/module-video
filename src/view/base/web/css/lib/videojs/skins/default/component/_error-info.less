@@ -1,0 +1,54 @@
+@player-error-background: #000;
+@player-error-message-size: 2.4em;
+@player-error-description-size: 1.6em;
+@player-error-icon: 'Qunity_Video::images/video/component/error-info/icon.svg';
+
+//
+// ErrorInfo video component
+// _____________________________________________
+.vjs-error-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+
+  &:empty {
+    visibility: hidden;
+  }
+
+  .vjs-error-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    padding: 4.8em;
+    background-color: @player-error-background;
+  }
+
+  .vjs-error-content {
+    margin-left: 1.6em;
+  }
+
+  .vjs-error-icon {
+    min-width: 6.4em;
+    min-height: 6.4em;
+
+    &:before {
+      content: url(@player-error-icon);
+    }
+  }
+
+  .vjs-error-message {
+    font-size: @player-error-message-size;
+  }
+
+  .vjs-error-description {
+    padding-top: .7em;
+    font-size: @player-error-description-size;
+  }
+}
