@@ -1,0 +1,149 @@
+@player-spinner-color: #ddd;
+@player-spinner-size: 6.4em;
+@player-spinner-line-width: .6em;
+@player-spinner-container-duration: 1.5682352941176s;
+@player-spinner-rotator-duration: 5332ms;
+@player-spinner-circle-duration: 1333ms;
+
+//
+// Spinner video component
+// _____________________________________________
+.vjs-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: @player-spinner-size;
+  margin-left: calc(@player-spinner-size / -2);
+  visibility: hidden;
+  z-index: 1;
+
+  .vjs-spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    margin-top: -50%;
+    margin-left: -50%;
+    padding-bottom: 100%;
+    animation: vjsSpinnerLinSpin @player-spinner-container-duration
+      linear infinite;
+  }
+
+  .vjs-spinner-rotator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: vjsSpinnerEaseSpin @player-spinner-rotator-duration
+      cubic-bezier(.4, 0, .2, 1) infinite both;
+  }
+
+  .vjs-spinner-left,
+  .vjs-spinner-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+  }
+
+  .vjs-spinner-left {
+    right: 49%;
+  }
+
+  .vjs-spinner-right {
+    left: 49%;
+  }
+
+  .vjs-spinner-circle {
+    position: absolute;
+    width: 200%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: @player-spinner-line-width;
+    border-color: @player-spinner-color
+      @player-spinner-color transparent;
+  }
+
+  .vjs-spinner-left .vjs-spinner-circle {
+    right: -100%;
+    left: 0;
+    border-right-color: transparent;
+    animation: vjsSpinnerLeftSpin @player-spinner-circle-duration
+      cubic-bezier(.4, 0, .2, 1) infinite both
+  }
+
+  .vjs-spinner-right .vjs-spinner-circle {
+    right: 0;
+    left: -100%;
+    border-left-color: transparent;
+    animation: vjsSpinnerRightSpin @player-spinner-circle-duration
+      cubic-bezier(.4, 0, .2, 1) infinite both
+  }
+
+  @keyframes vjsSpinnerLinSpin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  @keyframes vjsSpinnerEaseSpin {
+    12.5% {
+      transform: rotate(135deg);
+    }
+    25% {
+      transform: rotate(270deg);
+    }
+    37.5% {
+      transform: rotate(405deg);
+    }
+    50% {
+      transform: rotate(540deg);
+    }
+    62.5% {
+      transform: rotate(675deg);
+    }
+    75% {
+      transform: rotate(810deg);
+    }
+    87.5% {
+      transform: rotate(945deg);
+    }
+    100% {
+      transform: rotate(3turn);
+    }
+  }
+
+  @keyframes vjsSpinnerLeftSpin {
+    0% {
+      transform: rotate(130deg);
+    }
+    50% {
+      transform: rotate(-5deg);
+    }
+    100% {
+      transform: rotate(130deg);
+    }
+  }
+
+  @keyframes vjsSpinnerRightSpin {
+    0% {
+      transform: rotate(-130deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+    100% {
+      transform: rotate(-130deg);
+    }
+  }
+}
+
+//
+// Display Spinner video component
+// _____________________________________________
+.vjs-waiting .vjs-spinner {
+  visibility: visible;
+}
