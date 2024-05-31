@@ -22,3 +22,32 @@
 .vjs-svg-icon {
   transition: @player-small-duration;
 }
+
+//
+// Fade in/out at start end finish of playing
+// _____________________________________________
+.vjs-tech, video {
+  opacity: 0;
+  visibility: visible;
+  transition: visibility @player-normal-duration,
+    opacity @player-normal-duration ease-in;
+}
+
+.vjs-has-started {
+  .vjs-tech, video {
+    opacity: 1;
+  }
+}
+
+.vjs-final-time {
+  .vjs-tech, video {
+    opacity: 0;
+  }
+}
+
+.vjs-ended {
+  .vjs-tech, video {
+    visibility: hidden;
+    transition: none;
+  }
+}
