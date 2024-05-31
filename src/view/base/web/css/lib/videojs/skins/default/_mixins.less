@@ -1,0 +1,7 @@
+//
+// Animate element fade in/out
+// _____________________________________________
+.animation(@opacity, @duration, @function) {
+  opacity: @opacity;
+  transition: visibility @duration, opacity @duration @function;
+}
