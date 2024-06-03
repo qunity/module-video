@@ -193,6 +193,8 @@ define([
      * @param {Object} player
      */
     onEndedEvent: function (player) {
+      player.bigButton.wrapper.active('play');
+
       if (player.isFullscreen()) {
         player.exitFullscreen();
       }
