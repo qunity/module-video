@@ -12,10 +12,9 @@
 @player-control-bar-mute-control-size: 1.2em;
 
 @player-control-bar-playback-rate-value-size: 1.2em;
-@player-control-bar-playback-rate-hover-value-color: #fff;
 @player-control-bar-playback-rate-hover-value-shadow: 0 0 .3em rgba(255, 255, 255, .7);
 
-@player-control-bar-playback-rate-menu-border-radius: .7em;
+@player-control-bar-playback-rate-menu-border-radius: .4em;
 @player-control-bar-playback-rate-menu-background: rgba(0, 0, 0, .5);
 @player-control-bar-playback-rate-menu-shadow: 0 0 .5em rgba(0, 0, 0, .3);
 @player-control-bar-playback-rate-menu-separate-border: .1em solid rgba(238, 238, 238, .5);
@@ -48,7 +47,7 @@
     background-color: @player-control-bar-elements-color;
   }
 
-  // Fixing SVG icon for ProgressControl element
+  // Fixing SVG icon for progress control element
   .vjs-play-progress .vjs-icon-placeholder {
     top: 0;
     line-height: 1;
@@ -71,7 +70,7 @@
     display: none !important;
   }
 
-  // Styles of PlayControl element
+  // Styles of play control element
   .vjs-play-control {
     width: 3em;
     font-size: @player-control-bar-play-control-size;
@@ -81,7 +80,7 @@
     }
   }
 
-  // Styles of FullscreenControl element
+  // Styles of fullscreen control element
   .vjs-fullscreen-control {
     width: 4em;
     font-size: @player-control-bar-fullscreen-control-size;
@@ -91,31 +90,29 @@
     }
   }
 
-  // Styles of TimeControl element
+  // Styles of time control element
   .vjs-time-control {
     font-weight: 600;
     font-size: @player-control-bar-time-control-size;
+
+    &.vjs-current-time {
+      padding-right: 0;
+    }
+
+    &.vjs-duration {
+      padding-left: 0;
+    }
   }
 
-  .vjs-current-time {
-    padding-right: 0;
-  }
-
-  .vjs-duration {
-    padding-left: 0;
-  }
-
-  // Styles of MuteControl element
+  // Styles of mute control element
   .vjs-mute-control {
     font-size: @player-control-bar-mute-control-size;
   }
 
-  // Restyle PlaybackRate element
+  // Restyle playback rate element
   .vjs-playback-rate {
     &.vjs-hover {
       .vjs-playback-rate-value {
-        font-weight: 600;
-        color: @player-control-bar-playback-rate-hover-value-color;
         text-shadow: @player-control-bar-playback-rate-hover-value-shadow;
       }
 
@@ -134,8 +131,8 @@
 
     .vjs-menu {
       display: block !important;
-      width: 120%;
-      left: -10%;
+      width: 130%;
+      left: -15%;
 
       &:hover {
         visibility: visible;
@@ -143,11 +140,10 @@
     }
 
     .vjs-menu-content {
-      bottom: -.3em;
+      bottom: -.4em;
       visibility: hidden;
       overflow: visible;
       opacity: 0;
-      font-family: unset;
       border-radius: @player-control-bar-playback-rate-menu-border-radius;
       background-color: @player-control-bar-playback-rate-menu-background;
       box-shadow: @player-control-bar-playback-rate-menu-shadow;
@@ -157,7 +153,7 @@
       &:after {
         content: '\00A0';
         display: block;
-        padding: .4em 0;
+        padding: .45em 0;
         font-size: 1.2em;
         line-height: 1.4em;
         border-top: @player-control-bar-playback-rate-menu-separate-border;
@@ -166,15 +162,15 @@
 
     .vjs-menu-item {
       justify-content: flex-start;
-      padding-left: 1.6em;
+      padding-left: 2em;
       font-size: 1.1em;
       line-height: 1.8em;
       text-shadow: @player-control-bar-playback-rate-menu-item-text-shadow;
       transition: @player-small-duration;
 
       &:first-child {
-        border-radius: @player-control-bar-playback-rate-menu-border-radius
-          @player-control-bar-playback-rate-menu-border-radius 0 0;
+        border-top-left-radius: @player-control-bar-playback-rate-menu-border-radius;
+        border-top-right-radius: @player-control-bar-playback-rate-menu-border-radius;
       }
 
       &:hover {
@@ -188,7 +184,7 @@
         &:before {
           content: '\FF65';
           position: absolute;
-          left: .2em;
+          left: .3em;
           font-size: @player-control-bar-playback-rate-menu-item-mark-selected-value-size;
           color: @player-control-bar-playback-rate-menu-item-mark-selected-value-color;
         }
