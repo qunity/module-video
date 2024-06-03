@@ -1,0 +1,33 @@
+@player-top-bar-title-color: #eee;
+@player-top-bar-title-shadow: 0 0 .5em rgba(0, 0, 0, .3);
+@player-top-bar-description-color: #eee;
+@player-top-bar-description-shadow: 0 0 .5em rgba(0, 0, 0, .3);
+@player-top-bar-mask-gradient: linear-gradient(to bottom, rgba(0, 0, 0, .7), transparent);
+@player-top-bar-background-gradient-color: rgba(0, 0, 0, .7);
+
+//
+// TopBar video component
+// _____________________________________________
+.vjs-top-bar {
+  &:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    mask: @player-top-bar-mask-gradient;
+    background-color: @player-top-bar-background-gradient-color;
+    z-index: -1;
+  }
+
+  .vjs-top-title {
+    line-height: 1.1;
+    color: @player-top-bar-title-color;
+    text-shadow: @player-top-bar-title-shadow;
+  }
+
+  .vjs-top-description {
+    line-height: 1.2;
+    color: @player-top-bar-description-color;
+    text-shadow: @player-top-bar-description-shadow;
+  }
+}
