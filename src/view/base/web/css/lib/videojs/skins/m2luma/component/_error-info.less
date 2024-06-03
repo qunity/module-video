@@ -1,0 +1,29 @@
+@player-error-background: rgb(40, 40, 40);
+@player-error-message-color: #eee;
+@player-error-description-size: 1.8em;
+@player-error-description-color: rgba(238, 238, 238, .7);
+
+//
+// ErrorInfo video component
+// _____________________________________________
+.vjs-error-info {
+  .vjs-error-wrapper {
+    background-color: @player-error-background;
+  }
+
+  .vjs-error-icon:before {
+    opacity: .7;
+  }
+
+  .vjs-error-message {
+    font-weight: 600;
+    line-height: 1.1;
+    color: @player-error-message-color;
+  }
+
+  .vjs-error-description {
+    line-height: 1.2;
+    font-size: @player-error-description-size;
+    color: @player-error-description-color;
+  }
+}
