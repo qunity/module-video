@@ -10,20 +10,20 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterfaceFactory;
 use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
+use Qunity\Video\Api\Service\YouTube\GetMetadataByIdInterface;
+use Qunity\Video\Api\Service\YouTube\GetMetadataByUrlInterface;
 use Qunity\Video\Api\VideoPlayer\ConfigProcessorInterface;
-use Qunity\Video\Model\Service\YouTube\GetMetadataById;
-use Qunity\Video\Model\Service\YouTube\GetMetadataByUri;
 
 class YouTubeMetadata implements ConfigProcessorInterface
 {
     /**
      * @param ZendUri $zendUri
-     * @param GetMetadataByUri $getMetadataByUri
+     * @param GetMetadataByUrlInterface $getMetadataByUrl
      * @param ThumbnailInterfaceFactory $thumbnailFactory
      */
     public function __construct(
         private readonly ZendUri $zendUri,
-        private readonly GetMetadataByUri $getMetadataByUri,
+        private readonly GetMetadataByUrlInterface $getMetadataByUrl,
         private readonly ThumbnailInterfaceFactory $thumbnailFactory
     ) {
         // ...
@@ -44,7 +44,7 @@ class YouTubeMetadata implements ConfigProcessorInterface
             return;
         }
 
-        $snippet = $data[GetMetadataById::KEY_SNIPPET] ?? [];
+        $snippet = $data[GetMetadataByIdInterface::KEY_SNIPPET] ?? [];
 
         $title = $this->getTitle($snippet);
         $description = $this->getDescription($snippet);
@@ -72,7 +72,7 @@ class YouTubeMetadata implements ConfigProcessorInterface
         }
 
         try {
-            $data = $this->getMetadataByUri->execute($linkUrl);
+            $data = $this->getMetadataByUrl->execute($linkUrl);
         } catch (NoSuchEntityException) {
             return [];
         }
@@ -81,17 +81,17 @@ class YouTubeMetadata implements ConfigProcessorInterface
     }
 
     /**
-     * Checking whether URI is YouTube link
+     * Checking whether URL is YouTube link
      *
-     * @param string $uri
+     * @param string $url
      * @return bool
      */
-    private function isYoutubeLink(string $uri): bool
+    private function isYoutubeLink(string $url): bool
     {
-        $host = $this->zendUri->parse($uri)->getHost();
+        $host = $this->zendUri->parse($url)->getHost();
 
-        return $host == GetMetadataByUri::YOUTUBE_HOST_SHORT ||
-            str_ends_with($host, GetMetadataByUri::YOUTUBE_HOST_FULL);
+        return $host == GetMetadataByUrlInterface::YOUTUBE_HOST_SHORT ||
+            str_ends_with($host, GetMetadataByUrlInterface::YOUTUBE_HOST_FULL);
     }
 
     /**

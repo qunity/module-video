@@ -9,21 +9,21 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface;
 use Qunity\Video\Api\Data\VideoPlayer\ConfigInterface;
+use Qunity\Video\Api\Service\VideoPlayer\GetComponentByUrlInterface;
+use Qunity\Video\Api\Service\VideoPlayer\GetIdByUrlInterface;
 use Qunity\Video\Api\VideoPlayer\ConfigProcessorInterface;
-use Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentByUri;
-use Qunity\Video\Model\ResourceModel\VideoPlayer\GetIdByUri;
 
 class RequiredConfig implements ConfigProcessorInterface
 {
     /**
      * @param LoggerInterface $logger
-     * @param GetIdByUri $getIdByUri
-     * @param GetComponentByUri $getComponentByUri
+     * @param GetIdByUrlInterface $getIdByUrl
+     * @param GetComponentByUrlInterface $getComponentByUrl
      */
     public function __construct(
         private readonly LoggerInterface $logger,
-        private readonly GetIdByUri $getIdByUri,
-        private readonly GetComponentByUri $getComponentByUri
+        private readonly GetIdByUrlInterface $getIdByUrl,
+        private readonly GetComponentByUrlInterface $getComponentByUrl
     ) {
         // ...
     }
@@ -68,24 +68,24 @@ class RequiredConfig implements ConfigProcessorInterface
     /**
      * Get video ID for Video Player configuration
      *
-     * @param string $uri
+     * @param string $url
      * @return string
      */
-    private function getVideoId(string $uri): string
+    private function getVideoId(string $url): string
     {
-        return $this->getIdByUri->execute($uri);
+        return $this->getIdByUrl->execute($url);
     }
 
     /**
      * Get JS component for Video Player configuration
      *
-     * @param string $uri
+     * @param string $url
      * @return ComponentInterface
      *
      * @throws NoSuchEntityException
      */
-    private function getComponent(string $uri): ComponentInterface
+    private function getComponent(string $url): ComponentInterface
     {
-        return $this->getComponentByUri->execute($uri);
+        return $this->getComponentByUrl->execute($url);
     }
 }

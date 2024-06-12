@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Qunity\Video\Model\Service\YouTube;
 
-use Laminas\Http\Client;
+use Laminas\Http\Client as HttpClient;
 use Laminas\Http\Client\Exception\RuntimeException;
 use Laminas\Http\Response;
 use Laminas\Stdlib\ResponseInterface;
@@ -14,12 +14,12 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Serialize\SerializerInterface;
 use Psr\Log\LoggerInterface;
+use Qunity\Video\Api\Service\YouTube\GetMetadataByIdInterface;
 use Qunity\Video\Model\Cache\YouTubeMetadata;
 use Qunity\Video\Model\Config as ModuleConfig;
 
-class GetMetadataById
+class GetMetadataById implements GetMetadataByIdInterface
 {
-    public const KEY_ID = 'id', KEY_SNIPPET = 'snippet';
     private const REQUEST_GOOGLE_APIS_URL = 'https://www.googleapis.com/youtube/v3/videos';
     private const REQUEST_TIMEOUT = 1;
 
@@ -30,31 +30,26 @@ class GetMetadataById
     private array $metadataKeys = [self::KEY_ID, self::KEY_SNIPPET];
 
     /**
+     * @param LoggerInterface $logger
+     * @param SerializerInterface $serializer
      * @param CacheInterface $cache
      * @param StateInterface $cacheState
-     * @param SerializerInterface $serializer
-     * @param LoggerInterface $logger
      * @param ModuleConfig $config
-     * @param Client $httpClient
+     * @param HttpClient $httpClient
      */
     public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly SerializerInterface $serializer,
         private readonly CacheInterface $cache,
         private readonly StateInterface $cacheState,
-        private readonly SerializerInterface $serializer,
-        private readonly LoggerInterface $logger,
         private readonly ModuleConfig $config,
-        private readonly Client $httpClient
+        private readonly HttpClient $httpClient
     ) {
         // ...
     }
 
     /**
-     * Get metadata for YouTube video by video ID
-     *
-     * @param string $videoId
-     * @return array
-     *
-     * @throws LocalizedException|NoSuchEntityException
+     * @inheritDoc
      */
     public function execute(string $videoId): array
     {

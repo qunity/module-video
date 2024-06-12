@@ -5,43 +5,36 @@ declare(strict_types=1);
 namespace Qunity\Video\Model\Service\YouTube;
 
 use Laminas\Uri\Uri as ZendUri;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
+use Qunity\Video\Api\Service\YouTube\GetMetadataByIdInterface;
+use Qunity\Video\Api\Service\YouTube\GetMetadataByUrlInterface;
 
-class GetMetadataByUri
+class GetMetadataByUrl implements GetMetadataByUrlInterface
 {
-    public const YOUTUBE_HOST_FULL = 'youtube.com';
-    public const YOUTUBE_HOST_SHORT = 'youtu.be';
-
     /**
      * @param LoggerInterface $logger
      * @param ZendUri $zendUri
-     * @param GetMetadataById $getMetadataById
+     * @param GetMetadataByIdInterface $getMetadataById
      */
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly ZendUri $zendUri,
-        private readonly GetMetadataById $getMetadataById
+        private readonly GetMetadataByIdInterface $getMetadataById
     ) {
         // ...
     }
 
     /**
-     * Get metadata for YouTube video by URI
-     *
-     * @param string $uri
-     * @return array
-     *
-     * @throws LocalizedException|NoSuchEntityException
+     * @inheritDoc
      */
-    public function execute(string $uri): array
+    public function execute(string $url): array
     {
-        $videoId = $this->getVideoId($uri);
+        $videoId = $this->getVideoId($url);
 
         if (empty($videoId)) {
-            $exceptionMessage = "YouTube video metadata for requested URI couldn't be determined.";
-            $this->logger->critical($exceptionMessage, ['uri' => $uri]);
+            $exceptionMessage = "YouTube video metadata for requested URL couldn't be determined.";
+            $this->logger->critical($exceptionMessage, ['url' => $url]);
 
             throw new NoSuchEntityException(__($exceptionMessage));
         }
@@ -50,14 +43,14 @@ class GetMetadataByUri
     }
 
     /**
-     * Get YouTube video ID from URI
+     * Get YouTube video ID from URL
      *
-     * @param string $uri
+     * @param string $url
      * @return string
      */
-    private function getVideoId(string $uri): string
+    private function getVideoId(string $url): string
     {
-        $url = $this->zendUri->parse($uri);
+        $url = $this->zendUri->parse($url);
         $host = $url->getHost();
 
         if ($host == self::YOUTUBE_HOST_SHORT) {

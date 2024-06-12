@@ -9,48 +9,45 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Psr\Log\LoggerInterface;
 use Qunity\Video\Api\Data\VideoPlayer\Config\ComponentInterface;
+use Qunity\Video\Api\Service\VideoPlayer\GetComponentByCodeInterface;
+use Qunity\Video\Api\Service\VideoPlayer\GetComponentByUrlInterface;
 
-class GetComponentByUri
+class GetComponentByUrl implements GetComponentByUrlInterface
 {
     /**
      * @param LoggerInterface $logger
      * @param ZendUri $zendUri
      * @param ScopeConfigInterface $scopeConfig
-     * @param GetComponentByCode $getComponentByCode
+     * @param GetComponentByCodeInterface $getComponentByCode
      * @param array $componentMapper
      */
     public function __construct(
         private readonly LoggerInterface $logger,
         private readonly ZendUri $zendUri,
         private readonly ScopeConfigInterface $scopeConfig,
-        private readonly GetComponentByCode $getComponentByCode,
+        private readonly GetComponentByCodeInterface $getComponentByCode,
         private readonly array $componentMapper = []
     ) {
         // ...
     }
 
     /**
-     * Get JS component for Video Player by URI
-     *
-     * @param string $uri
-     * @return ComponentInterface
-     *
-     * @throws NoSuchEntityException
+     * @inheritDoc
      */
-    public function execute(string $uri): ComponentInterface
+    public function execute(string $url): ComponentInterface
     {
-        $urlHost = $this->getPreparedHost($uri);
+        $urlHost = $this->getPreparedHost($url);
 
         foreach ($this->componentMapper as $code => $item) {
-            foreach ($item as $itemUri) {
-                if ($this->getPreparedHost($itemUri) == $urlHost) {
+            foreach ($item as $itemUrl) {
+                if ($this->getPreparedHost($itemUrl) == $urlHost) {
                     return $this->getComponentByCode->execute($code);
                 }
             }
         }
 
-        $exceptionMessage = "JS component for requested URI couldn't be determined.";
-        $this->logger->critical($exceptionMessage, ['uri' => $uri]);
+        $exceptionMessage = "JS component for requested URL couldn't be determined.";
+        $this->logger->critical($exceptionMessage, ['url' => $url]);
 
         throw new NoSuchEntityException(__($exceptionMessage));
     }
