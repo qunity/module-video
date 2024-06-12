@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Qunity\Base\Model\Service\GetCustomUrlList">
         <arguments>
-            <argument name="urlListData" xsi:type="array">
+            <argument name="pathListData" xsi:type="array">
                 <item name="validate-youtube-video-metadata" xsi:type="array">
                     <item name="area_code" xsi:type="const">Magento\Framework\App\Area::AREA_ADMINHTML</item>
                     <item name="route_path" xsi:type="string">qunity/video_youtube/metadataValidate</item>

@@ -77,7 +77,7 @@ class YouTubeMetadata implements ConfigProcessorInterface
             return [];
         }
 
-        return $data ?: [];
+        return $data;
     }
 
     /**

@@ -50,17 +50,17 @@ class GetMetadataByUrl implements GetMetadataByUrlInterface
      */
     private function getVideoId(string $url): string
     {
-        $url = $this->zendUri->parse($url);
-        $host = $url->getHost();
+        $parsedUrl = $this->zendUri->parse($url);
+        $host = $parsedUrl->getHost();
 
         if ($host == self::YOUTUBE_HOST_SHORT) {
-            $path = trim($url->getPath(), '/');
+            $path = trim($parsedUrl->getPath(), '/');
 
             return array_first(explode('/', $path));
         }
 
         if (str_ends_with($host, self::YOUTUBE_HOST_FULL)) {
-            $query = $url->getQueryAsArray();
+            $query = $parsedUrl->getQueryAsArray();
 
             return $query['v'] ?? '';
         }
