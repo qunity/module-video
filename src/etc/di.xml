@@ -8,6 +8,18 @@
                 type="Qunity\Video\Model\Data\VideoPlayer\Config\Component"/>
     <preference for="Qunity\Video\Api\Data\VideoPlayer\Config\ThumbnailInterface"
                 type="Qunity\Video\Model\Data\VideoPlayer\Config\Thumbnail"/>
+    <preference for="Qunity\Video\Api\Service\VideoPlayer\GetComponentByCodeInterface"
+                type="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentByCode"/>
+    <preference for="Qunity\Video\Api\Service\VideoPlayer\GetComponentByUrlInterface"
+                type="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentByUrl"/>
+    <preference for="Qunity\Video\Api\Service\VideoPlayer\GetComponentListInterface"
+                type="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentList"/>
+    <preference for="Qunity\Video\Api\Service\VideoPlayer\GetIdByUrlInterface"
+                type="Qunity\Video\Model\ResourceModel\VideoPlayer\GetIdByUrl"/>
+    <preference for="Qunity\Video\Api\Service\YouTube\GetMetadataByIdInterface"
+                type="Qunity\Video\Model\Service\YouTube\GetMetadataById"/>
+    <preference for="Qunity\Video\Api\Service\YouTube\GetMetadataByUrlInterface"
+                type="Qunity\Video\Model\Service\YouTube\GetMetadataByUrl"/>
     <type name="Qunity\Video\Model\VideoPlayer">
         <arguments>
             <argument name="configProcessors" xsi:type="array">
@@ -32,7 +44,7 @@
     </type>
     <type name="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentList">
         <arguments>
-            <argument name="components" xsi:type="array">
+            <argument name="componentListData" xsi:type="array">
                 <item name="local" xsi:type="array">
                     <item name="path" xsi:type="string">uiVideo</item>
                 </item>
@@ -42,7 +54,7 @@
             </argument>
         </arguments>
     </type>
-    <type name="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentByUri">
+    <type name="Qunity\Video\Model\ResourceModel\VideoPlayer\GetComponentByUrl">
         <arguments>
             <argument name="componentMapper" xsi:type="array">
                 <item name="local" xsi:type="array">
