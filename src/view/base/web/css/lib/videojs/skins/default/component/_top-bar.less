@@ -1,45 +1,82 @@
-@import "../_variables";
-@import "../_mixins";
-
-@player-top-bar-title-size: 2.4em;
-@player-top-bar-description-size: 1.6em;
-
 //
-// TopBar video component
-// _____________________________________________
-.vjs-top-bar {
-  position: absolute;
-  right: 0;
-  left: 0;
-  z-index: 2;
+//  Common
+//  _____________________________________________
 
-  .vjs-top-wrapper {
-    padding: 1.8em 2em 2em;
+// noinspection LessResolvedByNameOnly
+& when (@media-common = true) {
+
+  @import "../_variables";
+  @import "../_mixins";
+
+  //
+  // TopBar video component
+  // _____________________________________________
+
+  .vjs-top-bar {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 2;
   }
 
-  .vjs-top-title {
-    font-size: @player-top-bar-title-size;
-  }
+  //
+  // Dynamics when playback ends / user inactivity
+  // _____________________________________________
 
-  .vjs-top-description {
-    padding-top: .3em;
-    font-size: @player-top-bar-description-size;
-  }
-}
-
-//
-// Dynamics when playback ends / user inactivity
-// _____________________________________________
-.vjs-top-bar {
-  .animation(1, @player-normal-duration, ease-out);
-}
-
-.vjs-user-inactive.vjs-playing {
-  &.vjs-ended .vjs-top-bar {
+  .vjs-top-bar {
     .animation(1, @player-normal-duration, ease-out);
   }
 
-  .vjs-top-bar {
-    .animation(0, @player-large-duration, ease-out);
+  .vjs-user-inactive.vjs-playing {
+    &.vjs-ended .vjs-top-bar {
+      .animation(1, @player-normal-duration, ease-out);
+    }
+
+    .vjs-top-bar {
+      .animation(0, @player-large-duration, ease-out);
+    }
   }
+}
+
+//
+//  Mobile
+//  _____________________________________________
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+  .vjs-top-bar-media-mixin(1.6em 1.8em 1.8em, 2em, 1.6em, @description-padding: .25em 0 0);
+}
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+  .vjs-top-bar-media-mixin(1.2em 1.6em 1.6em, 1.8em, 1.4em, @description-padding: .2em 0 0);
+}
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
+  .vjs-top-bar-media-mixin(.8em, 1.2em, 1em, @description-padding: .15em 0 0);
+}
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xxs) {
+  .vjs-top-bar-media-mixin(.8em, 1em, .8em, 0, 0);
+}
+
+//
+//  Desktop
+//  _____________________________________________
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+  .vjs-top-bar-media-mixin(1.2em 1.6em 1.6em, 1.8em, 1.4em, @description-padding: .2em 0 0);
+}
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
+  .vjs-top-bar-media-mixin(1.6em 1.8em 1.8em, 2em, 1.6em, @description-padding: .25em 0 0);
+}
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
+  .vjs-top-bar-media-mixin(1.8em 2em 2em, 2.4em, 1.8em, @description-padding: .3em 0 0);
 }
