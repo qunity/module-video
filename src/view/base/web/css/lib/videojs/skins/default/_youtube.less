@@ -1,20 +1,30 @@
 //
-// Hides YouTube player elements
-// _____________________________________________
-.vjs-youtube {
-  overflow: hidden;
+//  Common
+//  _____________________________________________
 
-  .vjs-tech {
-    top: -50% !important;
-    height: 200% !important;
+// noinspection LessResolvedByNameOnly
+& when (@media-common = true) {
+
+  //
+  // Hides YouTube player elements
+  // _____________________________________________
+
+  .vjs-youtube {
+    overflow: hidden;
+
+    .vjs-tech {
+      top: -50% !important;
+      height: 200% !important;
+    }
   }
-}
 
-//
-// Hide Spinner video component for YouTube
-// _____________________________________________
-.vjs-youtube:not(.vjs-creating) {
-  &.vjs-waiting .vjs-spinner {
-    visibility: hidden;
+  //
+  // Hide Spinner video component for YouTube
+  // _____________________________________________
+
+  .vjs-youtube:not(.vjs-creating) {
+    &.vjs-waiting .vjs-spinner {
+      visibility: hidden;
+    }
   }
 }
