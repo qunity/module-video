@@ -38,3 +38,29 @@
     }
   }
 }
+
+//
+//  Media for BigButton video component
+//  _____________________________________________
+
+.vjs-big-button-media-mixin(@wrapper-size, @icon-size) {
+  .vjs-big-button {
+    button {
+      width: @wrapper-size;
+      height: @wrapper-size;
+      margin-top: calc(@wrapper-size / -2);
+      margin-left: calc(@wrapper-size / -2);
+
+      &:before {
+        width: @wrapper-size;
+        height: @wrapper-size;
+        border-radius: @wrapper-size;
+      }
+    }
+
+    .vjs-svg-icon {
+      width: @icon-size;
+      height: @icon-size;
+    }
+  }
+}
