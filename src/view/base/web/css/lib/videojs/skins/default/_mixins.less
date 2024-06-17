@@ -133,3 +133,21 @@
     }
   }
 }
+
+//
+//  Media for Spinner video component
+//  _____________________________________________
+
+.vjs-spinner-media-mixin(
+  @spinner-size,
+  @line-width
+) {
+  .vjs-spinner {
+    width: @spinner-size;
+    margin-left: calc(@spinner-size / -2);
+
+    .vjs-spinner-circle {
+      border-width: @line-width;
+    }
+  }
+}
