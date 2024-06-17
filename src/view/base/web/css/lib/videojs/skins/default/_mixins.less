@@ -13,12 +13,14 @@
 
 .vjs-top-bar-media-mixin(
   @wrapper-padding,
-  @title-size,
-  @description-size,
+  @title-size: 1.2em,
+  @description-size: 1em,
   @title-padding: 0,
   @description-padding: 0,
   @title-line-height: 1.1,
-  @description-line-height: 1.2
+  @description-line-height: 1.2,
+  @show-title: true,
+  @show-description: true
 ) {
   .vjs-top-bar {
     .vjs-top-wrapper {
@@ -29,12 +31,20 @@
       padding: @title-padding;
       line-height: @title-line-height;
       font-size: @title-size;
+
+      & when (@show-title = false) {
+        display: none;
+      }
     }
 
     .vjs-top-description {
       padding: @description-padding;
       line-height: @description-line-height;
       font-size: @description-size;
+
+      & when (@show-description = false) {
+        display: none;
+      }
     }
   }
 }
