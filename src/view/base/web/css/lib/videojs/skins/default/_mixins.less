@@ -64,3 +64,62 @@
     }
   }
 }
+
+//
+//  Media for ErrorInfo video component
+//  _____________________________________________
+
+.vjs-error-info-media-mixin(
+  @wrapper-padding,
+  @icon-size: 2.2em,
+  @message-size: 1.2em,
+  @description-size: 1em,
+  @icon-margin: .5em,
+  @message-padding: 0,
+  @description-padding: 0,
+  @message-line-height: 1.1,
+  @description-line-height: 1.2,
+  @show-icon: true,
+  @show-message: true,
+  @show-description: true
+) {
+  .vjs-error-info {
+    .vjs-error-wrapper {
+      padding: @wrapper-padding;
+    }
+
+    .vjs-error-icon {
+      width: @icon-size;
+      height: @icon-size;
+      max-width: @icon-size;
+      max-height: @icon-size;
+      min-width: @icon-size;
+      min-height: @icon-size;
+      margin: @icon-margin;
+
+      & when (@show-icon = false) {
+        display: none;
+      }
+    }
+
+    .vjs-error-message {
+      padding: @message-padding;
+      line-height: @message-line-height;
+      font-size: @message-size;
+
+      & when (@show-message = false) {
+        display: none;
+      }
+    }
+
+    .vjs-error-description {
+      padding: @description-padding;
+      line-height: @description-line-height;
+      font-size: @description-size;
+
+      & when (@show-description = false) {
+        display: none;
+      }
+    }
+  }
+}
