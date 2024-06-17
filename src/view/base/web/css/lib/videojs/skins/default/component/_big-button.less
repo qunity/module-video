@@ -1,12 +1,12 @@
+@import "../_variables";
+@import "../_mixins";
+
 //
 //  Common
 //  _____________________________________________
 
 // noinspection LessResolvedByNameOnly
 & when (@media-common = true) {
-
-  @import "../_variables";
-  @import "../_mixins";
 
   //
   // BigButton video component
@@ -102,23 +102,35 @@
 //  _____________________________________________
 
 // noinspection LessResolvedByNameOnly
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-  .vjs-big-button-media-mixin(6em, 6em);
-}
-
-// noinspection LessResolvedByNameOnly
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
-  .vjs-big-button-media-mixin(5em, 5em);
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xxs) {
+  .vjs-big-button-media-mixin(
+    @wrapper-size: 3em,
+    @icon-size: 3em
+  );
 }
 
 // noinspection LessResolvedByNameOnly
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
-  .vjs-big-button-media-mixin(4em, 4em);
+  .vjs-big-button-media-mixin(
+    @wrapper-size: 4em,
+    @icon-size: 4em
+  );
 }
 
 // noinspection LessResolvedByNameOnly
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xxs) {
-  .vjs-big-button-media-mixin(3em, 3em);
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+  .vjs-big-button-media-mixin(
+    @wrapper-size: 5em,
+    @icon-size: 5em
+  );
+}
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+  .vjs-big-button-media-mixin(
+    @wrapper-size: 6em,
+    @icon-size: 6em
+  );
 }
 
 //
@@ -127,15 +139,24 @@
 
 // noinspection LessResolvedByNameOnly
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-  .vjs-big-button-media-mixin(5em, 5em);
+  .vjs-big-button-media-mixin(
+    @wrapper-size: 5em,
+    @icon-size: 5em
+  );
 }
 
 // noinspection LessResolvedByNameOnly
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-  .vjs-big-button-media-mixin(6em, 6em);
+  .vjs-big-button-media-mixin(
+    @wrapper-size: 6em,
+    @icon-size: 6em
+  );
 }
 
 // noinspection LessResolvedByNameOnly
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
-  .vjs-big-button-media-mixin(7em, 7em);
+  .vjs-big-button-media-mixin(
+    @wrapper-size: 7em,
+    @icon-size: 7em
+  );
 }
