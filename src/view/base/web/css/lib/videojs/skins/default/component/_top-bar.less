@@ -1,12 +1,12 @@
+@import "../_variables";
+@import "../_mixins";
+
 //
 //  Common
 //  _____________________________________________
 
 // noinspection LessResolvedByNameOnly
 & when (@media-common = true) {
-
-  @import "../_variables";
-  @import "../_mixins";
 
   //
   // TopBar video component
@@ -43,23 +43,42 @@
 //  _____________________________________________
 
 // noinspection LessResolvedByNameOnly
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
-  .vjs-top-bar-media-mixin(1.6em 1.8em 1.8em, 2em, 1.6em, @description-padding: .25em 0 0);
-}
-
-// noinspection LessResolvedByNameOnly
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
-  .vjs-top-bar-media-mixin(1.2em 1.6em 1.6em, 1.8em, 1.4em, @description-padding: .2em 0 0);
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xxs) {
+  .vjs-top-bar-media-mixin(
+    @wrapper-padding: .8em,
+    @title-size: 1em,
+    @show-description: false
+  );
 }
 
 // noinspection LessResolvedByNameOnly
 .media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xs) {
-  .vjs-top-bar-media-mixin(.8em, 1.2em, 1em, @description-padding: .15em 0 0);
+  .vjs-top-bar-media-mixin(
+    @wrapper-padding: 1em 1.2em 1.2em,
+    @title-size: 1.6em,
+    @description-size: 1em,
+    @description-padding: .15em 0 0
+  );
 }
 
 // noinspection LessResolvedByNameOnly
-.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__xxs) {
-  .vjs-top-bar-media-mixin(.8em, 1em, .8em, 0, 0);
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__s) {
+  .vjs-top-bar-media-mixin(
+    @wrapper-padding: 1.6em 1.8em 1.8em,
+    @title-size: 2.2em,
+    @description-size: 1.6em,
+    @description-padding: .2em 0 0
+  );
+}
+
+// noinspection LessResolvedByNameOnly
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+  .vjs-top-bar-media-mixin(
+    @wrapper-padding: 1.7em 1.9em 1.9em,
+    @title-size: 2.3em,
+    @description-size: 1.7em,
+    @description-padding: .25em 0 0
+  );
 }
 
 //
@@ -68,15 +87,30 @@
 
 // noinspection LessResolvedByNameOnly
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-  .vjs-top-bar-media-mixin(1.2em 1.6em 1.6em, 1.8em, 1.4em, @description-padding: .2em 0 0);
+  .vjs-top-bar-media-mixin(
+    @wrapper-padding: 1.2em 1.6em 1.6em,
+    @title-size: 1.8em,
+    @description-size: 1.4em,
+    @description-padding: .2em 0 0
+  );
 }
 
 // noinspection LessResolvedByNameOnly
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__l) {
-  .vjs-top-bar-media-mixin(1.6em 1.8em 1.8em, 2em, 1.6em, @description-padding: .25em 0 0);
+  .vjs-top-bar-media-mixin(
+    @wrapper-padding: 1.6em 1.8em 1.8em,
+    @title-size: 2.2em,
+    @description-size: 1.6em,
+    @description-padding: .25em 0 0
+  );
 }
 
 // noinspection LessResolvedByNameOnly
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__xl) {
-  .vjs-top-bar-media-mixin(1.8em 2em 2em, 2.4em, 1.8em, @description-padding: .3em 0 0);
+  .vjs-top-bar-media-mixin(
+    @wrapper-padding: 1.8em 2em 2em,
+    @title-size: 2.4em,
+    @description-size: 1.8em,
+    @description-padding: .3em 0 0
+  );
 }
