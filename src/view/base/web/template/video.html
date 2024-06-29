@@ -1,5 +1,5 @@
 <!-- ko foreach: getRegion('preview') -->
     <!-- ko template: getTemplate() --><!-- /ko -->
 <!-- /ko -->
-<video class="video-js" data-bind="attr: { id: options.id }, css: options.htmlClass.theme,
-       style: { 'min-width': options.width, 'min-height': options.height }, afterRender: element"></video>
+<video class="video-js" data-bind="attr: { id: options.id, width: options.width, height: options.height },
+       css: options.htmlClass.theme, afterRender: element"></video>
