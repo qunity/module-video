@@ -26,7 +26,7 @@ class GetComponentByUrl implements GetComponentByUrlInterface
         private readonly ZendUri $zendUri,
         private readonly ScopeConfigInterface $scopeConfig,
         private readonly GetComponentByCodeInterface $getComponentByCode,
-        private readonly array $componentMapper = []
+        private readonly array $componentMapper
     ) {
         // ...
     }

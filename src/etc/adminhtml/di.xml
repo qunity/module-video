@@ -5,8 +5,7 @@
         <arguments>
             <argument name="pathListData" xsi:type="array">
                 <item name="validate-youtube-video-metadata" xsi:type="array">
-                    <item name="area_code" xsi:type="const">Magento\Framework\App\Area::AREA_ADMINHTML</item>
-                    <item name="route_path" xsi:type="string">qunity/video_youtube/metadataValidate</item>
+                    <item name="route_path" xsi:type="string">qunity_video/youtube_metadata/validate</item>
                 </item>
             </argument>
         </arguments>

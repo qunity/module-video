@@ -22,7 +22,7 @@ class GetComponentList implements GetComponentListInterface
      */
     public function __construct(
         private readonly ComponentInterfaceFactory $componentFactory,
-        private readonly array $componentListData = []
+        private readonly array $componentListData
     ) {
         // ...
     }

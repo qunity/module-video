@@ -23,7 +23,7 @@ class VideoPlayer implements VideoPlayerInterface
      */
     public function __construct(
         private readonly ConfigInterfaceFactory $configFactory,
-        private readonly array $configProcessors = []
+        private readonly array $configProcessors
     ) {
         $this->config = $this->configFactory->create();
     }

@@ -15,19 +15,19 @@ use Qunity\Video\Api\VideoPlayerInterface;
 class VideoPlayer extends Template
 {
     /**
-     * @param Template\Context $context
      * @param SerializerInterface $serializer
      * @param VideoPlayerInterface $videoPlayer
      * @param MessageManagerInterface $messageManager
      * @param LayoutProcessorInterface[] $layoutProcessors
+     * @param Template\Context $context
      * @param array $data
      */
     public function __construct(
-        Template\Context $context,
         private readonly SerializerInterface $serializer,
         private readonly VideoPlayerInterface $videoPlayer,
         private readonly MessageManagerInterface $messageManager,
-        private readonly array $layoutProcessors = [],
+        private readonly array $layoutProcessors,
+        Template\Context $context,
         array $data = []
     ) {
         parent::__construct($context, $data);

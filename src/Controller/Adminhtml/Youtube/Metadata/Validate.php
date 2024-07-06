@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Qunity\Video\Controller\Adminhtml\Video\Youtube;
+namespace Qunity\Video\Controller\Adminhtml\Youtube\Metadata;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -13,19 +13,19 @@ use Magento\Framework\DataObjectFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Qunity\Video\Api\Service\YouTube\GetMetadataByUrlInterface;
 
-class MetadataValidate extends Action implements HttpPostActionInterface
+class Validate extends Action implements HttpPostActionInterface
 {
     /**
-     * @param Context $context
      * @param JsonFactory $jsonResultFactory
      * @param GetMetadataByUrlInterface $getMetadataByUrl
      * @param DataObjectFactory $responseFactory
+     * @param Context $context
      */
     public function __construct(
-        Context $context,
         private readonly JsonFactory $jsonResultFactory,
         private readonly GetMetadataByUrlInterface $getMetadataByUrl,
-        private readonly DataObjectFactory $responseFactory
+        private readonly DataObjectFactory $responseFactory,
+        Context $context
     ) {
         parent::__construct($context);
     }

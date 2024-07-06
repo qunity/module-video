@@ -13,7 +13,7 @@ interface GetMetadataByUrlInterface
     public const YOUTUBE_HOST_SHORT = 'youtu.be';
 
     /**
-     * Get metadata for YouTube video by URL
+     * Get metadata for YouTube video by video URL
      *
      * @param string $url
      * @return array
