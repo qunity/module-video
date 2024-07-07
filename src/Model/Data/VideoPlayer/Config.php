@@ -213,10 +213,8 @@ class Config extends DataObject implements ConfigInterface
      */
     private function _setThumbnails(array $thumbnails): ConfigInterface
     {
-        $thumbnails = array_filter(
-            $thumbnails,
-            fn (mixed $item): bool => $item instanceof ThumbnailInterface
-        );
+        $fnFilterCallback = fn (mixed $item): bool => $item instanceof ThumbnailInterface;
+        $thumbnails = array_filter($thumbnails, $fnFilterCallback);
 
         return $this->setData(self::THUMBNAILS, $thumbnails);
     }
