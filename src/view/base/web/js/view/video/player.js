@@ -127,7 +127,7 @@ define([
      */
     _addLanguages: function () {
       Object.entries(this.languages).forEach(([name, language]) =>
-        videojs.addLanguage(name, language));
+        typeof language === 'object' ? videojs.addLanguage(name, language) : false);
     },
 
     /**

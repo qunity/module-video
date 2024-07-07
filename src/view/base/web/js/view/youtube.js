@@ -12,7 +12,10 @@ define([
       options: {
         techOrder: [ 'youtube' ],
         sources: [{ type: 'video/youtube' }],
-        youtube: { enablePrivacyEnhancedMode: true }
+        youtube: {
+          enablePrivacyEnhancedMode: true,
+          disablePictureInPicture: true
+        }
       }
     }
   });

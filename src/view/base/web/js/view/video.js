@@ -17,6 +17,7 @@ define([
         techOrder: [ 'html5' ],
         sources: [{ type: 'video/mp4' }],
         playbackRates: [ 0.5, 1, 1.5, 2 ],
+        children: [ 'mediaLoader' ],
         htmlClass: {
           theme: 'vjs-m2luma-skin',
           creating: 'vjs-creating',
@@ -34,13 +35,24 @@ define([
         loop: false,
         autoSetup: false,
         translation: false,
+        normalizeAutoplay: true,
         noUITitleAttributes: true,
         experimentalSvgIcons: true,
         errorDisplay: false,
         controlBar: {
           pictureInPictureToggle: false,
           playToggle: { replay: true },
-          volumePanel: { inline: true, volume: 0.73 }
+          volumePanel: { inline: true, volume: 0.73 },
+          audioTrackButton: false,
+          chaptersButton: false,
+          descriptionsButton: false,
+          subsCapsButton: false,
+          remainingTimeDisplay: false,
+          customControlSpacer: false,
+          liveDisplay: false,
+          seekToLive: false,
+          skipBackward: false,
+          skipForward: false
         },
         topBar: true,
         bigButton: true,
@@ -53,6 +65,7 @@ define([
         liveTracker: false,
         textTrackDisplay: false,
         textTrackSettings: false,
+        inactivityTimeout: 2500,
         creationTimeout: 1000
       }
     },
