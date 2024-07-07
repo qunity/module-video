@@ -11,7 +11,7 @@ define([
     defaults: {
       videojsComponent: vjsPosterImage,
       template: 'Qunity_Video/video/component/poster-image',
-      pixel: 'Qunity_Video/images/pixel.webp',
+      pixel: 'Qunity_Base/images/pixel.webp',
       imports: {
         src: '${ $.name }:options.src',
         alt: '${ $.name }:options.alt',
