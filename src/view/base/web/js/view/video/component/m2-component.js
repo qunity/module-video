@@ -71,20 +71,16 @@ define([
      * @public
      *
      * @param {String|null} name
-     * @param {VoidFunction|null} callback
      */
-    animate: function (name = null, callback = null) {
+    animate: function (name = null) {
       /** @var {String} animationClass */
       const animationClass = name ? `${this.animationClass}-${name}` : this.animationClass;
 
       /** @var {HTMLElement} element */
       const element = this.element();
 
-      /** @var {VoidFunction} fnRemoveClass */
-      const fnRemoveClass = () => {
-        element.classList.remove(animationClass);
-        if (callback) callback(element);
-      };
+      /** @var {Function} fnRemoveClass */
+      const fnRemoveClass = () => element.classList.remove(animationClass);
 
       element.classList.add(animationClass);
       element.addEventListener('animationend', fnRemoveClass, { once: true });
