@@ -12,7 +12,7 @@ define([
     defaults: {
       modules: {
         parent: '${ $.parentName }',
-        errorInfo: '${ $.name }.errorInfo'
+        errorInfo: '${ $.components.errorInfo }'
       }
     },
 
