@@ -9,15 +9,11 @@ let config = {
       "video/m2Component": "Qunity_Video/js/view/video/component/m2-component",
       "video/vjsComponent": "Qunity_Video/js/view/video/component/vjs-component",
       "video/m2TopBar": "Qunity_Video/js/view/video/component/magento/top-bar",
-      "video/vjsTopBar": "Qunity_Video/js/view/video/component/videojs/top-bar",
       "video/m2BigButton": "Qunity_Video/js/view/video/component/magento/big-button",
       "video/vjsBigButton": "Qunity_Video/js/view/video/component/videojs/big-button",
       "video/m2PosterImage": "Qunity_Video/js/view/video/component/magento/poster-image",
-      "video/vjsPosterImage": "Qunity_Video/js/view/video/component/videojs/poster-image",
       "video/m2ErrorInfo": "Qunity_Video/js/view/video/component/magento/error-info",
-      "video/vjsErrorInfo": "Qunity_Video/js/view/video/component/videojs/error-info",
-      "video/m2Spinner": "Qunity_Video/js/view/video/component/magento/spinner",
-      "video/vjsSpinner": "Qunity_Video/js/view/video/component/videojs/spinner"
+      "video/m2Spinner": "Qunity_Video/js/view/video/component/magento/spinner"
     }
   },
   paths: {

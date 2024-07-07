@@ -1,6 +1,6 @@
 define([
   'video/m2Component',
-  'video/vjsSpinner'
+  'video/vjsComponent'
 ], function (m2Component, vjsSpinner) {
   'use strict';
 

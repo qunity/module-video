@@ -1,6 +1,6 @@
 define([
   'video/m2Component',
-  'video/vjsPosterImage'
+  'video/vjsComponent'
 ], function (m2Component, vjsPosterImage) {
   'use strict';
 

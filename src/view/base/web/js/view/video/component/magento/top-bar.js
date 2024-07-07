@@ -1,6 +1,6 @@
 define([
   'video/m2Component',
-  'video/vjsTopBar'
+  'video/vjsComponent'
 ], function (m2Component, vjsTopBar) {
   'use strict';
 

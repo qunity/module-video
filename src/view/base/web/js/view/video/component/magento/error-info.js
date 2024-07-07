@@ -1,6 +1,6 @@
 define([
   'video/m2Component',
-  'video/vjsErrorInfo',
+  'video/vjsComponent',
   'mage/translate'
 ], function (m2Component, vjsErrorInfo, $t) {
   'use strict';
