@@ -65,7 +65,7 @@ define([
         liveTracker: false,
         textTrackDisplay: false,
         textTrackSettings: false,
-        inactivityTimeout: 2500,
+        inactivityTimeout: 2000,
         creationTimeout: 1000
       }
     },
