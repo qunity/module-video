@@ -65,25 +65,25 @@
   // _____________________________________________
 
   .video-js {
-    .vjs-tech, video {
+    &.vjs-tech, video& {
       opacity: 0;
       transition: opacity @player-normal-duration ease-in;
     }
 
-    .vjs-has-started {
-      .vjs-tech, video {
+    &.vjs-has-started {
+      &.vjs-tech, video& {
         opacity: 1;
       }
     }
 
-    .vjs-final-time {
-      .vjs-tech, video {
+    &.vjs-final-time {
+      &.vjs-tech, video& {
         opacity: 0;
       }
     }
 
-    .vjs-ended {
-      .vjs-tech, video {
+    &.vjs-ended {
+      &.vjs-tech, video& {
         visibility: hidden;
         transition: none;
       }
